@@ -5,7 +5,8 @@
     "client": "cd client && npm run start",
     "server": "nodemon server.js --exec babel-node",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "start": "nodemon server.js --exec babel-node"
   },
   "dependencies": {
     "@babel/node": "^7.12.6",
