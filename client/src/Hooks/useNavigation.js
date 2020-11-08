@@ -31,7 +31,7 @@ const Navigation = () => {
   const getLoggedUser = async () => {
     const user = await api.getLoggedUser()
     console.log(user)
-    const User = user.data.json()
+    const User = user.data
     setUser(User)
   }
 
