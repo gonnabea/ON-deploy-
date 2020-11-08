@@ -41,7 +41,7 @@ const Navigation = () => {
         <SLink to="/">홈으로</SLink>
         <SLink to="/chatroom">채팅</SLink>
         <SLink to="/setting">설정</SLink>
-        <a href="http://localhost:5000/logout" style={{ color: "white" }}>
+        <a href="https://our-now.herokuapp.com/logout" style={{ color: "white" }}>
           Logout
         </a>
       </Header>
@@ -52,12 +52,12 @@ const Navigation = () => {
         <SLink to="/">홈으로</SLink>
         <SLink to="/chatroom/lobby">채팅</SLink>
       </Header>
-      <Form action="http://localhost:5000/login" method="post">
+      <Form action="https://our-now.herokuapp.com/login" method="post">
         <Input type="text" name="username" placeholder="username" required={true} />
         <Input type="password" name="password" placeholder="password" required={true} />
         <Submit type="submit" value="Login!" />
       </Form>
-      <Form action="http://localhost:5000/join" method="post">
+      <Form action="https://our-now.herokuapp.com/join" method="post">
         <Input type="email" name="email" placeholder="E-mail" required={true} />
         <Input type="text" name="username" placeholder="Username" required={true} />
         <Input type="password" name="password" placeholder="Password" required={true} />
