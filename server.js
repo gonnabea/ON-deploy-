@@ -18,6 +18,7 @@ import flash from "connect-flash"
 import localsMiddlewares from "./middleware"
 import { getLoggedUser } from "./controller/userController"
 import path from "path"
+import MySQLStore from "express-mysql-session"
 
 const PORT = process.env.PORT || 5000 // dotenv 쓰면 프록시가 망가짐
 const app = express()
@@ -151,9 +152,16 @@ app.use(bodyParser.json({ extended: true }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(
   session({
-    secret: "keyboard cat",
+    store: new MySQLStore({
+      host: "us-cdbr-east-02.cleardb.com",
+      user: "b8871d0c79abc7",
+      password: "fb562258",
+      database: "heroku_e7a4a426f1b1fd6",
+    }),
+    secret: "foo",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    proxy: true,
   })
 )
 
