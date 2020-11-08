@@ -118,7 +118,7 @@ app.get("/deletepost/:id", (req, res) => {
 const whitelist = [
   "http://localhost:3000",
   "http://localhost:5000",
-  "https://shrouded-journey-38552.heroku...",
+  "https://our-now.herokuapp.com/",
 ]
 const corsOptions = {
   origin: function (origin, callback) {
