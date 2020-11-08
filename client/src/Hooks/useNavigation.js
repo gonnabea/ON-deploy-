@@ -29,9 +29,9 @@ const Navigation = () => {
   const [user, setUser] = useState(null)
 
   const getLoggedUser = async () => {
-    const user = await api.getLoggedUser()
-    console.log(user)
-    const User = user.data
+    const userData = await api.getLoggedUser()
+    console.log(userData)
+    const User = userData.data
     setUser(User)
   }
 
@@ -39,9 +39,10 @@ const Navigation = () => {
     getLoggedUser()
   }, [])
 
-  return user && user.data !== undefined ? (
+  return user ? (
     <Container>
       <Header>
+        {console.log(user)}
         <SLink to="/">홈으로</SLink>
         <SLink to="/chatroom">채팅</SLink>
         <SLink to="/setting">설정</SLink>
