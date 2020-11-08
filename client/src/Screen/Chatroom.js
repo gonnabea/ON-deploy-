@@ -37,7 +37,7 @@ const Chatroom = () => {
   const [submit, setSubmit] = useState(0) // submit시 리렌더링 위해 작동시키는 useState
   const screenRef = useRef()
   const [flash, setFlash] = useState() // 타 유저가 접속했을 시 알림
-  const [socket, setSocket] = useState(io.connect("http://localhost:5000/")) // 클라이언트 소켓 통신
+  const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
   const [modalDisplay, setModalDisplay] = useState("none") // 그룹챗 모달 창 토글
   const [chatrooms, setChatroomList] = useState([]) // 현재 접속유저의 채팅룸 id 리스트
   const newMsgs = useRef([])
