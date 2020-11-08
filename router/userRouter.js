@@ -29,9 +29,9 @@ router.get(routes.setting, setting)
 
 router.post(routes.setStatusMsg, setStatusMsg)
 
-router.get(routes.getAllUsers, getAllUsers)
+router.post(routes.getAllUsers, getAllUsers)
 
-router.get(routes.chatroomList, getChatroomList)
+router.post(routes.chatroomList, getChatroomList)
 
 router.post(routes.currentUser, getLoggedUser)
 

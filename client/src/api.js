@@ -2,7 +2,7 @@ import axios from "axios"
 
 const api = {
   getLoggedUser: () => axios.post("/currentUser"),
-  getAllUsers: () => axios.get("/getAllUsers"),
+  getAllUsers: () => axios.post("/getAllUsers"),
   setStatusMsg: (text) =>
     axios({
       method: "post",
@@ -38,7 +38,7 @@ const api = {
         currentRoomID,
       },
     }),
-  getChatroomList: () => axios.get("chatroom-list"),
+  getChatroomList: () => axios.post("chatroom-list"),
 }
 
 export default api
