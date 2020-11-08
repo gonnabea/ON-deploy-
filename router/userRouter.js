@@ -21,7 +21,7 @@ router.get(routes.login, userController)
 
 router.post(routes.join, postJoin)
 
-router.get(routes.logout, logout)
+router.post(routes.logout, logout)
 
 router.get(routes.successLogin, successLogin)
 

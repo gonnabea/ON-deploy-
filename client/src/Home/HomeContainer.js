@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import api from "../api"
 import HomePresenter from "./HomePresenter"
 
 class Home extends Component {
@@ -8,11 +9,16 @@ class Home extends Component {
     user: null,
   }
 
+  getLoggedUser = async () => {
+    const userData = await api.getLoggedUser()
+    console.log(userData)
+    const user = userData.data
+    this.setState({ user })
+  }
+
   async componentDidMount() {
     try {
-      fetch("currentUser")
-        .then((res) => res.json())
-        .then((user) => this.setState({ user }))
+      this.getLoggedUser()
     } catch (error) {
       console.log(error)
     } finally {

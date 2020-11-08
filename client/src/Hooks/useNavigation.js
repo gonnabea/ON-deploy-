@@ -46,9 +46,9 @@ const Navigation = () => {
         <SLink to="/">홈으로</SLink>
         <SLink to="/chatroom">채팅</SLink>
         <SLink to="/setting">설정</SLink>
-        <a href="https://our-now.herokuapp.com/logout" style={{ color: "white" }}>
-          Logout
-        </a>
+        <Form action="https://our-now.herokuapp.com/logout" method="post">
+          <Input type="submit" value="로그아웃" />
+        </Form>
       </Header>
     </Container>
   ) : (
