@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import api from "../api"
 
 const Container = styled.section`
   width: 100%;
@@ -27,15 +28,18 @@ const SLink = styled(Link)`
 const Navigation = () => {
   const [user, setUser] = useState(null)
 
+  const getLoggedUser = async () => {
+    const user = await api.getLoggedUser()
+    console.log(user)
+    const User = user.data.json()
+    setUser(User)
+  }
+
   useEffect(() => {
-    fetch("currentUser")
-      .then((res) => res.json())
-      .then((user) => {
-        setUser(user)
-      })
+    getLoggedUser()
   }, [])
 
-  return user ? (
+  return user && user.data !== undefined ? (
     <Container>
       <Header>
         <SLink to="/">홈으로</SLink>

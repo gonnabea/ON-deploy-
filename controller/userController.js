@@ -2,8 +2,8 @@ import db from "../models"
 import passport from "passport"
 
 export const postLogin = passport.authenticate("local", {
-  successRedirect: "/success-login",
-  failureRedirect: "/loginfailed",
+  successRedirect: "success-login",
+  failureRedirect: "loginfailed",
   failureFlash: true,
 }) // err 패러미터를 만들어주지 않았기 때문에 passport.js에 있는 코드에 err argument가 없었던 것이다.
 
