@@ -10,7 +10,7 @@ export const postLogin = passport.authenticate("local", {
 export const successLogin = async (req, res) => {
   req.user.status = "active"
   await req.user.save()
-  res.redirect("http://localhost:3000/#/")
+  res.redirect("https://our-now.herokuapp.com")
 }
 
 export const userController = async (req, res) => {
