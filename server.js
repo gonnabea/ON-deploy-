@@ -169,7 +169,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(morgan("dev"))
 app.use(flash())
-app.use("/currentUser", getLoggedUser) // 현재 로그인 된 유저정보 클라이언트에 전송
 app.use(localsMiddlewares)
 app.use(mainRouter)
 app.use(userRouter)

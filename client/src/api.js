@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const api = {
-  getLoggedUser: () => axios.get("/currentUser"),
+  getLoggedUser: () => axios.post("/currentUser"),
   getAllUsers: () => axios.get("/getAllUsers"),
   setStatusMsg: (text) =>
     axios({

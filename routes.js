@@ -13,6 +13,7 @@ const SETSTATUSMSG = "/setStatusMsg"
 const GETALLUSERS = "/getAllUsers"
 const CREATEGROUPCHAT = "/create-groupchat"
 const CHATROOMLIST = "/chatroom-list"
+const CURRENTUSER = "/currentUser"
 
 const routes = {
   home: HOME,
@@ -30,6 +31,7 @@ const routes = {
   getAllUsers: GETALLUSERS,
   createGroupChat: CREATEGROUPCHAT,
   chatroomList: CHATROOMLIST,
+  currentUser: CURRENTUSER,
 }
 
 export default routes
