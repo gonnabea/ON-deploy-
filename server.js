@@ -26,10 +26,10 @@ dotenv.config()
 //////////////////////////////////////// 순수 SQL 테스트 ///////////////////////////////////////////////
 // MySQL 컨넥션 만들기
 const MySQL = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: process.env.DB_PASSWORD,
-  database: "our_now",
+  host: "us-cdbr-east-02.cleardb.com",
+  user: "b8871d0c79abc7",
+  password: "fb562258",
+  database: "heroku_e7a4a426f1b1fd6",
 })
 
 // MySQL 컨넥트
