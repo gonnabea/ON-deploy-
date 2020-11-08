@@ -9,11 +9,14 @@
     "start": "nodemon server.js --exec babel-node"
   },
   "dependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
     "@babel/node": "^7.12.6",
     "@babel/preset-env": "^7.12.1",
     "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "concurrently": "^4.0.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -33,12 +36,9 @@
     "sequelize-cli": "^6.2.0",
     "socket.io": "^2.3.0",
     "uuid": "^8.3.1",
-    "uuidv4": "^6.2.5",
-    "concurrently": "^4.0.1"
+    "uuidv4": "^6.2.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
     "concurrently": "^4.0.1"
   }
 }
