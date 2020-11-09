@@ -43,9 +43,10 @@ export const postJoin = async (req, res) => {
 
 export const logout = async (req, res) => {
   req.user.status = "inactive"
-  await req.user.save()
+  req.user.save()
   req.logout()
   res.redirect("back")
+  return ""
 }
 
 export const setting = async (req, res) => {

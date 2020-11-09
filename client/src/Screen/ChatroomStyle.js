@@ -12,6 +12,7 @@ export const Container = styled.section`
   @media (max-width: 500px) {
     overflow-x: auto;
     width: 1000px;
+    height: 1000px;
     overflow-y: hidden;
   }
   @keyframes moveBook {

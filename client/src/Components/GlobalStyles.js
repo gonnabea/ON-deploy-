@@ -13,8 +13,7 @@ body{
 background-color: #D7D8F1;
 
 font-size: 20px;
-overflow-x: auto;
-overflow-y: hidden;
+
 }
 `
 

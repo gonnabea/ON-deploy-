@@ -143,5 +143,8 @@ export const createGroupChat = async (req, res) => {
     })
   } catch (error) {
     console.log(error)
+  } finally {
+    console.log("success")
+    return ""
   }
 }
