@@ -118,7 +118,7 @@ export const createGroupChat = async (req, res) => {
     })
     console.log(usernameArr)
     const usernameList = usernameArr.join()
-    db.ChatRoom.create({
+    await db.ChatRoom.create({
       id: uuid(),
       text: usernameList, // 랜덤ID 생성
     }).then(async (chatroom) => {
@@ -144,7 +144,6 @@ export const createGroupChat = async (req, res) => {
   } catch (error) {
     console.log(error)
   } finally {
-    console.log("success")
-    return ""
+    res.redirect("https://our-now.herokuapp.com/#/chatroom")
   }
 }

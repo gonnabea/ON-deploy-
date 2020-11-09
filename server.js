@@ -116,7 +116,7 @@ app.get("/deletepost/:id", (req, res) => {
 
 // CORS 오류 해결법
 
-const whitelist = ["https://our-now.herokuapp.com", "http://localhost:5000"]
+const whitelist = ["https://our-now.herokuapp.com", "http://localhost:3000"]
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
