@@ -9,12 +9,16 @@ export const Container = styled.section`
   align-items: center;
   flex-direction: column;
   animation: moveBook 0.7s forwards;
+  @media (max-width: 500px) {
+    overflow-x: auto;
+    width: 1000px;
+    overflow-y: hidden;
+  }
   @keyframes moveBook {
     to {
       transform: translateX(150px);
     }
   } // 책 열었을 떄 오른쪽으로 움직이는 애니메이션
-  overflow: hidden;
 `
 
 export const FrontContainer = styled.section`
