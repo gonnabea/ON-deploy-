@@ -8,7 +8,7 @@ import { useLocation } from "react-use"
 const peers = {}
 const useVideoCall = () => {
   const [streamingVideo, setVideo] = useState()
-  const [socket, setSocket] = useState(io.connect(useLocation()))
+  const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/"))
   const myPeerId = useRef()
 
   const createVideoStream = async () => {
