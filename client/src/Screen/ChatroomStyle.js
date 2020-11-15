@@ -165,9 +165,10 @@ export const VideoCallBtn = styled.button`
   left: 0;
 `
 
+export const VideoGrid = styled.div``
+
 // 화상채팅 버트을 보여줄 지 안보여줄 지 판단
 export const showVideoCall = (chatroom) => {
-  console.log(chatroom)
   let userList
   if (chatroom) {
     userList = chatroom.text.split(",")

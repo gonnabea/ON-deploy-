@@ -29,6 +29,7 @@ import {
   ChatroomList,
   VideoCallBtn,
   showVideoCall,
+  VideoGrid,
 } from "./ChatroomStyle"
 import useVideoCall from "../Hooks/useVideoCall"
 
@@ -236,6 +237,7 @@ const Chatroom = () => {
               ) : (
                 console.log(currentRoom.current)
               )}
+              {useVideoCall()}
             </ChatBox>
           </Inside>
         }
