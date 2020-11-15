@@ -230,9 +230,12 @@ const Chatroom = () => {
                 <ChatSubmit type="submit" value="전송" />
               </ChatForm>
               {/* 채팅방 내의 유저가 2명일 경우만 보임 */}
-              {currentRoom.length && currentRoom.current.split(",").length === 2 ? (
+              {currentRoom.current.text.length > 0 &&
+              currentRoom.current.text.split(",").length === 2 ? (
                 <VideoCallBtn onClick={useVideoCall}>화상채팅 🎥</VideoCallBtn>
-              ) : null}
+              ) : (
+                console.log(currentRoom.current.text.split(","))
+              )}
             </ChatBox>
           </Inside>
         }
