@@ -28,6 +28,7 @@ import {
   StatusMsg,
   ChatroomList,
   VideoCallBtn,
+  showVideoCall,
 } from "./ChatroomStyle"
 import useVideoCall from "../Hooks/useVideoCall"
 
@@ -230,11 +231,10 @@ const Chatroom = () => {
                 <ChatSubmit type="submit" value="전송" />
               </ChatForm>
               {/* 채팅방 내의 유저가 2명일 경우만 보임 */}
-              {currentRoom.current.text.length > 0 &&
-              currentRoom.current.text.split(",").length === 2 ? (
+              {currentRoom && showVideoCall(currentRoom.current) ? (
                 <VideoCallBtn onClick={useVideoCall}>화상채팅 🎥</VideoCallBtn>
               ) : (
-                console.log(currentRoom.current.text.split(","))
+                console.log(currentRoom.current)
               )}
             </ChatBox>
           </Inside>

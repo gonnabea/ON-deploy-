@@ -164,3 +164,17 @@ export const VideoCallBtn = styled.button`
   bottom: 0;
   left: 0;
 `
+
+// 화상채팅 버트을 보여줄 지 안보여줄 지 판단
+export const showVideoCall = (chatroom) => {
+  console.log(chatroom)
+  let userList
+  if (chatroom) {
+    userList = chatroom.text.split(",")
+  }
+  if (chatroom && userList.length === 2) {
+    return true
+  } else {
+    return false
+  }
+}
