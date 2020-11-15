@@ -159,3 +159,8 @@ export const ChatroomList = styled.ul`
   display: flex;
   flex-direction: column;
 `
+export const VideoCallBtn = styled.button`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`

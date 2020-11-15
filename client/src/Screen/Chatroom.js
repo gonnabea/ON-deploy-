@@ -27,7 +27,9 @@ import {
   Username,
   StatusMsg,
   ChatroomList,
+  VideoCallBtn,
 } from "./ChatroomStyle"
+import useVideoCall from "../Hooks/useVideoCall"
 
 const Chatroom = () => {
   const [messages, setMessages] = useState([]) // DB에서 가져오는 메세지들
@@ -227,6 +229,10 @@ const Chatroom = () => {
                 <ChatText id="text" type="text" name="content" required={true} />
                 <ChatSubmit type="submit" value="전송" />
               </ChatForm>
+              {/* 채팅방 내의 유저가 2명일 경우만 보임 */}
+              {currentRoom.length && currentRoom.current.split(",").length === 2 ? (
+                <VideoCallBtn onClick={useVideoCall}>화상채팅 🎥</VideoCallBtn>
+              ) : null}
             </ChatBox>
           </Inside>
         }
