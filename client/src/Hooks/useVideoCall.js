@@ -12,6 +12,7 @@ const useVideoCall = () => {
   const [streamingVideo, setVideo] = useState()
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/"))
   const myPeerId = useRef(null)
+  const peerList = useRef({})
 
   const getLoggedUser = async () => {
     const user = await api.getLoggedUser()
@@ -42,29 +43,23 @@ const useVideoCall = () => {
       video.play()
       videoGrid.append(video)
     })
+    // host와 port를 설정해주어 개인 peerjs 서버를 가동
     peer = new Peer(await getLoggedUser(), {
       host: "/",
       port: "3004",
     })
+    peerList.current.myPeer = peer.id
     myPeerId.current = peer.id
     console.log(myPeerId)
     peer.on("error", (err) => {
       console.log(err)
     })
 
-    peer.on("call", async (call) => {
-      console.log(call)
-      call.answer(videoStream)
-      call.on("stream", (stream) => {
-        console.dir(stream)
-      })
-      call.on("error", (err) => {
-        console.log(err)
-      })
-    })
     socket.emit("sendPeerId", myPeerId.current)
     socket.on("getPeerId", async (id) => {
       console.log(id)
+      console.log(peerList)
+      peerList.current.targetUser = id
       const connection = peer.connect(id, {
         metadata: { id: myPeerId.current },
       })
@@ -72,6 +67,17 @@ const useVideoCall = () => {
       const call = peer.call(id, videoStream)
       console.log(call)
       console.log(connection)
+
+      peer.on("call", (call) => {
+        console.log(call)
+        call.answer(videoStream)
+        call.on("stream", (stream) => {
+          console.dir(stream)
+        })
+        call.on("error", (err) => {
+          console.log(err)
+        })
+      })
     })
   }
 
