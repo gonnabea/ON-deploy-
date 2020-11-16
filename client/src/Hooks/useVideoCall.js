@@ -45,7 +45,8 @@ const useVideoCall = () => {
     peer = new Peer(await getLoggedUser(), {
       secure: true,
       host: "our-now.herokuapp.com",
-      port: 443,
+      port: 8878,
+      path: "/peerjs",
     })
     myPeerId.current = peer.id
     console.log(myPeerId)

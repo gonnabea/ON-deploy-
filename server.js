@@ -19,6 +19,8 @@ import localsMiddlewares from "./middleware"
 import { getLoggedUser } from "./controller/userController"
 import path from "path"
 import MySQLStore from "express-mysql-session"
+import { ExpressPeerServer } from "peer"
+import http from "http"
 
 const PORT = process.env.PORT || 5000 // dotenv 쓰면 프록시가 망가짐
 const app = express()
@@ -129,7 +131,18 @@ const corsOptions = {
     }
   },
 }
+///////////////////////////// peerjs 서버 만들기 /////////////////////
+const server = http.createServer(app)
 
+app.use(
+  "/peerjs",
+  ExpressPeerServer(server, {
+    debug: true,
+  })
+)
+
+server.listen(8878, "our-now.herokuapp.com")
+///////////////////////////////////////////////////////////////////////
 app.use(cors(corsOptions))
 
 if (process.env.NODE_ENV === "production") {
