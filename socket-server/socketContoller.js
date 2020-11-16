@@ -19,6 +19,10 @@ export const socketController = (socket) => {
       // console.log(socket.adapter.rooms) // 모든 채팅방 목록 보여주기 참고: https://stackoverflow.com/questions/6631501/how-to-list-rooms-on-socket-io-nodejs-server
 
       socket.leave(roomID)
+    }),
+    socket.on(events.sendPeerId, (peerID) => {
+      console.log(peerID)
+      socket.broadcast.emit(events.sendPeerId, peerID)
     })
   )
 }
