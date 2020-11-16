@@ -46,6 +46,7 @@ const Chatroom = () => {
   const [chatrooms, setChatroomList] = useState([]) // 현재 접속유저의 채팅룸 id 리스트
   const newMsgs = useRef([])
   const location = useLocation()
+  const [videoCall, setVideoCall] = useState(false)
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -104,6 +105,8 @@ const Chatroom = () => {
         behavior: "smooth",
       }) // 채팅창 진입 시 자동 스크롤 내리기
   }
+
+  const activateVideoCall = () => {}
 
   const addNewMsg = (msg) => {
     newMsgs.current.push(msg)
@@ -233,11 +236,11 @@ const Chatroom = () => {
               </ChatForm>
               {/* 채팅방 내의 유저가 2명일 경우만 보임 */}
               {currentRoom && showVideoCall(currentRoom.current) ? (
-                <VideoCallBtn onClick={useVideoCall}>화상채팅 🎥</VideoCallBtn>
+                <VideoCallBtn onClick={() => setVideoCall(true)}>화상채팅 🎥</VideoCallBtn>
               ) : (
                 console.log(currentRoom.current)
               )}
-              {useVideoCall({ loggedUser })}
+              {videoCall ? useVideoCall : null}
             </ChatBox>
           </Inside>
         }

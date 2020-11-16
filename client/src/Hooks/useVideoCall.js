@@ -5,12 +5,19 @@ import Peer from "peerjs"
 import io from "socket.io-client"
 import { useLocation } from "react-use"
 import { v4 } from "uuid"
+import api from "../api"
 
 const peers = {}
-const useVideoCall = ({ loggedUser = v4() }) => {
+const useVideoCall = () => {
+  const [loggedUser, setLoggedUser] = useState()
   const [streamingVideo, setVideo] = useState()
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/"))
   const myPeerId = useRef(null)
+
+  const getLoggedUser = async () => {
+    const user = await api.getLoggedUser()
+    setLoggedUser(user.id)
+  }
 
   const createVideoStream = async () => {
     const video = document.createElement("video")
@@ -53,6 +60,7 @@ const useVideoCall = ({ loggedUser = v4() }) => {
   }
 
   useEffect(() => {
+    getLoggedUser()
     createVideoStream()
   }, [])
 
