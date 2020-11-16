@@ -74,8 +74,6 @@ const useVideoCall = () => {
 
   useEffect(() => {
     createVideoStream()
-
-    return peer.destroy()
   }, [])
 
   return <VideoGrid id="videoGrid"></VideoGrid>
