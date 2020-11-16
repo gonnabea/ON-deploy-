@@ -236,7 +236,7 @@ const Chatroom = () => {
               </ChatForm>
               {/* 채팅방 내의 유저가 2명일 경우만 보임 */}
               {currentRoom && showVideoCall(currentRoom.current) ? (
-                <VideoCallBtn onClick={() => setVideoCall(true)}>화상채팅 🎥</VideoCallBtn>
+                <VideoCallBtn onClick={setVideoCall(true)}>화상채팅 🎥</VideoCallBtn>
               ) : (
                 console.log(currentRoom.current)
               )}
