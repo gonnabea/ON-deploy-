@@ -51,20 +51,10 @@ const useVideoCall = () => {
       const connection = peer.connect(id, {
         metadata: { id: myPeerId.current },
       })
-      connection.on("open", () => {
-        connection.send("hi!")
-        console.log("유저가 접속해서 컨넥션 오픈됨, 상대에게 hi라고 보냄")
-      })
+
       const call = peer.call(id, videoStream)
       console.log(call)
       console.log(connection)
-    })
-
-    peer.on("connection", (connection) => {
-      connection.on("data", (data) => {
-        console.log(data)
-      })
-      connection.send("hello!")
     })
 
     peer.on("call", async (call) => {
