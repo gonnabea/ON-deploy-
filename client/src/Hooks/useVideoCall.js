@@ -17,7 +17,7 @@ const useVideoCall = () => {
   const getLoggedUser = async () => {
     const user = await api.getLoggedUser()
     console.log(user)
-    setLoggedUser(user.id)
+    setLoggedUser(user.data.id)
   }
 
   const createVideoStream = async () => {
