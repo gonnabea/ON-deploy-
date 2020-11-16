@@ -48,46 +48,15 @@ const useVideoCall = () => {
       host: "/",
       port: "3004",
     })
-    peerList.current.myPeer = peer.id
-    myPeerId.current = peer.id
-    console.log(myPeerId)
-    peer.on("error", (err) => {
-      console.log(err)
-    })
 
-    socket.emit("sendPeerId", myPeerId.current)
-    socket.on("getPeerId", async (id) => {
-      console.log(id)
-      console.log(peerList)
-      peerList.current.targetUser = id
-      peer.on("open", (userID) => {
-        console.log(userID)
+    console.log(peer)
+
+    peer.on("open", (id) => {
+      console.log("My peer ID is: " + id)
+      socket.emit("sendPeerId", id)
+      socket.on("getPeerId", (id) => {
+        console.log(id)
       })
-      const connection = peer.connect(id, {
-        metadata: { id: myPeerId.current },
-      })
-
-      connection.on("error", (err) => {
-        console.log(err)
-      })
-
-      peer.on("connection", (conn) => {
-        console.log("연결 생성됨")
-        console.log(conn)
-        conn.on("data", (data) => {
-          console.log("받음", data)
-        })
-
-        conn.send("Hello Connection!")
-      })
-
-      const mediaConnection = peer.call(id, videoStream)
-
-      mediaConnection.on("error", (err) => {
-        console.log(err)
-      })
-
-      console.log(connection)
     })
   }
 
