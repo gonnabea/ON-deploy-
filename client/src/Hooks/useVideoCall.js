@@ -74,6 +74,8 @@ const useVideoCall = () => {
         console.log(err)
       })
 
+      mediaConnection.send(videoStream)
+
       console.log(connection)
     })
   }
