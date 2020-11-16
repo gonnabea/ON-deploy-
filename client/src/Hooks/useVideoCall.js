@@ -63,18 +63,10 @@ const useVideoCall = () => {
       const connection = peer.connect(id, {
         metadata: { id: myPeerId.current },
       })
-
-      const mediaConnection = peer.call(id, videoStream)
-      console.log(mediaConnection)
-      mediaConnection.answer(videoStream)
-      mediaConnection.on("stream", (stream) => {
-        console.dir(stream)
+      connection.send(videoStream)
+      connection.on("data", (data) => {
+        console.log(data)
       })
-      mediaConnection.on("error", (err) => {
-        console.log(err)
-      })
-
-      mediaConnection.send(videoStream)
 
       console.log(connection)
     })
