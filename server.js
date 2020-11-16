@@ -132,7 +132,7 @@ const corsOptions = {
   },
 }
 ///////////////////////////// peerjs 서버 만들기 /////////////////////
-const peerServer = PeerServer({ port: 9000, path: "/peerjs" })
+const peerServer = PeerServer({ port: 9000, path: "/peerjs-jiwon", proxied: true })
 app.use(peerServer)
 ///////////////////////////////////////////////////////////////////////
 app.use(cors(corsOptions))
