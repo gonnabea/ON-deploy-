@@ -237,7 +237,7 @@ const Chatroom = () => {
               ) : (
                 console.log(currentRoom.current)
               )}
-              {useVideoCall()}
+              {useVideoCall({ loggedUser })}
             </ChatBox>
           </Inside>
         }
