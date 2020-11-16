@@ -76,6 +76,7 @@ const useVideoCall = () => {
       })
 
       const mediaConnection = peer.call(id, videoStream)
+      mediaConnection.open = true
       console.log(mediaConnection)
       console.log(connection)
     })
