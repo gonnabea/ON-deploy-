@@ -20,11 +20,20 @@ const useVideoCall = () => {
     return user.data.id
   }
 
+  const streamForSending = async () => {
+    const videoStream = await navigator.mediaDevices.getUserMedia({
+      video: { width: 360, height: 240 },
+      audio: true,
+      echoCancellation: true,
+    })
+    return videoStream
+  }
+
   const createVideoStream = async () => {
     const video = document.createElement("video")
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
-      video: { width: 320, height: 240 },
+      video: { width: 180, height: 120 },
       audio: true,
       echoCancellation: true,
     })
@@ -46,16 +55,24 @@ const useVideoCall = () => {
         connection.send("hi!")
         console.log("유저가 접속해서 컨넥션 오픈됨, 상대에게 hi라고 보냄")
       })
+      const call = peer.call(id, streamForSending())
+      console.log(call)
       console.log(connection)
+
+      call.on("stream", (stream) => {
+        console.dir(stream)
+      })
     })
 
     peer.on("connection", (connection) => {
       connection.on("data", (data) => {
         console.log(data)
       })
-      connection.on("open", () => {
-        connection.send("hello!")
-      })
+      connection.send("hello!")
+    })
+
+    peer.on("call", (call) => {
+      call.answer(streamForSending())
     })
   }
 
