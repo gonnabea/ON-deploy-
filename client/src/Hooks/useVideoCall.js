@@ -42,7 +42,10 @@ const useVideoCall = () => {
       video.play()
       videoGrid.append(video)
     })
-    peer = new Peer(await getLoggedUser())
+    peer = new Peer(await getLoggedUser(), {
+      host: "/",
+      port: "3004",
+    })
     myPeerId.current = peer.id
     console.log(myPeerId)
     peer.on("error", (err) => {
