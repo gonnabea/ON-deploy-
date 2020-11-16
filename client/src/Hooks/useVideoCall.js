@@ -6,7 +6,7 @@ import io from "socket.io-client"
 import { v4 } from "uuid"
 import api from "../api"
 
-const peers = {}
+let peer
 const useVideoCall = () => {
   const [loggedUser, setLoggedUser] = useState(null)
   const [streamingVideo, setVideo] = useState()
@@ -42,9 +42,23 @@ const useVideoCall = () => {
       video.play()
       videoGrid.append(video)
     })
-    const peer = new Peer(await getLoggedUser())
+    peer = new Peer(await getLoggedUser())
     myPeerId.current = peer.id
     console.log(myPeerId)
+    peer.on("error", (err) => {
+      console.log(err)
+    })
+
+    peer.on("call", async (call) => {
+      console.log(call)
+      call.answer(videoStream)
+      call.on("stream", (stream) => {
+        console.dir(stream)
+      })
+      call.on("error", (err) => {
+        console.log(err)
+      })
+    })
     socket.emit("sendPeerId", myPeerId.current)
     socket.on("getPeerId", async (id) => {
       console.log(id)
@@ -56,17 +70,12 @@ const useVideoCall = () => {
       console.log(call)
       console.log(connection)
     })
-
-    peer.on("call", async (call) => {
-      call.on("stream", (stream) => {
-        console.dir(stream)
-      })
-      call.answer(videoStream)
-    })
   }
 
   useEffect(() => {
     createVideoStream()
+
+    return peer.destroy()
   }, [])
 
   return <VideoGrid id="videoGrid"></VideoGrid>
