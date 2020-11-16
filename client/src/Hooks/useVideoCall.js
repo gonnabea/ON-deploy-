@@ -42,10 +42,7 @@ const useVideoCall = () => {
       video.play()
       videoGrid.append(video)
     })
-    peer = new Peer(await getLoggedUser(), {
-      host: "our-now.herokuapp.com",
-      path: "/peerjs-jiwon",
-    })
+    peer = new Peer(await getLoggedUser())
     myPeerId.current = peer.id
     console.log(myPeerId)
     peer.on("error", (err) => {
