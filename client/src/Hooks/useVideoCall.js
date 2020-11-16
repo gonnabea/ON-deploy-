@@ -16,8 +16,9 @@ const useVideoCall = ({ loggedUser = v4() }) => {
     const video = document.createElement("video")
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
-      audio: false,
       video: { width: 320, height: 240 },
+      audio: true,
+      echoCancellation: true,
     })
     video.srcObject = videoStream
     video.addEventListener("loadedmetadata", () => {
@@ -33,11 +34,12 @@ const useVideoCall = ({ loggedUser = v4() }) => {
       const connection = peer.connect(id, {
         metadata: { id: myPeerId.current },
       })
-      console.log(connection)
-      connection.on("open", () => {
+      connection.on("open", (msg) => {
         connection.send("hi!")
-        console.log("Dsfsdffdssf")
+        console.log("유저가 접속해서 컨넥션 오픈됨, 상대에게 hi라고 보냄")
+        console.log(msg)
       })
+      console.log(connection)
     })
 
     peer.on("connection", (connection) => {
