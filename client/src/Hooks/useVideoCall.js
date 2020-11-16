@@ -26,8 +26,6 @@ const useVideoCall = () => {
       audio: true,
       echoCancellation: true,
     })
-    console.log(videoStream)
-    console.log(typeof videoStream)
     return videoStream
   }
 
@@ -35,7 +33,7 @@ const useVideoCall = () => {
     const video = document.createElement("video")
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
-      video: { width: 300, height: 180 },
+      video: { width: 180, height: 120 },
       audio: true,
       echoCancellation: true,
     })
@@ -60,6 +58,10 @@ const useVideoCall = () => {
       const call = peer.call(id, await streamForSending())
       console.log(call)
       console.log(connection)
+
+      call.on("stream", (stream) => {
+        console.dir(stream)
+      })
     })
 
     peer.on("connection", (connection) => {
@@ -71,10 +73,6 @@ const useVideoCall = () => {
 
     peer.on("call", async (call) => {
       call.answer(await streamForSending())
-
-      call.on("stream", (stream) => {
-        console.dir(stream)
-      })
     })
   }
 
