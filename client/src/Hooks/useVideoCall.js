@@ -16,10 +16,13 @@ const useVideoCall = () => {
 
   const getLoggedUser = async () => {
     const user = await api.getLoggedUser()
+    console.log(user)
     setLoggedUser(user.id)
   }
 
   const createVideoStream = async () => {
+    await getLoggedUser()
+
     const video = document.createElement("video")
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -60,7 +63,6 @@ const useVideoCall = () => {
   }
 
   useEffect(() => {
-    getLoggedUser()
     createVideoStream()
   }, [])
 
