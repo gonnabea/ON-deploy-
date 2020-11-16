@@ -33,8 +33,10 @@ const useVideoCall = ({ loggedUser = v4() }) => {
       const connection = peer.connect(id, {
         metadata: { id: myPeerId.current },
       })
+      console.log(connection)
       connection.on("open", () => {
         connection.send("hi!")
+        console.log("Dsfsdffdssf")
       })
     })
 
