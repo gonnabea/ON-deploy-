@@ -55,17 +55,6 @@ const useVideoCall = () => {
       console.log(err)
     })
 
-    peer.on("call", (mediaConnection) => {
-      console.log(mediaConnection)
-      mediaConnection.answer(videoStream)
-      mediaConnection.on("stream", (stream) => {
-        console.dir(stream)
-      })
-      mediaConnection.on("error", (err) => {
-        console.log(err)
-      })
-    })
-
     socket.emit("sendPeerId", myPeerId.current)
     socket.on("getPeerId", async (id) => {
       console.log(id)
@@ -76,8 +65,15 @@ const useVideoCall = () => {
       })
 
       const mediaConnection = peer.call(id, videoStream)
-      mediaConnection.open = true
       console.log(mediaConnection)
+      mediaConnection.answer(videoStream)
+      mediaConnection.on("stream", (stream) => {
+        console.dir(stream)
+      })
+      mediaConnection.on("error", (err) => {
+        console.log(err)
+      })
+
       console.log(connection)
     })
   }
