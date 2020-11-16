@@ -3,4 +3,5 @@ export const events = {
   sendMsg: "sendMsg",
   leaveRoom: "leaveRoom",
   sendPeerId: "sendPeerId",
+  getPeerId: "getPeerId",
 }

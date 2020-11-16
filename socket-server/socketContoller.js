@@ -22,7 +22,7 @@ export const socketController = (socket) => {
     }),
     socket.on(events.sendPeerId, (peerID) => {
       console.log(peerID)
-      socket.broadcast.emit(events.sendPeerId, peerID)
+      socket.broadcast.emit(events.getPeerId, peerID)
     })
   )
 }

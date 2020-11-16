@@ -37,15 +37,14 @@ const useVideoCall = () => {
     myPeerId.current = peer.id
     console.log(myPeerId)
     socket.emit("sendPeerId", myPeerId.current)
-    socket.on("sendPeerId", (id) => {
+    socket.on("getPeerId", (id) => {
       console.log(id)
       const connection = peer.connect(id, {
         metadata: { id: myPeerId.current },
       })
-      connection.on("open", (msg) => {
+      connection.on("open", () => {
         connection.send("hi!")
         console.log("유저가 접속해서 컨넥션 오픈됨, 상대에게 hi라고 보냄")
-        console.log(msg)
       })
       console.log(connection)
     })
