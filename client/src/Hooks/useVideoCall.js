@@ -43,20 +43,27 @@ const useVideoCall = () => {
       video.play()
       videoGrid.append(video)
     })
+
+    peersConnection()
+  }
+
+  const peersConnection = async () => {
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
-    peer = new Peer(await getLoggedUser(), {
-      host: "/",
-      port: "3004",
-    })
+    peer = new Peer()
 
     console.log(peer)
-
-    peer.on("open", (id) => {
-      console.log("My peer ID is: " + id)
-      socket.emit("sendPeerId", id)
-      socket.on("getPeerId", (id) => {
-        console.log(id)
-      })
+    peer.on("open", async (id) => {
+      console.log(id)
+      peer.id = await getLoggedUser()
+      peer.options = {
+        host: "/",
+        port: "3004",
+      }
+      console.log(peer)
+    })
+    socket.emit("sendPeerId", peer.id)
+    socket.on("getPeerId", (id) => {
+      console.log(id)
     })
   }
 
