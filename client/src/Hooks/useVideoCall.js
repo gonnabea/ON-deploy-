@@ -26,6 +26,8 @@ const useVideoCall = () => {
       audio: true,
       echoCancellation: true,
     })
+    console.log(videoStream)
+    console.log(typeof videoStream)
     return videoStream
   }
 
@@ -58,10 +60,6 @@ const useVideoCall = () => {
       const call = peer.call(id, streamForSending())
       console.log(call)
       console.log(connection)
-
-      call.on("stream", (stream) => {
-        console.dir(stream)
-      })
     })
 
     peer.on("connection", (connection) => {
@@ -73,6 +71,10 @@ const useVideoCall = () => {
 
     peer.on("call", (call) => {
       call.answer(streamForSending())
+
+      call.on("stream", (stream) => {
+        console.dir(stream)
+      })
     })
   }
 
