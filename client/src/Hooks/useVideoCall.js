@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { VideoGrid } from "../Screen/ChatroomStyle"
 import Peer from "peerjs"
 import io from "socket.io-client"
-import { useLocation } from "react-use"
 import { v4 } from "uuid"
 import api from "../api"
 
@@ -18,6 +17,7 @@ const useVideoCall = () => {
     const user = await api.getLoggedUser()
     console.log(user.data.id)
     setLoggedUser(user.data.id)
+    return user.data.id
   }
 
   const createVideoStream = async () => {
@@ -33,7 +33,7 @@ const useVideoCall = () => {
       video.play()
       videoGrid.append(video)
     })
-    const peer = new Peer(loggedUser)
+    const peer = new Peer(await getLoggedUser())
     myPeerId.current = peer.id
     console.log(myPeerId)
     socket.emit("sendPeerId", myPeerId.current)
@@ -61,10 +61,7 @@ const useVideoCall = () => {
   }
 
   useEffect(() => {
-    getLoggedUser()
-    if (loggedUser) {
-      createVideoStream()
-    }
+    createVideoStream()
   }, [])
 
   return <VideoGrid id="videoGrid"></VideoGrid>
