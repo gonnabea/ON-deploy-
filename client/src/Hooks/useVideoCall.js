@@ -9,20 +9,18 @@ import api from "../api"
 
 const peers = {}
 const useVideoCall = () => {
-  const [loggedUser, setLoggedUser] = useState()
+  const [loggedUser, setLoggedUser] = useState(null)
   const [streamingVideo, setVideo] = useState()
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/"))
   const myPeerId = useRef(null)
 
   const getLoggedUser = async () => {
     const user = await api.getLoggedUser()
-    console.log(user)
+    console.log(user.data.id)
     setLoggedUser(user.data.id)
   }
 
   const createVideoStream = async () => {
-    await getLoggedUser()
-
     const video = document.createElement("video")
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -63,7 +61,10 @@ const useVideoCall = () => {
   }
 
   useEffect(() => {
-    createVideoStream()
+    getLoggedUser()
+    if (loggedUser) {
+      createVideoStream()
+    }
   }, [])
 
   return <VideoGrid id="videoGrid"></VideoGrid>
