@@ -60,25 +60,28 @@ const useVideoCall = () => {
       console.log(id)
       console.log(peerList)
       peerList.current.targetUser = id
+      peer.on("open", (userID) => {
+        console.log(userID)
+      })
       const connection = peer.connect(id, {
         metadata: { id: myPeerId.current },
       })
-      connection.send("메세지")
-      connection.on("data", (data) => {
-        console.log(data)
-        connection.send("메세지 에코")
-      })
+
       connection.on("error", (err) => {
         console.log(err)
       })
 
-      const mediaConnection = peer.call(id, videoStream)
+      peer.on("connection", (conn) => {
+        console.log("연결 생성됨")
+        console.log(conn)
+        conn.on("data", (data) => {
+          console.log("받음", data)
+        })
 
-      mediaConnection.answer(videoStream)
-
-      mediaConnection.on("stream", (stream) => {
-        console.log(stream)
+        conn.send("Hello Connection!")
       })
+
+      const mediaConnection = peer.call(id, videoStream)
 
       mediaConnection.on("error", (err) => {
         console.log(err)
