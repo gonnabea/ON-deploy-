@@ -16,7 +16,6 @@ import dotenv from "dotenv"
 import "./passport"
 import flash from "connect-flash"
 import localsMiddlewares from "./middleware"
-import { getLoggedUser } from "./controller/userController"
 import path from "path"
 import MySQLStore from "express-mysql-session"
 
