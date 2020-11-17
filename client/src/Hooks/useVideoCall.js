@@ -65,21 +65,21 @@ const useVideoCall = () => {
       // 컨넥팅
       const conn = peer.connect(id)
 
-      //
+      // 컨넥팅 받은 피어에게 반응 (방장)
       conn.on("open", () => {
         console.log("컨넥션 오픈")
+        console.log(conn)
         conn.send("hi!")
       })
-
-      // 피어가 컨넥팅 되는 것을 리슨
-      peer.on("connection", (conn) => {
-        console.log(conn)
-        conn.on("data", (data) => {
-          console.log(data)
-        })
-        conn.on("open", () => {
-          conn.send("hello!")
-        })
+    })
+    // 컨넥팅 시도한 피어에게 반응 (회원)
+    peer.on("connection", (conn) => {
+      console.log(conn)
+      conn.on("data", (data) => {
+        console.log(data)
+      })
+      conn.on("open", () => {
+        conn.send("hello!")
       })
     })
   }
