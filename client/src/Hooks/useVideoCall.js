@@ -53,14 +53,14 @@ const useVideoCall = () => {
       host: "/",
       port: "3004",
     })
-
+    const userID = await getLoggedUser()
     console.log(peer)
-
+    peerList.current.myPeer = userID
     peer.on("error", (err) => {
       console.log(err)
     })
 
-    socket.emit("sendPeerId", peer.id)
+    socket.emit("sendPeerId", userID)
     socket.on("getPeerId", async (id) => {
       console.log(id)
       peerList.current.targetPeer = id
@@ -68,8 +68,7 @@ const useVideoCall = () => {
       // 컨넥팅
       const conn = peer.connect(id)
       console.log(conn)
-      conn.metadata = await getLoggedUser()
-      peerList.current.myPeer = conn.metadata
+      conn.metadata = userID
 
       // 컨넥팅 받은 피어에게 반응 (방장)
       conn.on("open", () => {
