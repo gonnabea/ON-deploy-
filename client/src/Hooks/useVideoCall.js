@@ -71,6 +71,11 @@ const useVideoCall = () => {
         console.log(conn)
         conn.send("hi!")
       })
+
+      conn.on("data", (data) => {
+        console.log("회원으로 부터 데이터")
+        console.log(data)
+      })
     })
     // 컨넥팅 시도한 피어에게 반응 (회원)
     peer.on("connection", (conn) => {
