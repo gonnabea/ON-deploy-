@@ -44,10 +44,10 @@ const useVideoCall = () => {
       videoGrid.append(video)
     })
 
-    peersConnection()
+    peersConnection(videoStream)
   }
 
-  const peersConnection = async () => {
+  const peersConnection = async (videoStream) => {
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
     peer = new Peer(await getLoggedUser())
     peerList.current.myPeer = peer.id
@@ -80,6 +80,21 @@ const useVideoCall = () => {
         console.log("회원으로 부터 데이터")
         console.log(data)
       })
+
+      const callConn = peer.call(id, videoStream)
+      console.log(callConn)
+      const video = document.createElement("video")
+      callConn.on("stream", (userVideoStream) => {
+        const videoGrid = document.getElementById("videoGrid")
+        video.srcObject = userVideoStream
+        video.addEventListener("loadedmetadata", () => {
+          video.play()
+        })
+        videoGrid.append(video)
+      })
+      callConn.on("close", () => {
+        video.remove()
+      })
     })
     // 컨넥팅 시도한 피어에게 반응 (회원)
     peer.on("connection", (conn) => {
@@ -93,6 +108,21 @@ const useVideoCall = () => {
       })
       conn.on("open", () => {
         conn.send("hello!")
+      })
+    })
+
+    peer.on("call", (call) => {
+      call.answer(videoStream)
+      const video = document.createElement("video")
+
+      call.on("stream", (userVideoStream) => {
+        console.log(userVideoStream)
+        video.srcObject = userVideoStream
+        video.addEventListener("loadedmetadata", () => {
+          video.play()
+        })
+        const videoGrid = document.getElementById("videoGrid")
+        videoGrid.append(video)
       })
     })
   }
