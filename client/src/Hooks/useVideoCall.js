@@ -49,7 +49,10 @@ const useVideoCall = () => {
 
   const peersConnection = async () => {
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
-    peer = new Peer(undefined)
+    peer = new Peer(undefined, {
+      host: "/",
+      port: "3004",
+    })
 
     console.log(peer)
 
