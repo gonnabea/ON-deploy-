@@ -49,26 +49,24 @@ const useVideoCall = () => {
 
   const peersConnection = async () => {
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
-    peer = new Peer(undefined, {
+    peer = new Peer(await getLoggedUser(), {
       host: "/",
       port: "3004",
     })
-    const userID = await getLoggedUser()
+    peerList.current.myPeer = peer.id
     console.log(peer)
-    peerList.current.myPeer = userID
+
     peer.on("error", (err) => {
       console.log(err)
     })
 
-    socket.emit("sendPeerId", userID)
-    socket.on("getPeerId", async (id) => {
+    socket.emit("sendPeerId", peer.id)
+    socket.on("getPeerId", (id) => {
       console.log(id)
       peerList.current.targetPeer = id
 
       // 컨넥팅
       const conn = peer.connect(id)
-      console.log(conn)
-      conn.metadata = userID
 
       // 컨넥팅 받은 피어에게 반응 (방장)
       conn.on("open", () => {
