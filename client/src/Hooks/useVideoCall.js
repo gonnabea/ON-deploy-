@@ -21,21 +21,12 @@ const useVideoCall = () => {
     return user.data.id
   }
 
-  const streamForSending = async () => {
-    const videoStream = await navigator.mediaDevices.getUserMedia({
-      video: { width: 360, height: 240 },
-      audio: true,
-      echoCancellation: true,
-    })
-    return videoStream
-  }
-
   const createVideoStream = async () => {
     const video = document.createElement("video")
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
       video: { width: 360, height: 240 },
-      audio: false,
+      audio: true,
       echoCancellation: true,
     })
     video.srcObject = videoStream

@@ -165,7 +165,10 @@ export const VideoCallBtn = styled.button`
   left: 0;
 `
 
-export const VideoGrid = styled.div``
+export const VideoGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`
 
 // 화상채팅 버트을 보여줄 지 안보여줄 지 판단
 export const showVideoCall = (chatroom) => {
