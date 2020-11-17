@@ -53,6 +53,10 @@ const useVideoCall = () => {
     peerList.current.myPeer = peer.id
     console.log(peer)
 
+    peer.on("error", (err) => {
+      console.log(err)
+    })
+
     socket.emit("sendPeerId", peer.id)
     socket.on("getPeerId", (id) => {
       console.log(id)
@@ -63,11 +67,13 @@ const useVideoCall = () => {
 
       //
       conn.on("open", () => {
+        console.log("컨넥션 오픈")
         conn.send("hi!")
       })
 
       // 피어가 컨넥팅 되는 것을 리슨
       peer.on("connection", (conn) => {
+        console.log(conn)
         conn.on("data", (data) => {
           console.log(data)
         })
