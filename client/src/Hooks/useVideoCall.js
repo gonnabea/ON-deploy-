@@ -35,7 +35,7 @@ const useVideoCall = () => {
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
       video: { width: 360, height: 240 },
-      audio: true,
+      audio: false,
       echoCancellation: true,
     })
     video.srcObject = videoStream
@@ -61,9 +61,22 @@ const useVideoCall = () => {
       console.log(id)
       peerList.current.targetPeer = id
 
+      // 컨넥팅
       const conn = peer.connect(id)
+
+      //
       conn.on("open", () => {
         conn.send("hi!")
+      })
+
+      // 피어가 컨넥팅 되는 것을 리슨
+      peer.on("connection", (conn) => {
+        conn.on("data", (data) => {
+          console.log(data)
+        })
+        conn.on("open", () => {
+          conn.send("hello!")
+        })
       })
     })
   }
