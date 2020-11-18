@@ -18,6 +18,7 @@ import flash from "connect-flash"
 import localsMiddlewares from "./middleware"
 import path from "path"
 import MySQLStore from "express-mysql-session"
+import http from "http"
 import { ExpressPeerServer } from "peer"
 
 const PORT = process.env.PORT || 5000 // dotenv 쓰면 프록시가 망가짐
@@ -130,7 +131,14 @@ const corsOptions = {
   },
 }
 ///////////////////////////// peerjs 서버 만들기 /////////////////////
+const httpServer = http.createServer(app)
+const peerServer = ExpressPeerServer(httpServer, {
+  debug: true,
+  path: "/myapp",
+})
 
+app.use("/peerjs", peerServer)
+peerServer.listen(9000)
 ///////////////////////////////////////////////////////////////////////
 app.use(cors(corsOptions))
 
