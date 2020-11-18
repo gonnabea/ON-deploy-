@@ -184,7 +184,7 @@ db.sequelize.sync().then(() => {
     console.log(`express is running on ${PORT}`)
   })
 
-  const peerServer = ExpressPeerServer(server, { path: "/myapp" })
+  const peerServer = ExpressPeerServer(server)
   app.use("/peerjs", peerServer)
   const io = SocketIO.listen(server)
 
