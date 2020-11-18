@@ -48,8 +48,6 @@ const Chatroom = () => {
   const [videoCall, setVideoCall] = useState(false)
   const newMsgs = useRef([])
   const location = useLocation()
-  const [streamingVideo, setVideo] = useState()
-  const myPeerId = useRef(null)
   const peerList = useRef({})
 
   const createUserRoom = async ({ chatroom, previousRoom }) => {
@@ -367,7 +365,14 @@ const Chatroom = () => {
               </ChatForm>
               {/* 채팅방 내의 유저가 2명일 경우만 보임 */}
               {currentRoom && showVideoCall(currentRoom.current) ? (
-                <VideoCallBtn onClick={() => setVideoCall(true)}>화상채팅 🎥</VideoCallBtn>
+                <VideoCallBtn
+                  onClick={() => {
+                    setSubmit(submit + 1)
+                    setVideoCall(true)
+                  }}
+                >
+                  화상채팅 🎥
+                </VideoCallBtn>
               ) : (
                 console.log(currentRoom.current)
               )}
