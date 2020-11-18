@@ -25,7 +25,7 @@ const useVideoCall = () => {
     const video = document.createElement("video")
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
-      video: { width: { max: 240 }, height: 240, facingMode: "user" },
+      video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
       audio: true,
       echoCancellation: true,
     })
