@@ -140,6 +140,7 @@ const Chatroom = () => {
         path: "/",
         key: "peerjs",
         debug: true,
+        port: 9000,
       })
       peerList.current.myPeer = peer.id
       console.log(peer)
