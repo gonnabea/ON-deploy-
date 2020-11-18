@@ -274,9 +274,6 @@ const Chatroom = () => {
   useEffect(() => {
     try {
       handleApi()
-      if (videoCall) {
-        activateVideoCall()
-      }
 
       console.log(loggedUser)
     } catch (err) {
@@ -356,8 +353,8 @@ const Chatroom = () => {
                       )
                     )
                   : null}
-
                 <VideoGrid id="videoGrid"></VideoGrid>
+                {videoCall ? activateVideoCall() : null}
               </ChatScreen>
               <ChatForm onSubmit={handleSubmit} action="chat" method="post">
                 <ChatText id="text" type="text" name="content" required={true} />
