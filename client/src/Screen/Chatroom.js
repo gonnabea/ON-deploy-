@@ -112,13 +112,6 @@ const Chatroom = () => {
   const activateVideoCall = () => {
     let peer
 
-    const getLoggedUser = async () => {
-      const user = await api.getLoggedUser()
-      console.log(user.data.id)
-      setLoggedUser(user.data.id)
-      return user.data.id
-    }
-
     const createVideoStream = async () => {
       const video = document.createElement("video")
       const videoGrid = document.getElementById("videoGrid")
@@ -141,7 +134,7 @@ const Chatroom = () => {
 
     const peersConnection = async (videoStream, myVideo) => {
       // host와 port를 설정해주어 개인 peerjs 서버를 가동
-      peer = new Peer(await getLoggedUser())
+      peer = new Peer(loggedUser.id)
       peerList.current.myPeer = peer.id
       console.log(peer)
 
