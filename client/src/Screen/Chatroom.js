@@ -364,7 +364,6 @@ const Chatroom = () => {
               {currentRoom && showVideoCall(currentRoom.current) ? (
                 <VideoCallBtn
                   onClick={() => {
-                    setSubmit(submit + 1)
                     setVideoCall(true)
                   }}
                 >
