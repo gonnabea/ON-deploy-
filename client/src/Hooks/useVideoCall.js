@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
-import styled from "styled-components"
 import { VideoGrid } from "../Screen/ChatroomStyle"
 import Peer from "peerjs"
 import io from "socket.io-client"
-import { v4 } from "uuid"
 import api from "../api"
 
 let peer

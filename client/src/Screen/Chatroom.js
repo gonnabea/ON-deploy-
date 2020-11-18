@@ -8,6 +8,7 @@ import NeonLineButton from "../Components/NeonLineButton"
 import GroupChatModal from "../Components/GroupChatModal"
 import api from "../api"
 import { useLocation } from "react-use"
+import Peer from "peerjs"
 
 import {
   Container,
@@ -35,7 +36,7 @@ import useVideoCall from "../Hooks/useVideoCall"
 
 const Chatroom = () => {
   const [messages, setMessages] = useState([]) // DB에서 가져오는 메세지들
-  const [loggedUser, setLoggedUser] = useState() // 로그인 된 유저 정보
+  const [loggedUser, setLoggedUser] = useState(null) // 로그인 된 유저 정보
   const [userList, setUserList] = useState() // 모든 유저리스트
   const currentRoom = useRef() // 지정된 유저 정보
   const [submit, setSubmit] = useState(0) // submit시 리렌더링 위해 작동시키는 useState
@@ -44,8 +45,13 @@ const Chatroom = () => {
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
   const [modalDisplay, setModalDisplay] = useState("none") // 그룹챗 모달 창 토글
   const [chatrooms, setChatroomList] = useState([]) // 현재 접속유저의 채팅룸 id 리스트
+  const [videoCall, setVideoCall] = useState(false)
   const newMsgs = useRef([])
   const location = useLocation()
+  const [streamingVideo, setVideo] = useState()
+  const myPeerId = useRef(null)
+  const peerList = useRef({})
+
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -105,7 +111,127 @@ const Chatroom = () => {
       }) // 채팅창 진입 시 자동 스크롤 내리기
   }
 
-  const activateVideoCall = () => {}
+  const activateVideoCall = () => {
+    let peer
+
+    const getLoggedUser = async () => {
+      const user = await api.getLoggedUser()
+      console.log(user.data.id)
+      setLoggedUser(user.data.id)
+      return user.data.id
+    }
+
+    const createVideoStream = async () => {
+      const video = document.createElement("video")
+      const videoGrid = document.getElementById("videoGrid")
+      const videoStream = await navigator.mediaDevices.getUserMedia({
+        video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
+        audio: true,
+        echoCancellation: true,
+      })
+
+      video.controls = true
+
+      video.srcObject = videoStream
+      video.addEventListener("loadedmetadata", () => {
+        video.play()
+        videoGrid.append(video)
+      })
+
+      peersConnection(videoStream, video)
+    }
+
+    const peersConnection = async (videoStream, myVideo) => {
+      // host와 port를 설정해주어 개인 peerjs 서버를 가동
+      peer = new Peer(await getLoggedUser())
+      peerList.current.myPeer = peer.id
+      console.log(peer)
+
+      peer.on("error", (err) => {
+        console.log(err)
+      })
+
+      socket.emit("sendPeerId", peer.id)
+      socket.on("getPeerId", (id) => {
+        console.log(id)
+        peerList.current.targetPeer = id
+
+        // 컨넥팅
+        const conn = peer.connect(id)
+
+        // 컨넥팅 받은 피어에게 반응 (방장)
+        conn.on("open", () => {
+          console.log("컨넥션 오픈")
+          console.log(conn)
+          conn.send("hi!")
+        })
+
+        conn.on("error", (err) => {
+          console.log(err)
+        })
+
+        conn.on("data", (data) => {
+          console.log("회원으로 부터 데이터")
+          console.log(data)
+        })
+
+        const callConn = peer.call(id, videoStream)
+        console.log(callConn)
+        const video = document.createElement("video")
+        callConn.on("stream", (userVideoStream) => {
+          myVideo.muted = true
+          const videoGrid = document.getElementById("videoGrid")
+          video.srcObject = userVideoStream
+          video.addEventListener("loadedmetadata", () => {
+            video.play()
+          })
+          videoGrid.append(video)
+        })
+        callConn.on("close", () => {
+          video.remove()
+        })
+      })
+      // 컨넥팅 시도한 피어에게 반응 (회원)
+      peer.on("connection", (conn) => {
+        myVideo.muted = true
+        conn.on("error", (err) => {
+          console.log(err)
+        })
+
+        console.log(conn)
+        conn.on("data", (data) => {
+          console.log(data)
+        })
+        conn.on("open", () => {
+          conn.send("hello!")
+        })
+      })
+
+      peer.on("call", (call) => {
+        call.answer(videoStream)
+
+        const video = document.createElement("video")
+
+        call.on("stream", (userVideoStream) => {
+          console.log(userVideoStream)
+          video.srcObject = userVideoStream
+          video.addEventListener("loadedmetadata", () => {
+            video.play()
+          })
+          const videoGrid = document.getElementById("videoGrid")
+          videoGrid.append(video)
+        })
+
+        call.on("close", () => {
+          video.remove()
+        })
+      })
+    }
+
+    createVideoStream()
+
+    return null
+  }
 
   const addNewMsg = (msg) => {
     newMsgs.current.push(msg)
@@ -150,6 +276,10 @@ const Chatroom = () => {
   useEffect(() => {
     try {
       handleApi()
+      if (videoCall) {
+        activateVideoCall()
+      }
+
       console.log(loggedUser)
     } catch (err) {
       console.log(err)
@@ -228,7 +358,8 @@ const Chatroom = () => {
                       )
                     )
                   : null}
-                {useVideoCall()}
+
+                <VideoGrid id="videoGrid"></VideoGrid>
               </ChatScreen>
               <ChatForm onSubmit={handleSubmit} action="chat" method="post">
                 <ChatText id="text" type="text" name="content" required={true} />
@@ -236,7 +367,7 @@ const Chatroom = () => {
               </ChatForm>
               {/* 채팅방 내의 유저가 2명일 경우만 보임 */}
               {currentRoom && showVideoCall(currentRoom.current) ? (
-                <VideoCallBtn onClick={useVideoCall}>화상채팅 🎥</VideoCallBtn>
+                <VideoCallBtn onClick={() => setVideoCall(true)}>화상채팅 🎥</VideoCallBtn>
               ) : (
                 console.log(currentRoom.current)
               )}
