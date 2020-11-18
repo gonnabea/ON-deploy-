@@ -228,6 +228,7 @@ const Chatroom = () => {
                       )
                     )
                   : null}
+                {useVideoCall()}
               </ChatScreen>
               <ChatForm onSubmit={handleSubmit} action="chat" method="post">
                 <ChatText id="text" type="text" name="content" required={true} />
@@ -239,7 +240,6 @@ const Chatroom = () => {
               ) : (
                 console.log(currentRoom.current)
               )}
-              {useVideoCall()}
             </ChatBox>
           </Inside>
         }

@@ -106,6 +106,7 @@ const useVideoCall = () => {
 
     peer.on("call", (call) => {
       call.answer(videoStream)
+      myVideo.muted = true
       const video = document.createElement("video")
 
       call.on("stream", (userVideoStream) => {
