@@ -118,7 +118,7 @@ const Chatroom = () => {
       const videoStream = await navigator.mediaDevices.getUserMedia({
         video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
         audio: true,
-        echoCancellation: true,
+        controls: true,
       })
 
       video.controls = true
@@ -134,7 +134,10 @@ const Chatroom = () => {
 
     const peersConnection = async (videoStream, myVideo) => {
       // host와 port를 설정해주어 개인 peerjs 서버를 가동
-      peer = new Peer(loggedUser.id)
+      peer = new Peer(loggedUser.id, {
+        host: "our-now/herokuapp.com",
+        path: "/peerjs/myapp",
+      })
       peerList.current.myPeer = peer.id
       console.log(peer)
 

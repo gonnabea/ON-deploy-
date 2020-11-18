@@ -18,6 +18,7 @@ import flash from "connect-flash"
 import localsMiddlewares from "./middleware"
 import path from "path"
 import MySQLStore from "express-mysql-session"
+import { ExpressPeerServer } from "peer"
 
 const PORT = process.env.PORT || 5000 // dotenv 쓰면 프록시가 망가짐
 const app = express()
@@ -182,6 +183,9 @@ db.sequelize.sync().then(() => {
   const server = app.listen(PORT, () => {
     console.log(`express is running on ${PORT}`)
   })
+
+  const peerServer = ExpressPeerServer(server, { path: "/myapp" })
+  app.use("/peerjs", peerServer)
   const io = SocketIO.listen(server)
 
   io.on("connection", (socket) => socketController(socket))
