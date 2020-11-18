@@ -137,7 +137,7 @@ const Chatroom = () => {
       peer = new Peer(loggedUser.id, {
         secure: true,
         host: "our-now/herokuapp.com",
-        port: 443,
+        port: 9000,
         debug: true,
       })
       peerList.current.myPeer = peer.id
