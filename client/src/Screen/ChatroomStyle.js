@@ -170,6 +170,7 @@ export const VideoGrid = styled.div`
   justify-content: center;
   align-items: center;
   overflow: auto;
+  min-height: 240px;
 `
 
 // 화상채팅 버트을 보여줄 지 안보여줄 지 판단
