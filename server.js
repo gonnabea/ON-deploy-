@@ -134,7 +134,6 @@ const corsOptions = {
 const httpServer = http.createServer(app)
 const peerServer = ExpressPeerServer(httpServer, {
   debug: true,
-  path: "/myapp",
 })
 
 app.use("/peerjs", peerServer)

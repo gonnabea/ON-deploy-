@@ -136,8 +136,6 @@ const Chatroom = () => {
       // host와 port를 설정해주어 개인 peerjs 서버를 가동
       peer = new Peer(loggedUser.id, {
         host: "our-now/herokuapp.com",
-        port: 9000,
-        path: "/peerjs/myapp",
       })
       peerList.current.myPeer = peer.id
       console.log(peer)
