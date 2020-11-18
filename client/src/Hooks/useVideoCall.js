@@ -36,10 +36,10 @@ const useVideoCall = () => {
       videoGrid.append(video)
     })
 
-    peersConnection(videoStream, video)
+    peersConnection(videoStream)
   }
 
-  const peersConnection = async (videoStream, myVideo) => {
+  const peersConnection = async (videoStream) => {
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
     peer = new Peer(await getLoggedUser())
     peerList.current.myPeer = peer.id
@@ -77,7 +77,6 @@ const useVideoCall = () => {
       console.log(callConn)
       const video = document.createElement("video")
       callConn.on("stream", (userVideoStream) => {
-        myVideo.muted = true
         const videoGrid = document.getElementById("videoGrid")
         video.srcObject = userVideoStream
         video.addEventListener("loadedmetadata", () => {
