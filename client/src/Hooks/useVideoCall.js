@@ -25,10 +25,12 @@ const useVideoCall = () => {
     const video = document.createElement("video")
     const videoGrid = document.getElementById("videoGrid")
     const videoStream = await navigator.mediaDevices.getUserMedia({
-      video: { width: 360, height: 240 },
+      video: { width: { max: 240 }, height: 240, facingMode: "user" },
       audio: true,
       echoCancellation: true,
     })
+
+    video.controls = true
 
     video.srcObject = videoStream
     video.addEventListener("loadedmetadata", () => {
@@ -91,6 +93,7 @@ const useVideoCall = () => {
     })
     // 컨넥팅 시도한 피어에게 반응 (회원)
     peer.on("connection", (conn) => {
+      myVideo.muted = true
       conn.on("error", (err) => {
         console.log(err)
       })
@@ -106,7 +109,7 @@ const useVideoCall = () => {
 
     peer.on("call", (call) => {
       call.answer(videoStream)
-      myVideo.muted = true
+
       const video = document.createElement("video")
 
       call.on("stream", (userVideoStream) => {
@@ -117,6 +120,10 @@ const useVideoCall = () => {
         })
         const videoGrid = document.getElementById("videoGrid")
         videoGrid.append(video)
+      })
+
+      call.on("close", () => {
+        video.remove()
       })
     })
   }

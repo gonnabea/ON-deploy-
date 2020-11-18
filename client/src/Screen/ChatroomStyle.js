@@ -169,7 +169,6 @@ export const VideoGrid = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   overflow: auto;
 `
 
