@@ -130,6 +130,7 @@ const corsOptions = {
     }
   },
 }
+app.use(cors(corsOptions))
 ///////////////////////////// peerjs 서버 만들기 /////////////////////
 const httpServer = http.createServer(app)
 const peerServer = ExpressPeerServer(httpServer, {
@@ -139,7 +140,6 @@ const peerServer = ExpressPeerServer(httpServer, {
 app.use("/peerjs", peerServer)
 peerServer.listen(9000)
 ///////////////////////////////////////////////////////////////////////
-app.use(cors(corsOptions))
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files

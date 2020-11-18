@@ -134,7 +134,12 @@ const Chatroom = () => {
 
     const peersConnection = async (videoStream, myVideo) => {
       // host와 port를 설정해주어 개인 peerjs 서버를 가동
-      peer = new Peer(loggedUser.id)
+      peer = new Peer(loggedUser.id, {
+        host: "our-now/herokuapp.com",
+        debug: true,
+        port: 9000,
+        proxied: true,
+      })
       peerList.current.myPeer = peer.id
       console.log(peer)
 
