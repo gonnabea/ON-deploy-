@@ -294,8 +294,8 @@ const Chatroom = () => {
   return (
     <Container>
       <Book
-        width={treatBookWidth}
-        height={treatBookHeight}
+        width={treatBookWidth()}
+        height={treatBookHeight()}
         spineWidth="50px"
         state={true}
         front={
