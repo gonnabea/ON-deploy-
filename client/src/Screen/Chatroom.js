@@ -111,7 +111,7 @@ const Chatroom = () => {
 
   const activateVideoCall = () => {
     let peer
-
+    setVideoCall(false)
     const createVideoStream = async () => {
       const video = document.createElement("video")
       const videoGrid = document.getElementById("videoGrid")
@@ -359,8 +359,8 @@ const Chatroom = () => {
                 <ChatText id="text" type="text" name="content" required={true} />
                 <ChatSubmit type="submit" value="전송" />
               </ChatForm>
-              {/* 채팅방 내의 유저가 2명일 경우만 보임 */}
-              {currentRoom && showVideoCall(currentRoom.current) ? (
+              {/* 채팅방 내의 유저가 2명일 경우만 보임, 버튼 클릭 시 사라짐 */}
+              {currentRoom && showVideoCall(currentRoom.current) && videoCall === false ? (
                 <VideoCallBtn
                   onClick={() => {
                     setVideoCall(true)
