@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Book from "../Components/3DBook"
 import Navigation from "../Hooks/useNavigation"
+import { treatBookHeight, treatBookWidth } from "../Screen/ChatroomStyle"
 
 const Container = styled.section`
   width: 100vw;
@@ -21,7 +22,7 @@ const BookFront = styled.div`
   height: 100%;
   /* background-color: #314458; */
   background-image: url("/cover.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
   box-shadow: 0 0 10px white;
   display: flex;
   flex-direction: column;
@@ -34,8 +35,8 @@ export default ({ user, loading }) => (
   <Container>
     {console.log(user)}
     <Book
-      width="500px"
-      height="650px"
+      width={treatBookWidth()}
+      height={treatBookHeight()}
       spineWidth="50px"
       front={
         <BookFront>

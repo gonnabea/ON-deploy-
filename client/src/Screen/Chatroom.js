@@ -283,13 +283,14 @@ const Chatroom = () => {
     return () => {}
   }, [])
 
+  // 그룹챗 모달 창 토글 함수
   const startGroupChat = () => {
     if (modalDisplay === "none") {
       setModalDisplay("block")
     } else {
       setModalDisplay("none")
     }
-  } // 그룹챗 모달 창 토글 함수
+  }
 
   return (
     <Container>

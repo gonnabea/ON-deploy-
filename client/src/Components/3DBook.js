@@ -139,17 +139,17 @@ const Inside6 = styled.div`
   border-radius: 0 3px 3px 0;
 `
 
-const MobileFilter = (width) => {
-  let filtered = width
-  if (window.matchMedia("(min-width: 500px)").matches) {
-    /* 뷰포트 너비가 500 픽셀 이상 */
-  } else {
-    /* 뷰포트 너비가 500 픽셀 미만 */
-    console.log(`${width} -> 350px`)
-    filtered = "350px"
-  }
-  return filtered
-}
+// const MobileFilter = (width) => {
+//   let filtered = width
+//   if (window.matchMedia("(min-width: 500px)").matches) {
+//     /* 뷰포트 너비가 500 픽셀 이상 */
+//   } else {
+//     /* 뷰포트 너비가 500 픽셀 미만 */
+//     console.log(`${width} -> 350px`)
+//     filtered = "350px"
+//   }
+//   return filtered
+// }
 
 const Book = ({
   width = "100px",
@@ -165,14 +165,14 @@ const Book = ({
 }) => {
   return (
     <Container
-      width={MobileFilter(width)}
+      width={width}
       height={height}
       state={state}
       initState={initState}
       backState={backState}
     >
       <Front
-        width={MobileFilter(width)}
+        width={width}
         height={height}
         spineWidth={spineWidth}
         state={state}
@@ -180,18 +180,18 @@ const Book = ({
       >
         {front}
       </Front>
-      <Inside1 width={MobileFilter(width)} height={height} spineWidth={spineWidth}>
+      <Inside1 width={width} height={height} spineWidth={spineWidth}>
         {inside1}
       </Inside1>
-      <Inside2 width={MobileFilter(width)} height={height} spineWidth={spineWidth}></Inside2>
-      <Inside3 width={MobileFilter(width)} height={height} spineWidth={spineWidth}></Inside3>
-      <Inside4 width={MobileFilter(width)} height={height} spineWidth={spineWidth}></Inside4>
-      <Inside5 width={MobileFilter(width)} height={height} spineWidth={spineWidth}></Inside5>
+      <Inside2 width={width} height={height} spineWidth={spineWidth}></Inside2>
+      <Inside3 width={width} height={height} spineWidth={spineWidth}></Inside3>
+      <Inside4 width={width} height={height} spineWidth={spineWidth}></Inside4>
+      <Inside5 width={width} height={height} spineWidth={spineWidth}></Inside5>
 
-      <Back width={MobileFilter(width)} height={height} spineWidth={spineWidth}>
+      <Back width={width} height={height} spineWidth={spineWidth}>
         {back}
       </Back>
-      <Left width={MobileFilter(width)} height={height} spineWidth={spineWidth}>
+      <Left width={width} height={height} spineWidth={spineWidth}>
         {spine}
       </Left>
     </Container>
