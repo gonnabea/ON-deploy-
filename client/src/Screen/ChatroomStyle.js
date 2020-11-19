@@ -173,13 +173,13 @@ export const VideoGrid = styled.div`
   min-height: 240px;
 `
 
-// 화상채팅 버트을 보여줄 지 안보여줄 지 판단
-export const showVideoCall = (chatroom) => {
+// 화상채팅 버튼을 보여줄 지 안보여줄 지 판단
+export const showVideoCall = (chatroom, videoCallStatus) => {
   let userList
   if (chatroom) {
     userList = chatroom.text.split(",")
   }
-  if (chatroom && userList.length === 2) {
+  if (videoCallStatus === false && chatroom && userList.length === 2) {
     return true
   } else {
     return false

@@ -360,7 +360,7 @@ const Chatroom = () => {
                 <ChatSubmit type="submit" value="전송" />
               </ChatForm>
               {/* 채팅방 내의 유저가 2명일 경우만 보임, 버튼 클릭 시 사라짐 */}
-              {currentRoom && showVideoCall(currentRoom.current) && videoCall === false ? (
+              {currentRoom && showVideoCall(currentRoom.current, videoCall) ? (
                 <VideoCallBtn
                   onClick={() => {
                     setVideoCall(true)
