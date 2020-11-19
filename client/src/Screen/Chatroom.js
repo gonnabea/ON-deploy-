@@ -111,8 +111,8 @@ const Chatroom = () => {
 
   const activateVideoCall = () => {
     let peer
-    setVideoCall(false)
     const createVideoStream = async () => {
+      setVideoCall(false)
       const video = document.createElement("video")
       const videoGrid = document.getElementById("videoGrid")
       const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -360,10 +360,12 @@ const Chatroom = () => {
                 <ChatSubmit type="submit" value="전송" />
               </ChatForm>
               {/* 채팅방 내의 유저가 2명일 경우만 보임, 버튼 클릭 시 사라짐 */}
-              {currentRoom && showVideoCall(currentRoom.current, videoCall) ? (
+              {currentRoom && showVideoCall(currentRoom.current) ? (
                 <VideoCallBtn
-                  onClick={() => {
+                  onClick={(e) => {
                     setVideoCall(true)
+                    console.log(e)
+                    e.target.remove()
                   }}
                 >
                   화상채팅 🎥
