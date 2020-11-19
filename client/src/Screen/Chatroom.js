@@ -139,10 +139,9 @@ const Chatroom = () => {
         debug: true,
         port: 9000,
         proxied: true,
-        path: "/peerjs",
       }
 
-      peer = new Peer(loggedUser.id)
+      peer = new Peer(loggedUser.id, peerOptions)
       peerList.current.myPeer = peer.id
       console.log(peer)
 

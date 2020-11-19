@@ -132,13 +132,13 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 ///////////////////////////// peerjs 서버 만들기 /////////////////////
-// const httpServer = http.createServer(app)
-// const peerServer = ExpressPeerServer(httpServer, {
-//   debug: true,
-// })
+const httpServer = http.createServer(app)
+const peerServer = ExpressPeerServer(httpServer, {
+  debug: true,
+})
 
-// app.use("/peerjs", peerServer)
-// peerServer.listen(9000)
+app.use("/peerjs", peerServer)
+peerServer.listen(9000)
 ///////////////////////////////////////////////////////////////////////
 
 if (process.env.NODE_ENV === "production") {
