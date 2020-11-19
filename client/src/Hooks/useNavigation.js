@@ -19,13 +19,13 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   @media (max-width: 700px) {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+    text-align: center;
   }
-  display: grid;
-  grid-template-columns: 25% 25% 25%;
+  display: flex;
   align-items: center;
-  text-align: center;
 `
 
 const SLink = styled(Link)`
