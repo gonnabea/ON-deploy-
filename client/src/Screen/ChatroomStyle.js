@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
+// 책 열었을 떄 오른쪽으로 움직이는 애니메이션
 export const Container = styled.section`
   width: 100vw;
   height: 100vh;
@@ -9,17 +10,12 @@ export const Container = styled.section`
   align-items: center;
   flex-direction: column;
   animation: moveBook 0.7s forwards;
-  @media (max-width: 500px) {
-    overflow-x: auto;
-    width: 1000px;
-    height: 1000px;
-    overflow-y: hidden;
-  }
+
   @keyframes moveBook {
     to {
       transform: translateX(150px);
     }
-  } // 책 열었을 떄 오른쪽으로 움직이는 애니메이션
+  }
 `
 
 export const FrontContainer = styled.section`
@@ -185,4 +181,32 @@ export const showVideoCall = (chatroom) => {
   } else {
     return false
   }
+}
+
+// 책 사이즈 반응형 구현
+export const treatBookWidth = () => {
+  let width = "500px"
+  if (window.matchMedia("(max-width: 700px)").matches) {
+    width = "300px"
+    return width
+  }
+  if (window.matchMedia("(max-width: 950px)").matches) {
+    width = "350px"
+    return width
+  }
+  if (window.matchMedia("(max-width: 1150px)").matches) {
+    width = "400px"
+    return width
+  }
+  return width
+}
+
+export const treatBookHeight = () => {
+  let height = "650px"
+
+  if (window.matchMedia("(max-width: 950px)").matches) {
+    height = "600px"
+    return height
+  }
+  return height
 }

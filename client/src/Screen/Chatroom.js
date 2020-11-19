@@ -31,6 +31,8 @@ import {
   VideoCallBtn,
   showVideoCall,
   VideoGrid,
+  treatBookWidth,
+  treatBookHeight,
 } from "./ChatroomStyle"
 import useVideoCall from "../Hooks/useVideoCall"
 
@@ -292,8 +294,8 @@ const Chatroom = () => {
   return (
     <Container>
       <Book
-        width="500px"
-        height="650px"
+        width={treatBookWidth}
+        height={treatBookHeight}
         spineWidth="50px"
         state={true}
         front={
@@ -364,7 +366,6 @@ const Chatroom = () => {
                 <VideoCallBtn
                   onClick={(e) => {
                     setVideoCall(true)
-                    console.log(e)
                     e.target.remove()
                   }}
                 >
