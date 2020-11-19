@@ -16,10 +16,15 @@ const Submit = styled.input``
 const Header = styled.div`
   width: 100%;
   height: 50px;
-  display: grid;
-  grid-template-columns: 20% 20% 20%;
+  display: flex;
   align-items: center;
-
+  @media (max-width: 700px) {
+    display: flex;
+    align-items: center;
+  }
+  display: grid;
+  grid-template-columns: 25% 25% 25%;
+  align-items: center;
   text-align: center;
 `
 
