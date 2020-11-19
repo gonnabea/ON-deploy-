@@ -17,8 +17,10 @@ const Header = styled.div`
   width: 100%;
   height: 50px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 20% 20% 20%;
   align-items: center;
+
+  text-align: center;
 `
 
 const SLink = styled(Link)`
