@@ -16,7 +16,8 @@ const Submit = styled.input``
 const Header = styled.div`
   width: 100%;
   height: 50px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
 `
 
@@ -42,9 +43,8 @@ const Navigation = () => {
   return user ? (
     <Container>
       <Header>
-        {console.log(user)}
         <SLink to="/">홈으로</SLink>
-        <SLink to="/chatroom">채팅</SLink>
+        <SLink to="/chatroom/lobby">채팅</SLink>
         <SLink to="/setting">설정</SLink>
         <Form action="https://our-now.herokuapp.com/logout" method="post">
           <Input type="submit" value="로그아웃" />

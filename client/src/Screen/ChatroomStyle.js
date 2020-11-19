@@ -99,7 +99,7 @@ export const BookFront = styled.div`
   background-color: #98c0d9;
   overflow: auto;
   /* background-image: url("/cover.jpg"); */
-  background-size: cover;
+  background-size: 100% 100%;
 
   box-shadow: 0 0 20px black;
   display: flex;
@@ -218,4 +218,12 @@ export const treatBookHeight = () => {
     return height
   }
   return height
+}
+
+export const treatBookSpine = () => {
+  let spine = "50px"
+  if (window.matchMedia("(max-width: 700px)").matches) {
+    spine = "20px"
+    return spine
+  }
 }

@@ -4,7 +4,7 @@ import Navigation from "../Hooks/useNavigation"
 import Book from "../Components/3DBook"
 import { Link } from "react-router-dom"
 import api from "../api"
-import { treatBookHeight, treatBookWidth } from "./ChatroomStyle"
+import { treatBookHeight, treatBookSpine, treatBookWidth } from "./ChatroomStyle"
 
 const Container = styled.section`
   width: 100vw;
@@ -20,7 +20,7 @@ const BookFront = styled.div`
   height: 100%;
   background-color: #314458;
   background-image: url("/cover.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
   box-shadow: 0 0 10px white;
   display: flex;
   flex-direction: column;
@@ -77,7 +77,7 @@ const Chatroom = (props) => {
       <Book
         width={treatBookWidth()}
         height={treatBookHeight()}
-        spineWidth="50px"
+        spineWidth={treatBookSpine()}
         backState={true}
         front={
           <BookFront>
