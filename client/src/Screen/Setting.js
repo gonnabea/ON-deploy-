@@ -4,6 +4,7 @@ import Navigation from "../Hooks/useNavigation"
 import Book from "../Components/3DBook"
 import { Link } from "react-router-dom"
 import api from "../api"
+import { treatBookHeight, treatBookWidth } from "./ChatroomStyle"
 
 const Container = styled.section`
   width: 100vw;
@@ -74,8 +75,8 @@ const Chatroom = (props) => {
   return (
     <Container>
       <Book
-        width="500px"
-        height="650px"
+        width={treatBookWidth()}
+        height={treatBookHeight()}
         spineWidth="50px"
         backState={true}
         front={
