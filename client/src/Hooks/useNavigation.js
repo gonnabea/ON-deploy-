@@ -9,7 +9,11 @@ const Container = styled.section`
 
 const Form = styled.form``
 
-const Input = styled.input``
+const Input = styled.input`
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+`
 
 const Submit = styled.input``
 

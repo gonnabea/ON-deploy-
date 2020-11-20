@@ -366,8 +366,10 @@ const Chatroom = () => {
               {currentRoom && showVideoCall(currentRoom.current) ? (
                 <VideoCallBtn
                   onClick={(e) => {
+                    const videoGrid = document.getElementById("videoGrid")
                     setVideoCall(true)
                     e.target.remove()
+                    videoGrid.style.display = "flex"
                   }}
                 >
                   화상채팅 🎥

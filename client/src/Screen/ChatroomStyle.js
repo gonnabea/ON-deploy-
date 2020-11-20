@@ -82,9 +82,9 @@ export const ChatText = styled.input`
 
 export const ChatSubmit = styled.input`
   position: relative;
-  left: 75%;
-  bottom: 80%;
-  width: 20%;
+  left: 70%;
+  bottom: 85%;
+  width: 25%;
   background-color: #f23f79;
   color: white;
   border: none;
@@ -168,7 +168,7 @@ export const VideoCallBtn = styled.button`
 `
 
 export const VideoGrid = styled.div`
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   overflow: auto;
@@ -192,8 +192,12 @@ export const showVideoCall = (chatroom) => {
 // 책 사이즈 반응형 구현
 export const treatBookWidth = () => {
   let width = "500px"
+  if (window.matchMedia("(max-width: 400px)").matches) {
+    width = "50vw"
+    return width
+  }
   if (window.matchMedia("(max-width: 700px)").matches) {
-    width = "170px"
+    width = "50vw"
     return width
   }
   if (window.matchMedia("(max-width: 950px)").matches) {
@@ -210,7 +214,7 @@ export const treatBookWidth = () => {
 export const treatBookHeight = () => {
   let height = "650px"
   if (window.matchMedia("(max-width: 700px)").matches) {
-    height = "400px"
+    height = "60vh"
     return height
   }
   if (window.matchMedia("(max-width: 950px)").matches) {
