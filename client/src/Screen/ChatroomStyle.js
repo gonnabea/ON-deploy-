@@ -91,6 +91,9 @@ export const ChatSubmit = styled.input`
   outline: none;
   padding: 10px;
   border-radius: 5px;
+  @media (max-width: 500px) {
+    display: hidden;
+  }
 `
 
 export const BookFront = styled.div`
@@ -163,7 +166,7 @@ export const ChatroomList = styled.ul`
 `
 export const VideoCallBtn = styled.button`
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
 `
 
