@@ -192,10 +192,6 @@ export const showVideoCall = (chatroom) => {
 // 책 사이즈 반응형 구현
 export const treatBookWidth = () => {
   let width = "500px"
-  if (window.matchMedia("(max-width: 400px)").matches) {
-    width = "50vw"
-    return width
-  }
   if (window.matchMedia("(max-width: 700px)").matches) {
     width = "50vw"
     return width
@@ -214,6 +210,19 @@ export const treatBookWidth = () => {
 export const treatBookHeight = () => {
   let height = "650px"
   if (window.matchMedia("(max-width: 700px)").matches) {
+    height = "80vh"
+    return height
+  }
+  if (window.matchMedia("(max-width: 950px)").matches) {
+    height = "600px"
+    return height
+  }
+  return height
+}
+
+export const closedBookHeight = () => {
+  let height = "650px"
+  if (window.matchMedia("(max-width: 700px)").matches) {
     height = "60vh"
     return height
   }
@@ -227,7 +236,7 @@ export const treatBookHeight = () => {
 export const treatBookSpine = () => {
   let spine = "50px"
   if (window.matchMedia("(max-width: 700px)").matches) {
-    spine = "20px"
+    spine = "25px"
     return spine
   }
 }

@@ -11,8 +11,8 @@ a{
 }
 body{
 background-color: #D7D8F1;
-
 font-size: 20px;
+overflow: hidden;
 @media (max-width: 500px){
     font-size: 15px;
 }
