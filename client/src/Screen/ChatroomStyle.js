@@ -92,7 +92,7 @@ export const ChatSubmit = styled.input`
   padding: 10px;
   border-radius: 5px;
   @media (max-width: 500px) {
-    display: hidden;
+    display: none;
   }
 `
 
