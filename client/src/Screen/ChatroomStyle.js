@@ -213,7 +213,7 @@ export const treatBookWidth = () => {
 export const treatBookHeight = () => {
   let height = "650px"
   if (window.matchMedia("(max-width: 700px)").matches) {
-    height = "80vh"
+    height = "70vh"
     return height
   }
   if (window.matchMedia("(max-width: 950px)").matches) {
@@ -223,10 +223,27 @@ export const treatBookHeight = () => {
   return height
 }
 
+export const closedBookWidth = () => {
+  let width = "500px"
+  if (window.matchMedia("(max-width: 700px)").matches) {
+    width = "90vw"
+    return width
+  }
+  if (window.matchMedia("(max-width: 950px)").matches) {
+    width = "350px"
+    return width
+  }
+  if (window.matchMedia("(max-width: 1150px)").matches) {
+    width = "400px"
+    return width
+  }
+  return width
+}
+
 export const closedBookHeight = () => {
   let height = "650px"
   if (window.matchMedia("(max-width: 700px)").matches) {
-    height = "60vh"
+    height = "90vh"
     return height
   }
   if (window.matchMedia("(max-width: 950px)").matches) {

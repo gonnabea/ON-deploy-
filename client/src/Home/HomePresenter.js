@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Book from "../Components/3DBook"
 import Navigation from "../Hooks/useNavigation"
-import { closedBookHeight, treatBookHeight, treatBookWidth } from "../Screen/ChatroomStyle"
+import { closedBookHeight, closedBookWidth } from "../Screen/ChatroomStyle"
 
 const Container = styled.section`
   width: 100vw;
@@ -35,7 +35,7 @@ export default ({ user, loading }) => (
   <Container>
     {console.log(user)}
     <Book
-      width={treatBookWidth()}
+      width={closedBookWidth()}
       height={closedBookHeight()}
       spineWidth="50px"
       front={

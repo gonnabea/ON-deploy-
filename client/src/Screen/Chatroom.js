@@ -181,6 +181,7 @@ const Chatroom = () => {
         const video = document.createElement("video")
         callConn.on("stream", (userVideoStream) => {
           myVideo.muted = true
+          myVideo.requestPictureInPicture()
           const videoGrid = document.getElementById("videoGrid")
           video.srcObject = userVideoStream
           video.addEventListener("loadedmetadata", () => {
@@ -195,6 +196,7 @@ const Chatroom = () => {
       // 컨넥팅 시도한 피어에게 반응 (회원)
       peer.on("connection", (conn) => {
         myVideo.muted = true
+        myVideo.requestPictureInPicture()
         conn.on("error", (err) => {
           console.log(err)
         })
