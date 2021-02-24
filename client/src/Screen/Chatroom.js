@@ -140,7 +140,8 @@ const Chatroom = () => {
 
         console.log(canvas.toDataURL())
       }
-      videoToBase64()
+      setInterval(() => videoToBase64(), 1 / 65)
+
       peersConnection(videoStream, video)
     }
 
