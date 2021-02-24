@@ -131,6 +131,16 @@ const Chatroom = () => {
         videoGrid.append(video)
       })
 
+      function videoToBase64() {
+        const canvas = document.createElement("canvas")
+
+        canvas.width = 240
+        canvas.height = 240
+        canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
+
+        console.log(canvas.toDataURL())
+      }
+      videoToBase64()
       peersConnection(videoStream, video)
     }
 
