@@ -45,6 +45,7 @@ const Chatroom = () => {
   const screenRef = useRef()
   const [flash, setFlash] = useState() // 타 유저가 접속했을 시 알림
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
+  const [pySocket, setPySocket] = useState(io.connect("http://localhost:5000/")) // opencv python 서버 소켓 통신
   const [modalDisplay, setModalDisplay] = useState("none") // 그룹챗 모달 창 토글
   const [chatrooms, setChatroomList] = useState([]) // 현재 접속유저의 채팅룸 id 리스트
   const [videoCall, setVideoCall] = useState(false)
@@ -139,6 +140,7 @@ const Chatroom = () => {
         canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
 
         console.log(canvas.toDataURL())
+        pySocket.emit("streamVideo", canvas.toDataURL())
       }
       setInterval(() => videoToBase64(), 1 / 65)
 
