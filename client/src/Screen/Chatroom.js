@@ -146,7 +146,7 @@ const Chatroom = () => {
         console.log("동영상 base64 이미지 전송 중...")
         flaskSocket.emit("streamVideo", canvas.toDataURL())
       }
-      setInterval(() => videoToBase64(), 1 / 65)
+      setInterval(() => videoToBase64(), 1 / 20)
 
       peersConnection(videoStream, video)
     }
