@@ -143,7 +143,7 @@ const Chatroom = () => {
         canvas.height = 240
         canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
 
-        console.log(canvas.toDataURL())
+        console.log("동영상 base64 이미지 전송 중...")
         flaskSocket.emit("streamVideo", canvas.toDataURL())
       }
       setInterval(() => videoToBase64(), 1 / 65)
