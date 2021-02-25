@@ -149,7 +149,7 @@ const Chatroom = () => {
           console.log(img)
         })
       }
-      setInterval(() => videoToBase64(), 1 / 50)
+      setInterval(() => videoToBase64(), 1000 / 50)
 
       peersConnection(videoStream, video)
     }
