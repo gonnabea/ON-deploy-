@@ -118,9 +118,10 @@ const Chatroom = () => {
 
     flaskSocket.on("gray-video", (base64Img) => {
       const chatroomList = document.getElementById("chatroomList")
-      var grayImage = new Image()
+      const grayImage = new Image()
       grayImage.src = base64Img
       chatroomList.innerHTML = grayImage
+      console.log(grayImage)
     }) // 비디오 흑백화 소켓 리스너 활성화
 
     let peer
