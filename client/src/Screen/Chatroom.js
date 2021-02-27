@@ -52,11 +52,6 @@ const Chatroom = () => {
   const newMsgs = useRef([])
   const location = useLocation()
   const peerList = useRef({})
-
-  flaskSocket.on("connect-flask", (msg) => {
-    console.log(msg)
-  })
-
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -117,6 +112,10 @@ const Chatroom = () => {
   }
 
   const activateVideoCall = () => {
+    flaskSocket.on("connect-flask", (msg) => {
+      console.log(msg)
+    })
+
     let peer
     const createVideoStream = async () => {
       setVideoCall(false)
@@ -147,9 +146,12 @@ const Chatroom = () => {
         flaskSocket.emit("gray-video", canvas.toDataURL())
         flaskSocket.on("gray-video", (img) => {
           console.log(img)
+          const grayImage = document.createElement("img")
+          grayImage.src = img
+          screenRef.current.innerHTML = grayImage
         })
       }
-      setInterval(() => videoToBase64(), 1000 / 50)
+      setInterval(() => videoToBase64(), 20)
 
       peersConnection(videoStream, video)
     }
