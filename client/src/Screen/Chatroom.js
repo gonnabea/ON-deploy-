@@ -125,7 +125,7 @@ const Chatroom = () => {
       }
 
       const grayImage = new Image()
-      grayImage.src = toBase64(base64Img)
+      grayImage.src = "data:image/png;base64," + toBase64(base64Img)
       chatroomList.appendChild(grayImage)
       console.log(grayImage)
     }) // 비디오 흑백화 소켓 리스너 활성화
@@ -137,7 +137,7 @@ const Chatroom = () => {
       const videoGrid = document.getElementById("videoGrid")
       const videoStream = await navigator.mediaDevices.getUserMedia({
         video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
-        audio: true,
+        audio: false,
         controls: true,
       })
 
