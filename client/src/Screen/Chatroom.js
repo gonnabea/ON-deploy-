@@ -118,11 +118,8 @@ const Chatroom = () => {
 
     flaskSocket.on("gray-video", (base64Img) => {
       const chatroomList = document.getElementById("chatroomList")
-      console.log(base64Img)
-      const img = Buffer.from(base64Img, "base64").toString("hex")
-      console.log(img)
-      const grayImage = document.createElement("img")
-      grayImage.innerHTML = img
+      var grayImage = new Image()
+      grayImage.src = "data:image/png;base64,iVBORw0K..."
       chatroomList.innerHTML = grayImage
     }) // 비디오 흑백화 소켓 리스너 활성화
 
