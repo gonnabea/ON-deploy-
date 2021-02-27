@@ -128,7 +128,8 @@ const Chatroom = () => {
       grayImage.src = "data:image/webp;base64," + toBase64(base64Img)
       chatroomList.appendChild(grayImage)
       chatroomList.scrollTo(100000000000, 0)
-      console.log(grayImage)
+
+      console.log("Creating Image...")
     }) // 비디오 흑백화 소켓 리스너 활성화
 
     let peer
