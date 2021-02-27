@@ -120,7 +120,7 @@ const Chatroom = () => {
       const chatroomList = document.getElementById("chatroomList")
       const grayImage = new Image()
       grayImage.src = base64Img
-      chatroomList.innerHTML = grayImage
+      chatroomList.appendChild(grayImage)
       console.log(grayImage)
     }) // 비디오 흑백화 소켓 리스너 활성화
 
