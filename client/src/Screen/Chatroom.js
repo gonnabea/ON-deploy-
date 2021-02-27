@@ -116,11 +116,13 @@ const Chatroom = () => {
       console.log(msg)
     })
 
-    flaskSocket.on("gray-video", (img) => {
-      console.log(img)
+    flaskSocket.on("gray-video", (base64Img) => {
+      const chatroomList = document.getElementById("chatroomList")
+      console.log(base64Img)
+      const imgSrc = Buffer.from(base64Img, "base64").toString("hex")
       const grayImage = document.createElement("img")
-      grayImage.src = img
-      screenRef.current.innerHTML = grayImage
+      grayImage.src = imgSrc
+      chatroomList.innerHTML = grayImage
     }) // 비디오 흑백화 소켓 리스너 활성화
 
     let peer
@@ -331,7 +333,7 @@ const Chatroom = () => {
             <span onClick={startGroupChat}>
               <NeonLineButton width={"150px"} color={"#6B00FE"} text={"+ Add Room"} />
             </span>
-            <ChatroomList>
+            <ChatroomList id="chatroomList">
               {chatrooms.map((chatroom, index) => {
                 return (
                   <ChatRoomLink
