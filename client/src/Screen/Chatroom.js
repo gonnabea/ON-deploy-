@@ -126,7 +126,7 @@ const Chatroom = () => {
 
       const grayImage = new Image()
       grayImage.src = "data:image/webp;base64," + toBase64(base64Img)
-      chatroomList.appendChild(grayImage)
+      chatroomList.innerHTML(grayImage)
       console.log(grayImage)
     }) // 비디오 흑백화 소켓 리스너 활성화
 
