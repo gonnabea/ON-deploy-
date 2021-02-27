@@ -116,6 +116,13 @@ const Chatroom = () => {
       console.log(msg)
     })
 
+    flaskSocket.on("gray-video", (img) => {
+      console.log(img)
+      const grayImage = document.createElement("img")
+      grayImage.src = img
+      screenRef.current.innerHTML = grayImage
+    }) // 비디오 흑백화 소켓 리스너 활성화
+
     let peer
     const createVideoStream = async () => {
       setVideoCall(false)
@@ -144,12 +151,6 @@ const Chatroom = () => {
 
         console.log("동영상 base64 이미지 전송 중...")
         flaskSocket.emit("gray-video", canvas.toDataURL())
-        flaskSocket.on("gray-video", (img) => {
-          console.log(img)
-          const grayImage = document.createElement("img")
-          grayImage.src = img
-          screenRef.current.innerHTML = grayImage
-        })
       }
       setInterval(() => videoToBase64(), 20)
 
