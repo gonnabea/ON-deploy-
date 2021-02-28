@@ -116,6 +116,7 @@ const Chatroom = () => {
       console.log(msg)
     })
 
+    const grayImage = new Image()
     flaskSocket.on("gray-video", (base64Img) => {
       const chatroomList = document.getElementById("chatroomList")
       // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
@@ -124,10 +125,9 @@ const Chatroom = () => {
         return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
       }
 
-      const grayImage = new Image()
       grayImage.src = "data:image/webp;base64," + toBase64(base64Img)
       chatroomList.appendChild(grayImage)
-      chatroomList.scrollTo(100000000000, 0)
+      chatroomList.scrollTo(0, chatroomList.scrollHeight)
 
       console.log("Creating Image...")
     }) // 비디오 흑백화 소켓 리스너 활성화
