@@ -111,7 +111,7 @@ const Chatroom = () => {
   }
 
   const activateVideoCall = () => {
-    const flaskSocket = io.connect(null, { port: 5000, rememberTransport: false }) // opencv python 서버 소켓 통신
+    const flaskSocket = io.connect("http://localhost:5000/") // opencv python 서버 소켓 통신
     flaskSocket.on("connect-flask", (msg) => {
       console.log(msg)
     })
