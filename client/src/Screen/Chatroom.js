@@ -156,7 +156,7 @@ const Chatroom = () => {
 
       function giveFaceDetector() {
         imageCatcher("face-detection")
-        setInterval(() => videoToBase64("face-detection"), 1000 / 50)
+        setInterval(() => videoToBase64("face-detection"), 1000 / 20)
       }
 
       const image = new Image()
