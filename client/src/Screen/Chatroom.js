@@ -119,22 +119,6 @@ const Chatroom = () => {
       console.log(msg)
     })
 
-    const grayImage = new Image()
-    flaskSocket.on("gray-video", (base64Img) => {
-      const chatroomList = document.getElementById("chatroomList")
-      // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
-      function toBase64(arr) {
-        arr = new Uint8Array(arr) // if it's an ArrayBuffer
-        return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
-      }
-
-      grayImage.src = "data:image/webp;base64," + toBase64(base64Img)
-      chatroomList.appendChild(grayImage)
-      chatroomList.scrollTo(0, chatroomList.scrollHeight)
-
-      console.log("Creating Image...")
-    }) // 비디오 흑백화 소켓 리스너 활성화
-
     let peer
     const createVideoStream = async () => {
       setVideoCall(false)
@@ -142,7 +126,7 @@ const Chatroom = () => {
       const videoGrid = document.getElementById("videoGrid")
       const videoStream = await navigator.mediaDevices.getUserMedia({
         video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
-        audio: false,
+        audio: true,
         controls: true,
       })
 
@@ -154,7 +138,7 @@ const Chatroom = () => {
         videoGrid.append(video)
       })
 
-      function videoToBase64() {
+      function videoToBase64(socketChannel) {
         const canvas = document.createElement("canvas")
 
         canvas.width = 240
@@ -162,10 +146,38 @@ const Chatroom = () => {
         canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
 
         console.log("동영상 base64 이미지 전송 중...")
-        flaskSocket.emit("gray-video", canvas.toDataURL("image/webp"))
+        flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
       }
-      setInterval(() => videoToBase64(), 1000 / 50)
 
+      function giveGrayEffect() {
+        imageCatcher("gray-video")
+        setInterval(() => videoToBase64("gray-video"), 1000 / 50)
+      }
+
+      function giveFaceDetector() {
+        imageCatcher("face-detection")
+        setInterval(() => videoToBase64("face-detection"), 1000 / 50)
+      }
+
+      const image = new Image()
+      function imageCatcher(socketChannel) {
+        flaskSocket.on(socketChannel, (base64Img) => {
+          const chatroomList = document.getElementById("chatroomList")
+
+          // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
+          function toBase64(arr) {
+            arr = new Uint8Array(arr) // if it's an ArrayBuffer
+            return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
+          }
+
+          image.src = "data:image/webp;base64," + toBase64(base64Img)
+          chatroomList.appendChild(image)
+          chatroomList.scrollTo(0, chatroomList.scrollHeight)
+
+          console.log("Creating Image...")
+        }) // 비디오 흑백화 소켓 리스너 활성화
+      }
+      giveFaceDetector()
       peersConnection(videoStream, video)
     }
 
@@ -216,7 +228,7 @@ const Chatroom = () => {
         const video = document.createElement("video")
         callConn.on("stream", (userVideoStream) => {
           myVideo.muted = true
-          myVideo.requestPictureInPicture()
+          myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
           const videoGrid = document.getElementById("videoGrid")
           video.srcObject = userVideoStream
           video.addEventListener("loadedmetadata", () => {
