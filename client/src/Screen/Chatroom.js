@@ -156,7 +156,7 @@ const Chatroom = () => {
 
       function giveFaceDetector() {
         imageCatcher("face-detection")
-        setInterval(() => videoToBase64("face-detection"), 1000 / 30)
+        setInterval(() => videoToBase64("face-detection"), 1000 / 10)
       }
 
       const image = new Image()
@@ -177,8 +177,8 @@ const Chatroom = () => {
           console.log("Creating Image...")
         }) // 비디오 흑백화 소켓 리스너 활성화
       }
-      // giveFaceDetector()
-      giveGrayEffect()
+      // giveGrayEffect()
+      giveFaceDetector()
       peersConnection(videoStream, video)
     }
 
