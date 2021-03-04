@@ -242,10 +242,49 @@ const Chatroom = () => {
           video.remove()
         })
       })
+
+      function videoToBase64(socketChannel) {
+        const canvas = document.createElement("canvas")
+
+        canvas.width = 240
+        canvas.height = 240
+        canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
+
+        console.log(`동영상 base64 ${socketChannel} 이미지 전송 중...`)
+        flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
+      }
+      function imageCatcher(socketChannel) {
+        flaskSocket.on(socketChannel, (base64Img) => {
+          const chatroomList = document.getElementById("chatroomList")
+
+          // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
+          function toBase64(arr) {
+            arr = new Uint8Array(arr) // if it's an ArrayBuffer
+            return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
+          }
+
+          image.src = "data:image/webp;base64," + toBase64(base64Img)
+          chatroomList.appendChild(image)
+          chatroomList.scrollTo(0, chatroomList.scrollHeight)
+
+          console.log("Creating Image...")
+        })
+      }
+
+      function giveGrayEffect() {
+        imageCatcher("gray-video")
+        setInterval(() => videoToBase64("gray-video"), 1000 / 50)
+      }
+
+      function giveFaceDetector() {
+        imageCatcher("face-detection")
+        setInterval(() => videoToBase64("face-detection"), 1000 / 10)
+      }
       // 컨넥팅 시도한 피어에게 반응 (회원)
       peer.on("connection", (conn) => {
         myVideo.muted = true
         myVideo.requestPictureInPicture()
+        giveGrayEffect()
         conn.on("error", (err) => {
           console.log(err)
         })
