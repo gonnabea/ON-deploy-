@@ -156,10 +156,11 @@ const Chatroom = () => {
 
       function giveFaceDetector() {
         imageCatcher("face-detection")
-        setInterval(() => videoToBase64("face-detection"), 1000 / 10)
+        setInterval(() => videoToBase64("face-detection"), 1000 / 50)
       }
 
       const image = new Image()
+      // 비디오 흑백화 소켓 리스너 활성화
       function imageCatcher(socketChannel) {
         flaskSocket.on(socketChannel, (base64Img) => {
           const chatroomList = document.getElementById("chatroomList")
@@ -175,7 +176,7 @@ const Chatroom = () => {
           chatroomList.scrollTo(0, chatroomList.scrollHeight)
 
           console.log("Creating Image...")
-        }) // 비디오 흑백화 소켓 리스너 활성화
+        })
       }
       // giveGrayEffect()
       giveFaceDetector()
