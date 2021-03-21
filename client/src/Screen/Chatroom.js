@@ -111,10 +111,11 @@ const Chatroom = () => {
   }
 
   const activateVideoCall = () => {
+    // opencv python 서버 소켓 통신
     const flaskSocket = io.connect("http://localhost:5000/", {
       upgrade: false,
       transports: ["websocket"],
-    }) // opencv python 서버 소켓 통신
+    })
     flaskSocket.on("connect-flask", (msg) => {
       console.log(msg)
     })
@@ -160,8 +161,8 @@ const Chatroom = () => {
       }
 
       const image = new Image()
-      // 비디오 흑백화 소켓 리스너 활성화
       function imageCatcher(socketChannel) {
+        // 영상처리 소켓 리스너 활성화
         flaskSocket.on(socketChannel, (base64Img) => {
           const chatroomList = document.getElementById("chatroomList")
 
