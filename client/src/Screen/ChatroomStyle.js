@@ -99,7 +99,7 @@ export const ChatSubmit = styled.input`
 export const BookFront = styled.div`
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-image: linear-gradient(to right top, #202730, #172328, #141f1e, #131a16, #12140e);
   overflow: auto;
   /* background-image: url("/cover.jpg"); */
   background-size: 100% 100%;
@@ -154,6 +154,7 @@ export const UserInfo = styled.span`
 export const Username = styled.span`
   margin-bottom: 20px;
   font-size: 20px;
+  font-weight: 700;
 `
 
 export const StatusMsg = styled.span`
