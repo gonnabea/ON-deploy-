@@ -5,7 +5,7 @@ const Container = styled.section`
   background-image: linear-gradient(to right top, #202730, #172328, #141f1e, #131a16, #12140e);
   max-width: 200px;
   border-radius: 10px;
-  box-shadow: 0 0 10px #548dcb;
+  box-shadow: 0 0 5px white;
   margin-bottom: 5px;
 `
 

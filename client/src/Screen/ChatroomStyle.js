@@ -99,7 +99,7 @@ export const ChatSubmit = styled.input`
 export const BookFront = styled.div`
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to right top, #202730, #172328, #141f1e, #131a16, #12140e);
+  background-image: background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
   overflow: auto;
   /* background-image: url("/cover.jpg"); */
   background-size: 100% 100%;
@@ -139,11 +139,10 @@ export const UserList = styled.ul`
 
 export const ChatRoomLink = styled(Link)`
   color: white;
-  background-color: black;
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
   height: 70px;
   display: flex;
   align-items: center;
-  border: solid 1px white;
 `
 
 export const UserInfo = styled.span`
