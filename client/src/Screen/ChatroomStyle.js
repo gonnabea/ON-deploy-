@@ -75,9 +75,11 @@ export const ChatText = styled.input`
   height: 100%;
   border-radius: 5px;
   border: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px white;
   padding-right: 30%;
   font-size: 18px;
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
+  outline: none;
 `
 
 export const ChatSubmit = styled.input`
@@ -85,7 +87,7 @@ export const ChatSubmit = styled.input`
   left: 70%;
   bottom: 85%;
   width: 25%;
-  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
+  background-color: #dd4849;
   box-shadow: 0 0 10px white;
   color: white;
   border: none;

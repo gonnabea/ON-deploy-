@@ -20,7 +20,13 @@ const Input = styled.input`
   }
 `
 
-const Submit = styled.input``
+const Submit = styled.input`
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: 700;
+`
 
 const Header = styled.div`
   width: 100%;

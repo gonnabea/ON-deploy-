@@ -4,7 +4,8 @@ import styled from "styled-components"
 const Container = styled.section`
   display: ${(props) => props.display};
   position: absolute;
-  background-color: white;
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
+
   z-index: 999;
 `
 
@@ -12,19 +13,33 @@ const Title = styled.h1``
 
 const SearchFriends = styled.input``
 
-const FriendsList = styled.ul``
+const FriendsList = styled.ul`
+  padding: 0 10px 10px 0;
+`
 
 const Friend = styled.li``
 
 const ProfileImg = styled.img``
 
-const FriendName = styled.cite``
+const FriendName = styled.cite`
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: 700;
+  box-shadow: 0 0 white 2px;
+`
 
 const SubmitForm = styled.form``
 
 const Checkbox = styled.input``
 
-const SubmitBtn = styled.input``
+const SubmitBtn = styled.input`
+  background-color: #dd4849;
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: 700;
+`
 
 const GroupChatModal = ({ friends, display = "none", loggedUser }) => (
   <Container display={display}>
