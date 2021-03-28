@@ -126,8 +126,8 @@ export const FrontBgImg = styled.img`
 export const Inside = styled.div`
   width: 100%;
   height: 100%;
-  background-color: white;
-  background-image: url("/paper2.jpg");
+  background-color: black;
+
   box-shadow: 0 0 10px white;
   display: flex;
 `
@@ -168,6 +168,12 @@ export const VideoCallBtn = styled.button`
   position: absolute;
   top: 0;
   left: 0;
+  border-radius: 100%;
+  color: orange;
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
 `
 
 export const VideoGrid = styled.div`

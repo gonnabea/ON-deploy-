@@ -424,7 +424,7 @@ const Chatroom = () => {
                     videoGrid.style.display = "flex"
                   }}
                 >
-                  화상채팅 🎥
+                  🎥
                 </VideoCallBtn>
               ) : (
                 console.log(currentRoom.current)
