@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 const Container = styled.section`
-  background-color: #8a81fd;
+  background-color: #dd4849;
   max-width: 200px;
 
   box-shadow: 0 0 10px #548dcb;

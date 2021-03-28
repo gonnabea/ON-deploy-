@@ -85,7 +85,8 @@ export const ChatSubmit = styled.input`
   left: 70%;
   bottom: 85%;
   width: 25%;
-  background-color: #f23f79;
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
+  box-shadow: 0 0 10px white;
   color: white;
   border: none;
   outline: none;
@@ -166,12 +167,14 @@ export const ChatroomList = styled.ul`
 `
 export const VideoCallBtn = styled.button`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 5px;
   border-radius: 100%;
   color: orange;
+  outline: none;
   font-size: 20px;
   padding: 10px;
+  box-shadow: 0 0 5px white;
   text-align: center;
   background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
 `

@@ -10,6 +10,11 @@ const Container = styled.section`
 const Form = styled.form``
 
 const Input = styled.input`
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: 700;
   @media (max-width: 700px) {
     width: 100%;
   }
