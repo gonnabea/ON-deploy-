@@ -10,7 +10,7 @@ a{
     box-sizing: border-box;
 }
 body{
-background-color: #D7D8F1;
+background-color: #363A43;
 font-size: 20px;
 overflow: hidden;
 @media (max-width: 500px){

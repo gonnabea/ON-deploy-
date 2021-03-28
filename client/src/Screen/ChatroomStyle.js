@@ -99,7 +99,7 @@ export const ChatSubmit = styled.input`
 export const BookFront = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #98c0d9;
+  background-color: black;
   overflow: auto;
   /* background-image: url("/cover.jpg"); */
   background-size: 100% 100%;
@@ -139,11 +139,11 @@ export const UserList = styled.ul`
 
 export const ChatRoomLink = styled(Link)`
   color: white;
-  background-color: #f23f79;
+  background-color: black;
   height: 70px;
   display: flex;
   align-items: center;
-  border: solid 2px black;
+  border: solid 1px white;
 `
 
 export const UserInfo = styled.span`
