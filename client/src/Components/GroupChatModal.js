@@ -5,11 +5,15 @@ const Container = styled.section`
   display: ${(props) => props.display};
   position: absolute;
   background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
-
+  padding: 0 20px 20px 0;
   z-index: 999;
 `
 
-const Title = styled.h1``
+const Title = styled.h1`
+  font-weight: 700;
+  color: white;
+  padding-bottom: 10px;
+`
 
 const SearchFriends = styled.input``
 
@@ -29,7 +33,10 @@ const FriendName = styled.cite`
   box-shadow: 0 0 white 2px;
 `
 
-const SubmitForm = styled.form``
+const SubmitForm = styled.form`
+  position: relative;
+  left: 20px;
+`
 
 const Checkbox = styled.input``
 
@@ -62,7 +69,7 @@ const GroupChatModal = ({ friends, display = "none", loggedUser }) => (
             )
           : null}
       </FriendsList>
-      <SubmitBtn type="submit" value="드루와!" />
+      <SubmitBtn type="submit" value="채팅방 만들기" />
     </SubmitForm>
   </Container>
 )

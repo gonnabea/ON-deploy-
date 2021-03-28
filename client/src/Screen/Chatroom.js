@@ -356,7 +356,7 @@ const Chatroom = () => {
             <Navigation />
             <FrontBgImg src="/cover.jpg" />
             <span onClick={startGroupChat}>
-              <NeonLineButton width={"150px"} color={"#6B00FE"} text={"+ Add Room"} />
+              <NeonLineButton width={"150px"} color={"white"} text={"+ Add Room"} />
             </span>
             <ChatroomList id="chatroomList">
               {chatrooms.map((chatroom, index) => {

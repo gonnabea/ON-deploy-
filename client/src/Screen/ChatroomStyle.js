@@ -166,6 +166,7 @@ export const StatusMsg = styled.span`
 export const ChatroomList = styled.ul`
   display: flex;
   flex-direction: column;
+  padding-top: 15px;
 `
 export const VideoCallBtn = styled.button`
   position: absolute;
