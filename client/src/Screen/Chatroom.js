@@ -357,7 +357,7 @@ const Chatroom = () => {
         front={
           <BookFront>
             <Navigation />
-            <FrontBgImg src="/cover.jpg" />
+            <FrontBgImg src="https://media.images.yourquote.in/post/large/0/0/2/119/xL077112.jpg" />
             <span onClick={startGroupChat}>
               <NeonLineButton width={"150px"} color={"white"} text={"+ Add Room"} />
             </span>

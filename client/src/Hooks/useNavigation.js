@@ -62,16 +62,16 @@ const Navigation = () => {
   const getLoggedUser = async () => {
     const userData = await api.getLoggedUser()
     console.log(userData)
-    const User = userData.data
+    const User = await userData.data
     setUser(User)
+    setLoading(false)
   }
 
   useEffect(() => {
     getLoggedUser()
-    setLoading(false)
   }, [])
 
-  if (!isLoading) {
+  if (isLoading === false) {
     return user ? (
       <Container>
         <Header>
@@ -95,7 +95,7 @@ const Navigation = () => {
           <Input type="password" name="password" placeholder="password" required={true} />
           <Submit type="submit" value="Login" />
         </Form>
-        <MenuTitle>로그아웃</MenuTitle>
+        <MenuTitle>회원가입</MenuTitle>
         <Form action="https://our-now.herokuapp.com/join" method="post">
           <Input type="email" name="email" placeholder="E-mail" required={true} />
           <Input type="text" name="username" placeholder="Username" required={true} />
