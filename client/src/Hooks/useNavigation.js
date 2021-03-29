@@ -6,6 +6,7 @@ import Loader from "../Components/Loader"
 
 const Container = styled.section`
   width: 100%;
+  padding-bottom: 10px;
 `
 
 const Form = styled.form``
@@ -49,6 +50,11 @@ const SLink = styled(Link)`
   margin-right: 10px;
 `
 
+const MenuTitle = styled.h2`
+  padding-bottom: 20px 0;
+  font-weight: 700;
+`
+
 const Navigation = () => {
   const [user, setUser] = useState(null)
   const [isLoading, setLoading] = useState(true)
@@ -83,13 +89,13 @@ const Navigation = () => {
           <SLink to="/">홈으로</SLink>
           <SLink to="/chatroom/lobby">채팅</SLink>
         </Header>
-        <h2>로그인</h2>
+        <MenuTitle>로그인</MenuTitle>
         <Form action="https://our-now.herokuapp.com/login" method="post">
           <Input type="text" name="username" placeholder="username" required={true} />
           <Input type="password" name="password" placeholder="password" required={true} />
           <Submit type="submit" value="Login" />
         </Form>
-        <h2>로그아웃</h2>
+        <MenuTitle>로그아웃</MenuTitle>
         <Form action="https://our-now.herokuapp.com/join" method="post">
           <Input type="email" name="email" placeholder="E-mail" required={true} />
           <Input type="text" name="username" placeholder="Username" required={true} />
