@@ -109,7 +109,7 @@ const Navigation = () => {
     setLoading(false)
   }, [])
 
-  return <Container>{Navigation()}</Container>
+  return <Container>{renderNav()}</Container>
 }
 
 export default Navigation
