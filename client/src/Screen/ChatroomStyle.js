@@ -190,6 +190,10 @@ export const VideoGrid = styled.div`
   min-height: 240px;
 `
 
+export const ButtonContainer = styled.span`
+  width: 150px;
+`
+
 // 화상채팅 버튼을 보여줄 지 안보여줄 지 판단
 export const showVideoCall = (chatroom) => {
   let userList

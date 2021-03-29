@@ -35,7 +35,7 @@ const BookFront = styled.div`
 const Back = styled.section`
   width: 100%;
   height: 100%;
-  background-image: url("/backCover.jpg");
+  background-image: url("https://media.images.yourquote.in/post/large/0/0/2/119/xL077112.jpg");
   background-size: 100% 100%;
   transform: scaleX(-1);
 `

@@ -33,6 +33,7 @@ import {
   VideoGrid,
   treatBookWidth,
   treatBookHeight,
+  ButtonContainer,
 } from "./ChatroomStyle"
 import useVideoCall from "../Hooks/useVideoCall"
 import Loader from "../Components/Loader"
@@ -358,9 +359,9 @@ const Chatroom = () => {
           <BookFront>
             <Navigation />
             <FrontBgImg src="https://media.images.yourquote.in/post/large/0/0/2/119/xL077112.jpg" />
-            <span onClick={startGroupChat}>
+            <ButtonContainer onClick={startGroupChat}>
               <NeonLineButton width={"150px"} color={"white"} text={"+ Add Room"} />
-            </span>
+            </ButtonContainer>
             <ChatroomList id="chatroomList">
               {chatrooms.map((chatroom, index) => {
                 return (
