@@ -62,6 +62,7 @@ const Navigation = () => {
 
   useEffect(() => {
     getLoggedUser()
+    setLoading(false)
   }, [])
 
   if (!isLoading) {
