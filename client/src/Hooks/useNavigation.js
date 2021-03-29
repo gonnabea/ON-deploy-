@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import api from "../api"
+import Loader from "../Components/Loader"
 
 const Container = styled.section`
   width: 100%;
@@ -97,6 +98,8 @@ const Navigation = () => {
         </Form>
       </Container>
     )
+  } else {
+    return <Loader />
   }
 }
 
