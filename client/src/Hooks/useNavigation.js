@@ -65,8 +65,9 @@ const Navigation = () => {
     setUser(User)
   }
 
-  const renderNav = () => {
+  const renderNav = async () => {
     console.log("rendered!")
+    await getLoggedUser()
     if (isLoading === false) {
       return user ? (
         <Container>
@@ -107,7 +108,6 @@ const Navigation = () => {
   }
 
   useEffect(() => {
-    getLoggedUser()
     setLoading(false)
   }, [])
 
