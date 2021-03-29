@@ -61,10 +61,8 @@ const Navigation = () => {
 
   const getLoggedUser = async () => {
     const userData = await api.getLoggedUser()
-    console.log(userData)
     const User = await userData.data
     setUser(User)
-    setLoading(false)
   }
 
   const renderNav = () => {
@@ -110,6 +108,7 @@ const Navigation = () => {
 
   useEffect(() => {
     getLoggedUser()
+    setLoading(false)
   }, [])
 
   return renderNav()
