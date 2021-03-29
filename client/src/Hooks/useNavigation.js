@@ -70,16 +70,14 @@ const Navigation = () => {
     await getLoggedUser()
     if (isLoading === false) {
       return user ? (
-        <Container>
-          <Header>
-            <SLink to="/">홈으로</SLink>
-            <SLink to="/chatroom/lobby">채팅</SLink>
-            <SLink to="/setting">설정</SLink>
-            <Form action="https://our-now.herokuapp.com/logout" method="post">
-              <Input type="submit" value="로그아웃" />
-            </Form>
-          </Header>
-        </Container>
+        <Header>
+          <SLink to="/">홈으로</SLink>
+          <SLink to="/chatroom/lobby">채팅</SLink>
+          <SLink to="/setting">설정</SLink>
+          <Form action="https://our-now.herokuapp.com/logout" method="post">
+            <Input type="submit" value="로그아웃" />
+          </Form>
+        </Header>
       ) : (
         <Container>
           <Header>
@@ -111,7 +109,7 @@ const Navigation = () => {
     setLoading(false)
   }, [])
 
-  return renderNav()
+  return <Container>{Navigation()}</Container>
 }
 
 export default Navigation
