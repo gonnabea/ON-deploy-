@@ -35,7 +35,7 @@ const BookFront = styled.div`
 const Back = styled.section`
   width: 100%;
   height: 100%;
-  background-image: url("/backCover.jpg");
+  background-image: url("https://wallpaperaccess.com/full/804975.jpg");
   background-size: 100% 100%;
   transform: scaleX(-1);
 `
@@ -45,7 +45,7 @@ const Spine = styled.section`
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: #98c0d9;
+  background-color: black;
 `
 
 const Chatroom = (props) => {
