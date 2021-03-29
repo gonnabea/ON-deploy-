@@ -130,7 +130,7 @@ const Chatroom = () => {
       const videoGrid = document.getElementById("videoGrid")
       const videoStream = await navigator.mediaDevices.getUserMedia({
         video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
-        audio: true,
+        audio: false,
         controls: true,
       })
 
@@ -426,6 +426,7 @@ const Chatroom = () => {
                     setVideoCall(true)
                     e.target.remove()
                     videoGrid.style.display = "flex"
+                    videoGrid.style.flexDirection = "column"
                   }}
                 >
                   🎥

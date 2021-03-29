@@ -80,6 +80,7 @@ export const ChatText = styled.input`
   font-size: 18px;
   background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
   outline: none;
+  color: white;
 `
 
 export const ChatSubmit = styled.input`
@@ -186,6 +187,7 @@ export const VideoGrid = styled.div`
   display: none;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   overflow: auto;
   min-height: 240px;
 `
