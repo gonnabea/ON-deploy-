@@ -79,17 +79,19 @@ const Navigation = () => {
         <SLink to="/">홈으로</SLink>
         <SLink to="/chatroom/lobby">채팅</SLink>
       </Header>
+      <h2>로그인</h2>
       <Form action="https://our-now.herokuapp.com/login" method="post">
         <Input type="text" name="username" placeholder="username" required={true} />
         <Input type="password" name="password" placeholder="password" required={true} />
-        <Submit type="submit" value="Login!" />
+        <Submit type="submit" value="Login" />
       </Form>
+      <h2>로그아웃</h2>
       <Form action="https://our-now.herokuapp.com/join" method="post">
         <Input type="email" name="email" placeholder="E-mail" required={true} />
         <Input type="text" name="username" placeholder="Username" required={true} />
         <Input type="password" name="password" placeholder="Password" required={true} />
         <Input type="password" name="password2" placeholder="Verify Password" required={true} />
-        <Submit type="submit" value="Join!" />
+        <Submit type="submit" value="Join" />
       </Form>
     </Container>
   )

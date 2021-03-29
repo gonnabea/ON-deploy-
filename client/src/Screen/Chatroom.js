@@ -35,8 +35,10 @@ import {
   treatBookHeight,
 } from "./ChatroomStyle"
 import useVideoCall from "../Hooks/useVideoCall"
+import Loader from "../Components/Loader"
 
 const Chatroom = () => {
+  const [isLoading, setLoading] = useState(true)
   const [messages, setMessages] = useState([]) // DB에서 가져오는 메세지들
   const [loggedUser, setLoggedUser] = useState(null) // 로그인 된 유저 정보
   const [userList, setUserList] = useState() // 모든 유저리스트
@@ -326,9 +328,8 @@ const Chatroom = () => {
 
   useEffect(() => {
     try {
+      setLoading(false)
       handleApi()
-
-      console.log(loggedUser)
     } catch (err) {
       console.log(err)
     }
@@ -344,7 +345,9 @@ const Chatroom = () => {
     }
   }
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <Container>
       <Book
         width={treatBookWidth()}
