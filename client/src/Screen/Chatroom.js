@@ -55,7 +55,6 @@ const Chatroom = () => {
   const newMsgs = useRef([])
   const location = useLocation()
   const peerList = useRef({})
-  const videoEffect = useRef("gray")
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -173,13 +172,14 @@ const Chatroom = () => {
     })
   }
 
+  // 내 카메라 비디오
+  const video = document.createElement("video")
   const activateVideoCall = () => {
     flaskSocket.on("connect-flask", (msg) => {
       console.log(msg)
     })
 
     let peer
-    const video = document.createElement("video")
     const createVideoStream = async () => {
       setVideoCall(false)
       const videoGrid = document.getElementById("videoGrid")
@@ -196,15 +196,6 @@ const Chatroom = () => {
         video.play()
         videoGrid.append(video)
       })
-
-      // 영상처리 효과 선택
-      // 흑백효과
-      if (videoEffect.current === "gray") {
-        giveGrayEffect(video)
-        // 토끼 귀 효과
-      } else if (videoEffect.current === "rabbit") {
-        giveRabbitEffect(video)
-      }
       peersConnection(videoStream, video)
     }
 
@@ -455,15 +446,12 @@ const Chatroom = () => {
                     const grayBtn = document.createElement("button")
                     grayBtn.innerHTML = "흑백"
                     grayBtn.addEventListener("click", () => {
-                      videoEffect.current = "gray"
-                      activateVideoCall()
+                      giveGrayEffect(video)
                     })
                     const rabbitBtn = document.createElement("button")
                     rabbitBtn.innerHTML = "토끼"
                     rabbitBtn.addEventListener("click", () => {
-                      videoEffect.current = "rabbit"
-
-                      activateVideoCall()
+                      giveRabbitEffect(video)
                     })
                     videoOptionBox.appendChild(grayBtn)
                     videoOptionBox.appendChild(rabbitBtn)
