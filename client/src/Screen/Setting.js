@@ -48,6 +48,16 @@ const Spine = styled.section`
   background-color: black;
 `
 
+const StatusMsgInput = styled.input`
+  background-color: #dd4849;
+  box-shadow: 0 0 10px white;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+`
+
 const Chatroom = (props) => {
   const [loggedUser, setLoggedUser] = useState()
 
@@ -99,8 +109,8 @@ const Chatroom = (props) => {
             <Navigation />
             <cite>⚙ 설정</cite>
             <form action="setStatusMsg" method="post" onSubmit={(e) => setStatusMsg(e)}>
-              <input ref={statusMsg} type="text" placeholder="상태메세지" name="text" />
-              <input type="submit" value="적용" />
+              <StatusMsgInput ref={statusMsg} type="text" placeholder="상태메세지" name="text" />
+              <StatusMsgInput type="submit" value="적용" />
             </form>
           </Back>
         }
