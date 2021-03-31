@@ -458,7 +458,7 @@ const Chatroom = () => {
                   🎥
                 </VideoCallBtn>
               ) : (
-                
+                console.log("p2p 아니라서 화상채팅 불가!")
               )}
             </ChatBox>
           </Inside>
