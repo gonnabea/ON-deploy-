@@ -49,7 +49,7 @@ const Spine = styled.section`
 `
 
 const StatusMsgInput = styled.input`
-  background-color: #dd4849;
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
   box-shadow: 0 0 10px white;
   color: white;
   border: none;
