@@ -196,6 +196,10 @@ export const ButtonContainer = styled.span`
   width: 150px;
 `
 
+export const VideoOptionBox = styled.div`
+  background-color: transparent;
+`
+
 // 화상채팅 버튼을 보여줄 지 안보여줄 지 판단
 export const showVideoCall = (chatroom) => {
   let userList

@@ -34,6 +34,7 @@ import {
   treatBookWidth,
   treatBookHeight,
   ButtonContainer,
+  VideoOptionBox,
 } from "./ChatroomStyle"
 import useVideoCall from "../Hooks/useVideoCall"
 import Loader from "../Components/Loader"
@@ -54,6 +55,7 @@ const Chatroom = () => {
   const newMsgs = useRef([])
   const location = useLocation()
   const peerList = useRef({})
+  const [videoEffect, setVideoEffect] = useState("gray")
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -182,8 +184,14 @@ const Chatroom = () => {
           console.log("Creating Image...")
         })
       }
-      // giveGrayEffect()
-      giveFaceDetector()
+      // 영상처리 효과 선택
+      // 흑백효과
+      if (videoEffect === "gray") {
+        giveGrayEffect()
+        // 토끼 귀 효과
+      } else if (videoEffect === "rabbit") {
+        giveFaceDetector()
+      }
       peersConnection(videoStream, video)
     }
 
@@ -423,16 +431,34 @@ const Chatroom = () => {
                 <VideoCallBtn
                   onClick={(e) => {
                     const videoGrid = document.getElementById("videoGrid")
+                    const chatScreen = document.getElementById("chatScreen")
                     setVideoCall(true)
                     e.target.remove()
                     videoGrid.style.display = "flex"
                     videoGrid.style.flexDirection = "column"
+
+                    // 화상채팅 시 영상효과 옵션 선택 버튼
+                    const videoOptionBox = document.createElement("div")
+                    const grayBtn = document.createElement("button")
+                    grayBtn.innerHTML = "흑백"
+                    grayBtn.addEventListener("click", () => {
+                      setVideoEffect("gray")
+                    })
+                    const rabbitBtn = document.createElement("button")
+                    rabbitBtn.innerHTML = "토끼"
+                    rabbitBtn.addEventListener("click", () => {
+                      setVideoEffect("rabbit")
+                    })
+                    videoOptionBox.appendChild(grayBtn)
+                    videoOptionBox.appendChild(rabbitBtn)
+
+                    chatScreen.appendChild(videoOptionBox)
                   }}
                 >
                   🎥
                 </VideoCallBtn>
               ) : (
-                console.log(currentRoom.current)
+                
               )}
             </ChatBox>
           </Inside>

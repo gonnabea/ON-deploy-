@@ -43,9 +43,13 @@ const Back = styled.section`
 const Spine = styled.section`
   width: 100%;
   height: 100%;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
 `
 
 const StatusMsgInput = styled.input`
@@ -107,9 +111,14 @@ const Chatroom = (props) => {
         back={
           <Back>
             <Navigation />
-            <cite>⚙ 설정</cite>
+
             <form action="setStatusMsg" method="post" onSubmit={(e) => setStatusMsg(e)}>
-              <StatusMsgInput ref={statusMsg} type="text" placeholder="상태메세지" name="text" />
+              <StatusMsgInput
+                ref={statusMsg}
+                type="text"
+                placeholder="상태메세지 입력"
+                name="text"
+              />
               <StatusMsgInput type="submit" value="적용" />
             </form>
           </Back>
