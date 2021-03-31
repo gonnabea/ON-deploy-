@@ -154,7 +154,7 @@ const Chatroom = () => {
   }
 
   function imageCatcher(socketChannel) {
-    const base64Img = new Image()
+    const imageContainer = new Image()
     // 영상처리 소켓 리스너 활성화
     flaskSocket.on(socketChannel, (base64Img) => {
       const chatroomList = document.getElementById("chatroomList")
@@ -165,8 +165,8 @@ const Chatroom = () => {
         return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
       }
 
-      base64Img.src = "data:image/webp;base64," + toBase64(base64Img)
-      chatroomList.appendChild(base64Img)
+      imageContainer.src = "data:image/webp;base64," + toBase64(base64Img)
+      chatroomList.appendChild(imageContainer)
       chatroomList.scrollTo(0, chatroomList.scrollHeight)
 
       console.log("Creating Image...")
