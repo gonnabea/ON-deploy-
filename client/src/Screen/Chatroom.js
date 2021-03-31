@@ -55,7 +55,7 @@ const Chatroom = () => {
   const newMsgs = useRef([])
   const location = useLocation()
   const peerList = useRef({})
-  const [videoEffect, setVideoEffect] = useState("gray")
+  const videoEffect = useRef("gray")
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -126,9 +126,9 @@ const Chatroom = () => {
     })
 
     let peer
+    const video = document.createElement("video")
     const createVideoStream = async () => {
       setVideoCall(false)
-      const video = document.createElement("video")
       const videoGrid = document.getElementById("videoGrid")
       const videoStream = await navigator.mediaDevices.getUserMedia({
         video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
@@ -144,55 +144,58 @@ const Chatroom = () => {
         videoGrid.append(video)
       })
 
-      function videoToBase64(socketChannel) {
-        const canvas = document.createElement("canvas")
-
-        canvas.width = 240
-        canvas.height = 240
-        canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
-
-        console.log(`동영상 base64 ${socketChannel} 이미지 전송 중...`)
-        flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
-      }
-
-      function giveGrayEffect() {
-        imageCatcher("gray-video")
-        setInterval(() => videoToBase64("gray-video"), 1000 / 50)
-      }
-
-      function giveFaceDetector() {
-        imageCatcher("face-detection")
-        setInterval(() => videoToBase64("face-detection"), 1000 / 10)
-      }
-
-      const image = new Image()
-      function imageCatcher(socketChannel) {
-        // 영상처리 소켓 리스너 활성화
-        flaskSocket.on(socketChannel, (base64Img) => {
-          const chatroomList = document.getElementById("chatroomList")
-
-          // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
-          function toBase64(arr) {
-            arr = new Uint8Array(arr) // if it's an ArrayBuffer
-            return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
-          }
-
-          image.src = "data:image/webp;base64," + toBase64(base64Img)
-          chatroomList.appendChild(image)
-          chatroomList.scrollTo(0, chatroomList.scrollHeight)
-
-          console.log("Creating Image...")
-        })
-      }
       // 영상처리 효과 선택
       // 흑백효과
-      if (videoEffect === "gray") {
+      if (videoEffect.current === "gray") {
         giveGrayEffect()
         // 토끼 귀 효과
-      } else if (videoEffect === "rabbit") {
-        giveFaceDetector()
+      } else if (videoEffect.current === "rabbit") {
+        giveRabbitEffect()
       }
       peersConnection(videoStream, video)
+    }
+
+    const image = new Image()
+    function imageCatcher(socketChannel) {
+      // 영상처리 소켓 리스너 활성화
+      flaskSocket.on(socketChannel, (base64Img) => {
+        const chatroomList = document.getElementById("chatroomList")
+
+        // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
+        function toBase64(arr) {
+          arr = new Uint8Array(arr) // if it's an ArrayBuffer
+          return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
+        }
+
+        image.src = "data:image/webp;base64," + toBase64(base64Img)
+        chatroomList.appendChild(image)
+        chatroomList.scrollTo(0, chatroomList.scrollHeight)
+
+        console.log("Creating Image...")
+      })
+    }
+
+    function videoToBase64(socketChannel) {
+      const canvas = document.createElement("canvas")
+
+      canvas.width = 240
+      canvas.height = 240
+      canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
+
+      console.log(`동영상 base64 ${socketChannel} 이미지 전송 중...`)
+      flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
+    }
+
+    function giveGrayEffect() {
+      console.log("흑백 효과")
+      imageCatcher("gray-video")
+      setInterval(() => videoToBase64("gray-video"), 1000 / 50)
+    }
+
+    function giveRabbitEffect() {
+      console.log("토끼 효과")
+      imageCatcher("face-detection")
+      setInterval(() => videoToBase64("face-detection"), 1000 / 10)
     }
 
     const peersConnection = async (videoStream, myVideo) => {
@@ -442,13 +445,14 @@ const Chatroom = () => {
                     const grayBtn = document.createElement("button")
                     grayBtn.innerHTML = "흑백"
                     grayBtn.addEventListener("click", () => {
-                      setVideoEffect("gray")
+                      videoEffect.current = "gray"
                       activateVideoCall()
                     })
                     const rabbitBtn = document.createElement("button")
                     rabbitBtn.innerHTML = "토끼"
                     rabbitBtn.addEventListener("click", () => {
-                      setVideoEffect("rabbit")
+                      videoEffect.current = "rabbit"
+
                       activateVideoCall()
                     })
                     videoOptionBox.appendChild(grayBtn)
