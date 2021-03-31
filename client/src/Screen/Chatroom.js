@@ -115,12 +115,65 @@ const Chatroom = () => {
       }) // 채팅창 진입 시 자동 스크롤 내리기
   }
 
-  const activateVideoCall = () => {
-    // opencv python 서버 소켓 통신
-    const flaskSocket = io.connect("http://localhost:5000/", {
-      upgrade: false,
-      transports: ["websocket"],
+  // 영상처리를 위해 flask 소켓으로 보내고 있는 영상
+  let streamToSocket
+  // opencv python 서버 소켓 통신
+  const flaskSocket = io.connect("http://localhost:5000/", {
+    upgrade: false,
+    transports: ["websocket"],
+  })
+
+  function videoToBase64(socketChannel, video) {
+    const canvas = document.createElement("canvas")
+
+    canvas.width = 240
+    canvas.height = 240
+    canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
+
+    console.log(`동영상 base64 ${socketChannel} 이미지 전송 중...`)
+    flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
+  }
+
+  function giveGrayEffect(video) {
+    console.log("흑백 효과")
+
+    if (streamToSocket) {
+      clearInterval(streamToSocket)
+    }
+    imageCatcher("gray-video")
+    streamToSocket = setInterval(() => videoToBase64("gray-video", video), 1000 / 50)
+  }
+
+  function giveRabbitEffect(video) {
+    console.log("토끼 효과")
+    if (streamToSocket) {
+      clearInterval(streamToSocket)
+    }
+    imageCatcher("face-detection")
+    streamToSocket = setInterval(() => videoToBase64("face-detection", video), 1000 / 10)
+  }
+
+  function imageCatcher(socketChannel) {
+    const base64Img = new Image()
+    // 영상처리 소켓 리스너 활성화
+    flaskSocket.on(socketChannel, (base64Img) => {
+      const chatroomList = document.getElementById("chatroomList")
+
+      // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
+      function toBase64(arr) {
+        arr = new Uint8Array(arr) // if it's an ArrayBuffer
+        return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
+      }
+
+      base64Img.src = "data:image/webp;base64," + toBase64(base64Img)
+      chatroomList.appendChild(base64Img)
+      chatroomList.scrollTo(0, chatroomList.scrollHeight)
+
+      console.log("Creating Image...")
     })
+  }
+
+  const activateVideoCall = () => {
     flaskSocket.on("connect-flask", (msg) => {
       console.log(msg)
     })
@@ -147,55 +200,12 @@ const Chatroom = () => {
       // 영상처리 효과 선택
       // 흑백효과
       if (videoEffect.current === "gray") {
-        giveGrayEffect()
+        giveGrayEffect(video)
         // 토끼 귀 효과
       } else if (videoEffect.current === "rabbit") {
-        giveRabbitEffect()
+        giveRabbitEffect(video)
       }
       peersConnection(videoStream, video)
-    }
-
-    const image = new Image()
-    function imageCatcher(socketChannel) {
-      // 영상처리 소켓 리스너 활성화
-      flaskSocket.on(socketChannel, (base64Img) => {
-        const chatroomList = document.getElementById("chatroomList")
-
-        // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
-        function toBase64(arr) {
-          arr = new Uint8Array(arr) // if it's an ArrayBuffer
-          return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
-        }
-
-        image.src = "data:image/webp;base64," + toBase64(base64Img)
-        chatroomList.appendChild(image)
-        chatroomList.scrollTo(0, chatroomList.scrollHeight)
-
-        console.log("Creating Image...")
-      })
-    }
-
-    function videoToBase64(socketChannel) {
-      const canvas = document.createElement("canvas")
-
-      canvas.width = 240
-      canvas.height = 240
-      canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
-
-      console.log(`동영상 base64 ${socketChannel} 이미지 전송 중...`)
-      flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
-    }
-
-    function giveGrayEffect() {
-      console.log("흑백 효과")
-      imageCatcher("gray-video")
-      setInterval(() => videoToBase64("gray-video"), 1000 / 50)
-    }
-
-    function giveRabbitEffect() {
-      console.log("토끼 효과")
-      imageCatcher("face-detection")
-      setInterval(() => videoToBase64("face-detection"), 1000 / 10)
     }
 
     const peersConnection = async (videoStream, myVideo) => {

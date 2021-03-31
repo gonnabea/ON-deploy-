@@ -123,11 +123,7 @@ const Chatroom = (props) => {
             </form>
           </Back>
         }
-        spine={
-          <Spine>
-            <h1>ON</h1>
-          </Spine>
-        }
+        spine={<Spine></Spine>}
       />
     </Container>
   )
