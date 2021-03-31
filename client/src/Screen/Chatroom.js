@@ -443,11 +443,13 @@ const Chatroom = () => {
                     grayBtn.innerHTML = "흑백"
                     grayBtn.addEventListener("click", () => {
                       setVideoEffect("gray")
+                      activateVideoCall()
                     })
                     const rabbitBtn = document.createElement("button")
                     rabbitBtn.innerHTML = "토끼"
                     rabbitBtn.addEventListener("click", () => {
                       setVideoEffect("rabbit")
+                      activateVideoCall()
                     })
                     videoOptionBox.appendChild(grayBtn)
                     videoOptionBox.appendChild(rabbitBtn)
