@@ -152,11 +152,11 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("face-detection")
-    streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 30)
+    streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 15)
   }
 
+  const imageContainer = new Image()
   function imageCatcher(socketChannel) {
-    const imageContainer = new Image()
     // 영상처리 소켓 리스너 활성화
     flaskSocket.on(socketChannel, (base64Img) => {
       const chatroomList = document.getElementById("chatroomList")
@@ -193,7 +193,6 @@ const Chatroom = () => {
       })
 
       myVideo.srcObject = videoStream
-      myVideo.muted = true
       myVideo.controls = true
       myVideo.addEventListener("loadedmetadata", () => {
         myVideo.play()
