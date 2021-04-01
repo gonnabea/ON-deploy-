@@ -55,7 +55,7 @@ const Chatroom = () => {
   const newMsgs = useRef([])
   const location = useLocation()
   const peerList = useRef({})
-
+  const patnerCVMode = useRef()
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -156,9 +156,18 @@ const Chatroom = () => {
   }
 
   const imageContainer = new Image()
+  // 영상처리 소켓 리스너 활성화
   function imageCatcher(socketChannel) {
-    // 영상처리 소켓 리스너 활성화
-    flaskSocket.on(socketChannel, (base64Img) => {
+    flaskSocket.on(socketChannel, (dataArray) => {
+      console.log(dataArray)
+      const base64Img = dataArray[0]
+      const CVMode = dataArray[1] // 영상처리 옵션 체크
+      if (CVMode === "rabbit") {
+        patnerCVMode.current = "rabbit"
+      } else if (CVMode === "gray") {
+        patnerCVMode.current = "gray"
+      }
+      console.log(patnerCVMode.current)
       const chatroomList = document.getElementById("chatroomList")
 
       // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
@@ -227,7 +236,7 @@ const Chatroom = () => {
         // 컨넥팅
         const conn = peer.connect(id)
 
-        // 컨넥팅 받은 피어에게 반응 (방장)
+        // 컨넥팅 신청 받은 피어에게 반응 (방장)
         conn.on("open", () => {
           console.log("컨넥션 오픈")
           console.log(conn)
@@ -282,7 +291,7 @@ const Chatroom = () => {
         call.answer(videoStream)
 
         const video = document.createElement("video")
-
+        video.id = "patnerVideo"
         call.on("stream", (userVideoStream) => {
           console.log(userVideoStream)
           video.srcObject = userVideoStream
