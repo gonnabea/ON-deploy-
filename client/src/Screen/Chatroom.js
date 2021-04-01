@@ -115,8 +115,6 @@ const Chatroom = () => {
       }) // 채팅창 진입 시 자동 스크롤 내리기
   }
 
-  // 영상처리를 위해 flask 소켓으로 보내고 있는 영상
-  let streamToSocket
   // opencv python 서버 소켓 통신
   const flaskSocket = io.connect("http://localhost:5000/", {
     upgrade: false,
@@ -134,6 +132,8 @@ const Chatroom = () => {
     flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
   }
 
+  // 영상처리를 위해 flask 소켓으로 보내고 있는 영상
+  let streamToSocket
   function giveGrayEffect() {
     console.log("흑백 효과")
     const myVideo = document.getElementById("myVideo")
@@ -141,7 +141,7 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("gray-video")
-    streamToSocket = setInterval(() => videoToBase64("gray-video", myVideo), 1000 / 50)
+    streamToSocket = setInterval(() => videoToBase64("gray-video", myVideo), 1000 / 30)
   }
 
   function giveRabbitEffect() {
@@ -152,7 +152,7 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("face-detection")
-    streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 10)
+    streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 30)
   }
 
   function imageCatcher(socketChannel) {
@@ -188,13 +188,13 @@ const Chatroom = () => {
       const videoGrid = document.getElementById("videoGrid")
       const videoStream = await navigator.mediaDevices.getUserMedia({
         video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
-        audio: false,
+        audio: true,
         controls: true,
       })
 
-      myVideo.controls = true
-
       myVideo.srcObject = videoStream
+      myVideo.muted = true
+      myVideo.controls = true
       myVideo.addEventListener("loadedmetadata", () => {
         myVideo.play()
         videoGrid.append(myVideo)
@@ -263,7 +263,8 @@ const Chatroom = () => {
       })
       // 컨넥팅 시도한 피어에게 반응 (회원)
       peer.on("connection", (conn) => {
-        myVideo.muted = false
+        myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
+        myVideo.muted = true
 
         conn.on("error", (err) => {
           console.log(err)
