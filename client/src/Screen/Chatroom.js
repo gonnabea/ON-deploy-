@@ -55,6 +55,7 @@ const Chatroom = () => {
   const newMsgs = useRef([])
   const location = useLocation()
   const peerList = useRef({})
+
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -122,34 +123,34 @@ const Chatroom = () => {
     transports: ["websocket"],
   })
 
-  function videoToBase64(socketChannel, video) {
+  function videoToBase64(socketChannel, myVideo) {
     const canvas = document.createElement("canvas")
 
     canvas.width = 240
     canvas.height = 240
-    canvas.getContext("2d").drawImage(video, 0, 0, 240, 240)
+    canvas.getContext("2d").drawImage(myVideo, 0, 0, 240, 240)
 
     console.log(`동영상 base64 ${socketChannel} 이미지 전송 중...`)
     flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
   }
 
-  function giveGrayEffect(video) {
+  function giveGrayEffect() {
     console.log("흑백 효과")
 
     if (streamToSocket) {
       clearInterval(streamToSocket)
     }
     imageCatcher("gray-video")
-    streamToSocket = setInterval(() => videoToBase64("gray-video", video), 1000 / 50)
+    streamToSocket = setInterval(() => videoToBase64("gray-video", myVideo), 1000 / 50)
   }
 
-  function giveRabbitEffect(video) {
+  function giveRabbitEffect() {
     console.log("토끼 효과")
     if (streamToSocket) {
       clearInterval(streamToSocket)
     }
     imageCatcher("face-detection")
-    streamToSocket = setInterval(() => videoToBase64("face-detection", video), 1000 / 10)
+    streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 10)
   }
 
   function imageCatcher(socketChannel) {
@@ -166,14 +167,13 @@ const Chatroom = () => {
 
       imageContainer.src = "data:image/webp;base64," + toBase64(base64Img)
       chatroomList.appendChild(imageContainer)
-      chatroomList.scrollTo(0, chatroomList.scrollHeight)
 
       console.log("Creating Image...")
     })
   }
 
   // 내 카메라 비디오
-  const video = document.createElement("video")
+  let myVideo = document.createElement("video")
   const activateVideoCall = () => {
     flaskSocket.on("connect-flask", (msg) => {
       console.log(msg)
@@ -189,14 +189,14 @@ const Chatroom = () => {
         controls: true,
       })
 
-      video.controls = true
+      myVideo.controls = true
 
-      video.srcObject = videoStream
-      video.addEventListener("loadedmetadata", () => {
-        video.play()
-        videoGrid.append(video)
+      myVideo.srcObject = videoStream
+      myVideo.addEventListener("loadedmetadata", () => {
+        myVideo.play()
+        videoGrid.append(myVideo)
       })
-      peersConnection(videoStream, video)
+      peersConnection(videoStream, myVideo)
     }
 
     const peersConnection = async (videoStream, myVideo) => {
@@ -446,12 +446,12 @@ const Chatroom = () => {
                     const grayBtn = document.createElement("button")
                     grayBtn.innerHTML = "흑백"
                     grayBtn.addEventListener("click", () => {
-                      giveGrayEffect(video)
+                      giveGrayEffect()
                     })
                     const rabbitBtn = document.createElement("button")
                     rabbitBtn.innerHTML = "토끼"
                     rabbitBtn.addEventListener("click", () => {
-                      giveRabbitEffect(video)
+                      giveRabbitEffect()
                     })
                     videoOptionBox.appendChild(grayBtn)
                     videoOptionBox.appendChild(rabbitBtn)
