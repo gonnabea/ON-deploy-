@@ -66,6 +66,7 @@ const Chatroom = () => {
         rabbitForPartner()
       }
     })
+
     console.log(chatroom)
     if (previousRoom.current) {
       console.log(previousRoom)
@@ -277,7 +278,7 @@ const Chatroom = () => {
         const callConn = peer.call(id, videoStream)
         console.log(callConn)
         const video = document.createElement("video")
-        video.id = "patnerVideo"
+        video.id = "partnerVideo"
         callConn.on("stream", (userVideoStream) => {
           myVideo.muted = true
           myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
@@ -314,7 +315,7 @@ const Chatroom = () => {
         call.answer(videoStream)
 
         const video = document.createElement("video")
-        video.id = "patnerVideo"
+        video.id = "partnerVideo"
         call.on("stream", (userVideoStream) => {
           console.log(userVideoStream)
           video.srcObject = userVideoStream
