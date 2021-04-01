@@ -150,7 +150,7 @@ const Chatroom = () => {
     if (streamToSocket) {
       clearInterval(streamToSocket)
     }
-    imageCatcher("gray-video")
+    imageCatcher("gray-video", "me")
     streamToSocket = setInterval(() => videoToBase64("gray-video", myVideo), 1000 / 30)
   }
 
@@ -161,7 +161,7 @@ const Chatroom = () => {
     if (streamToSocket) {
       clearInterval(streamToSocket)
     }
-    imageCatcher("face-detection")
+    imageCatcher("face-detection", "me")
     streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 15)
   }
 
@@ -172,7 +172,7 @@ const Chatroom = () => {
     if (partnerVidSocket) {
       clearInterval(partnerVidSocket)
     }
-    imageCatcher("gray-video")
+    imageCatcher("gray-video", "partner")
     partnerVidSocket = setInterval(() => videoToBase64("gray-video", partnerVideo), 1000 / 30)
   }
 
@@ -183,13 +183,14 @@ const Chatroom = () => {
     if (partnerVidSocket) {
       clearInterval(partnerVidSocket)
     }
-    imageCatcher("face-detection")
+    imageCatcher("face-detection", "partner")
     partnerVidSocket = setInterval(() => videoToBase64("face-detection", partnerVideo), 1000 / 15)
   }
 
   const imageContainer = new Image()
+  const partnerImgContainer = new Image()
   // 영상처리 소켓 리스너 활성화
-  function imageCatcher(socketChannel) {
+  function imageCatcher(socketChannel, target) {
     flaskSocket.on(socketChannel, (base64Img) => {
       const chatroomList = document.getElementById("chatroomList")
 
@@ -199,8 +200,15 @@ const Chatroom = () => {
         return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""))
       }
 
-      imageContainer.src = "data:image/webp;base64," + toBase64(base64Img)
-      chatroomList.appendChild(imageContainer)
+      if (target === "me") {
+        imageContainer.src = "data:image/webp;base64," + toBase64(base64Img)
+        chatroomList.appendChild(imageContainer)
+      }
+
+      if (target === "partner") {
+        partnerImgContainer.src = "data:image/webp;base64," + toBase64(base64Img)
+        chatroomList.appendChild(partnerImgContainer)
+      }
 
       console.log("Creating Image...")
     })
