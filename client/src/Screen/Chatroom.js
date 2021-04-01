@@ -120,6 +120,7 @@ const Chatroom = () => {
     upgrade: false,
     transports: ["websocket"],
   })
+  io.set("transports", ["websocket"]) // 모든 polling 모드 막기
 
   function videoToBase64(socketChannel, myVideo) {
     const canvas = document.createElement("canvas")
