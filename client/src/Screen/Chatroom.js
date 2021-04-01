@@ -249,12 +249,12 @@ const Chatroom = () => {
         callConn.on("stream", (userVideoStream) => {
           myVideo.muted = true
           myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
-          const videoGrid = document.getElementById("videoGrid")
+          const chatroomList = document.getElementById("chatroomList")
           video.srcObject = userVideoStream
           video.addEventListener("loadedmetadata", () => {
             video.play()
           })
-          videoGrid.append(video)
+          chatroomList.append(video)
         })
         callConn.on("close", () => {
           video.remove()
@@ -289,8 +289,8 @@ const Chatroom = () => {
           video.addEventListener("loadedmetadata", () => {
             video.play()
           })
-          const videoGrid = document.getElementById("videoGrid")
-          videoGrid.append(video)
+          const chatroomList = document.getElementById("chatroomList")
+          chatroomList.append(video)
         })
 
         call.on("close", () => {
