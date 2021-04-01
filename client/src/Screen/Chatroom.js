@@ -71,7 +71,7 @@ const Chatroom = () => {
     const roomID = currentRoomID
 
     socket.emit("welcome", {
-      msg: `${loggedUser ? loggedUser.username : "새로운 유저"} 접속`,
+      msg: `${loggedUser ? loggedUser.username : "손님"} 접속`,
       roomID,
     }) // 서버에 접속, 소켓 ID 전달
     socket.on("welcome", (msg) => {
@@ -80,7 +80,7 @@ const Chatroom = () => {
 
     // 상대의 영상 처리 효과 상태 받기
     socket.on("patnerCVOption", (CVOption) => {
-      console.log(CVOption)
+      alert(CVOption)
       if (CVOption === "gray") {
         grayForPartner()
       } else if (CVOption === "rabbit") {
