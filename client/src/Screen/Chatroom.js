@@ -172,7 +172,7 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("gray-video")
-    streamToSocket = setInterval(() => videoToBase64("gray-video", myVideo), 1000 / 30)
+    streamToSocket = setInterval(() => videoToBase64("gray-video", partnerVideo), 1000 / 30)
   }
 
   function rabbitForPartner() {
@@ -183,7 +183,7 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("face-detection")
-    streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 15)
+    streamToSocket = setInterval(() => videoToBase64("face-detection", partnerVideo), 1000 / 15)
   }
 
   const imageContainer = new Image()
