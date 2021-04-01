@@ -55,7 +55,7 @@ const Chatroom = () => {
   const newMsgs = useRef([])
   const location = useLocation()
   const peerList = useRef({})
-  const patnerCVMode = useRef()
+
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     console.log(chatroom)
     if (previousRoom.current) {
@@ -77,6 +77,16 @@ const Chatroom = () => {
     socket.on("welcome", (msg) => {
       setFlash(msg)
     }) // 타 클라이언트 접속 메세지 리스닝
+
+    // 상대의 영상 처리 효과 상태 받기
+    socket.on("patnerCVOption", (CVOption) => {
+      console.log(patnerCVOption)
+      if (CVOption === "gray") {
+        grayForPartner()
+      } else if (CVOption === "rabbit") {
+        rabbitForPartner()
+      }
+    })
 
     socket.off("sendMsg").on("sendMsg", (msg) => {
       // 동일 메세지 중복 전송 방지 https://dev.to/bravemaster619/how-to-prevent-multiple-socket-connections-and-events-in-react-531d
@@ -155,19 +165,31 @@ const Chatroom = () => {
     streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 15)
   }
 
+  function grayForPartner() {
+    console.log("흑백 효과")
+    const partnerVideo = document.getElementById("partnerVideo")
+    if (streamToSocket) {
+      clearInterval(streamToSocket)
+    }
+    imageCatcher("gray-video")
+    streamToSocket = setInterval(() => videoToBase64("gray-video", myVideo), 1000 / 30)
+  }
+
+  function rabbitForPartner() {
+    console.log("토끼 효과")
+    const partnerVideo = document.getElementById("partnerVideo")
+
+    if (streamToSocket) {
+      clearInterval(streamToSocket)
+    }
+    imageCatcher("face-detection")
+    streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 15)
+  }
+
   const imageContainer = new Image()
   // 영상처리 소켓 리스너 활성화
   function imageCatcher(socketChannel) {
-    flaskSocket.on(socketChannel, (dataArray) => {
-      console.log(dataArray)
-      const base64Img = dataArray[0]
-      const CVMode = dataArray[1] // 영상처리 옵션 체크
-      if (CVMode === "rabbit") {
-        patnerCVMode.current = "rabbit"
-      } else if (CVMode === "gray") {
-        patnerCVMode.current = "gray"
-      }
-      console.log(patnerCVMode.current)
+    flaskSocket.on(socketChannel, (base64Img) => {
       const chatroomList = document.getElementById("chatroomList")
 
       // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
@@ -255,6 +277,7 @@ const Chatroom = () => {
         const callConn = peer.call(id, videoStream)
         console.log(callConn)
         const video = document.createElement("video")
+        video.id = "patnerVideo"
         callConn.on("stream", (userVideoStream) => {
           myVideo.muted = true
           myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
@@ -458,12 +481,14 @@ const Chatroom = () => {
                     const grayBtn = document.createElement("button")
                     grayBtn.innerHTML = "흑백"
                     grayBtn.addEventListener("click", () => {
+                      socket.emit("patnerCVOption", "gray")
                       giveGrayEffect()
                     })
 
                     const rabbitBtn = document.createElement("button")
                     rabbitBtn.innerHTML = "토끼"
                     rabbitBtn.addEventListener("click", () => {
+                      socket.emit("patnerCVOption", "rabbit")
                       giveRabbitEffect()
                     })
                     videoOptionBox.appendChild(grayBtn)
