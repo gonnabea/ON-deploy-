@@ -136,7 +136,7 @@ const Chatroom = () => {
 
   function giveGrayEffect() {
     console.log("흑백 효과")
-
+    const myVideo = document.getElementById("myVideo")
     if (streamToSocket) {
       clearInterval(streamToSocket)
     }
@@ -146,6 +146,8 @@ const Chatroom = () => {
 
   function giveRabbitEffect() {
     console.log("토끼 효과")
+    const myVideo = document.getElementById("myVideo")
+
     if (streamToSocket) {
       clearInterval(streamToSocket)
     }
@@ -173,7 +175,6 @@ const Chatroom = () => {
   }
 
   // 내 카메라 비디오
-  let myVideo = document.createElement("video")
   const activateVideoCall = () => {
     flaskSocket.on("connect-flask", (msg) => {
       console.log(msg)
@@ -181,6 +182,8 @@ const Chatroom = () => {
 
     let peer
     const createVideoStream = async () => {
+      const myVideo = document.createElement("video")
+      myVideo.id = "myVideo"
       setVideoCall(false)
       const videoGrid = document.getElementById("videoGrid")
       const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -260,8 +263,8 @@ const Chatroom = () => {
       })
       // 컨넥팅 시도한 피어에게 반응 (회원)
       peer.on("connection", (conn) => {
-        myVideo.muted = true
-        myVideo.requestPictureInPicture()
+        myVideo.muted = false
+
         conn.on("error", (err) => {
           console.log(err)
         })
@@ -448,6 +451,7 @@ const Chatroom = () => {
                     grayBtn.addEventListener("click", () => {
                       giveGrayEffect()
                     })
+
                     const rabbitBtn = document.createElement("button")
                     rabbitBtn.innerHTML = "토끼"
                     rabbitBtn.addEventListener("click", () => {
