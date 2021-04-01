@@ -59,7 +59,7 @@ const Chatroom = () => {
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     // 상대의 영상 처리 효과 상태 받기
     socket.on("patnerCVOption", (CVOption) => {
-      alert(CVOption)
+      console.log(CVOption)
       if (CVOption === "gray") {
         grayForPartner()
       } else if (CVOption === "rabbit") {
@@ -164,25 +164,26 @@ const Chatroom = () => {
     streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 15)
   }
 
+  let partnerVidSocket
   function grayForPartner() {
-    console.log("흑백 효과")
+    console.log("파트너 흑백 효과")
     const partnerVideo = document.getElementById("partnerVideo")
-    if (streamToSocket) {
-      clearInterval(streamToSocket)
+    if (partnerVidSocket) {
+      clearInterval(partnerVidSocket)
     }
     imageCatcher("gray-video")
-    streamToSocket = setInterval(() => videoToBase64("gray-video", partnerVideo), 1000 / 30)
+    partnerVidSocket = setInterval(() => videoToBase64("gray-video", partnerVideo), 1000 / 30)
   }
 
   function rabbitForPartner() {
-    console.log("토끼 효과")
+    console.log("파트너 토끼 효과")
     const partnerVideo = document.getElementById("partnerVideo")
 
-    if (streamToSocket) {
-      clearInterval(streamToSocket)
+    if (partnerVidSocket) {
+      clearInterval(partnerVidSocket)
     }
     imageCatcher("face-detection")
-    streamToSocket = setInterval(() => videoToBase64("face-detection", partnerVideo), 1000 / 15)
+    partnerVidSocket = setInterval(() => videoToBase64("face-detection", partnerVideo), 1000 / 15)
   }
 
   const imageContainer = new Image()
