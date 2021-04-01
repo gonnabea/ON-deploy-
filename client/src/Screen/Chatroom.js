@@ -120,7 +120,6 @@ const Chatroom = () => {
     upgrade: false,
     transports: ["websocket"],
   })
-  io.set("transports", ["websocket"]) // 모든 polling 모드 막기
 
   function videoToBase64(socketChannel, myVideo) {
     const canvas = document.createElement("canvas")
@@ -177,6 +176,7 @@ const Chatroom = () => {
 
   // 내 카메라 비디오
   const activateVideoCall = () => {
+    io.set("transports", ["websocket"]) // 모든 polling 모드 막기
     flaskSocket.on("connect-flask", (msg) => {
       console.log(msg)
     })
