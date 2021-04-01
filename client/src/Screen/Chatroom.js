@@ -80,7 +80,7 @@ const Chatroom = () => {
 
     // 상대의 영상 처리 효과 상태 받기
     socket.on("patnerCVOption", (CVOption) => {
-      console.log(patnerCVOption)
+      console.log(CVOption)
       if (CVOption === "gray") {
         grayForPartner()
       } else if (CVOption === "rabbit") {
