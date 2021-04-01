@@ -23,6 +23,10 @@ export const socketController = (socket) => {
     socket.on(events.sendPeerId, (peerID) => {
       console.log(peerID)
       socket.broadcast.emit(events.getPeerId, peerID)
+    }),
+    // 상대에게 내 영상처리 옵션 상태를 보냄
+    socket.on(events.patnerCVOption, (CVOption) => {
+      socket.broadcast.emit(events.patnerCVOption, CVOption)
     })
   )
 }

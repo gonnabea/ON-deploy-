@@ -4,4 +4,5 @@ export const events = {
   leaveRoom: "leaveRoom",
   sendPeerId: "sendPeerId",
   getPeerId: "getPeerId",
+  patnerCVOption: "patnerCVOption",
 }

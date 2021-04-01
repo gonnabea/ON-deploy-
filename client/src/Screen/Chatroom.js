@@ -57,6 +57,15 @@ const Chatroom = () => {
   const peerList = useRef({})
 
   const createUserRoom = async ({ chatroom, previousRoom }) => {
+    // 상대의 영상 처리 효과 상태 받기
+    socket.on("patnerCVOption", (CVOption) => {
+      alert(CVOption)
+      if (CVOption === "gray") {
+        grayForPartner()
+      } else if (CVOption === "rabbit") {
+        rabbitForPartner()
+      }
+    })
     console.log(chatroom)
     if (previousRoom.current) {
       console.log(previousRoom)
@@ -77,16 +86,6 @@ const Chatroom = () => {
     socket.on("welcome", (msg) => {
       setFlash(msg)
     }) // 타 클라이언트 접속 메세지 리스닝
-
-    // 상대의 영상 처리 효과 상태 받기
-    socket.on("patnerCVOption", (CVOption) => {
-      alert(CVOption)
-      if (CVOption === "gray") {
-        grayForPartner()
-      } else if (CVOption === "rabbit") {
-        rabbitForPartner()
-      }
-    })
 
     socket.off("sendMsg").on("sendMsg", (msg) => {
       // 동일 메세지 중복 전송 방지 https://dev.to/bravemaster619/how-to-prevent-multiple-socket-connections-and-events-in-react-531d
