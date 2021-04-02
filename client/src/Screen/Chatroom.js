@@ -381,8 +381,8 @@ const Chatroom = () => {
 
     setLoggedUser(userContext.data)
     setUserList(allUsers.data)
-    setChatroomList(userContext.data.chatrooms)
-    console.log(userContext.data.chatrooms)
+    setChatroomList(loggedUser.data.chatrooms)
+    console.log(loggedUser.data.chatrooms)
   }
 
   useEffect(() => {
