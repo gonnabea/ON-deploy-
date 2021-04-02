@@ -3,8 +3,12 @@ import api from "./api"
 
 export const UserContext = React.createContext()
 
-const loggedUser = async () => await api.getLoggedUser()
-
+let loggedUser
+const getLoggedUser = async () => {
+  loggedUser = await api.getLoggedUser()
+  loggedUser = loggedUser.data
+}
+getLoggedUser()
 const UserContextProvider = ({ children }) => (
   <UserContext.Provider value={loggedUser}>{children}</UserContext.Provider>
 )
