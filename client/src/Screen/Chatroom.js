@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef, useContext } from "react"
 import Navigation from "../Hooks/useNavigation"
 import Book from "../Components/3DBook"
 import io from "socket.io-client"
@@ -38,6 +38,7 @@ import {
 } from "./ChatroomStyle"
 
 import Loader from "../Components/Loader"
+import { UserContext } from "../context"
 
 const Chatroom = () => {
   const [isLoading, setLoading] = useState(true)
@@ -55,6 +56,8 @@ const Chatroom = () => {
   const newMsgs = useRef([])
   const location = useLocation()
   const peerList = useRef({})
+  const userContext = useContext(UserContext)
+  console.log(userContext)
 
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     // 상대의 영상 처리 효과 상태 받기
