@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 import api from "../api"
 import Loader from "../Components/Loader"
-import UserContextProvider, { UserContext } from "../context"
+import UserContextProvider, { UserContext } from "../userContext"
 
 const Container = styled.section`
   width: 100%;

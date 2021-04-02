@@ -38,7 +38,7 @@ import {
 } from "./ChatroomStyle"
 
 import Loader from "../Components/Loader"
-import { UserContext } from "../context"
+import { UserContext } from "../userContext"
 
 const Chatroom = () => {
   const [isLoading, setLoading] = useState(true)
