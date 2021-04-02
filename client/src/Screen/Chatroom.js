@@ -377,19 +377,18 @@ const Chatroom = () => {
   } // 메세지 보냈을 때 처리
 
   const handleApi = async () => {
-    const currentUser = await api.getLoggedUser() // 로그인 된 유저 정보 불러오기
     const allUsers = await api.getAllUsers() // 모든 유저정보 불러오기
 
-    setLoggedUser(currentUser.data)
+    setLoggedUser(userContext.data)
     setUserList(allUsers.data)
-    setChatroomList(currentUser.data.chatrooms)
-    console.log(currentUser.data.chatrooms)
+    setChatroomList(userContext.data.chatrooms)
+    console.log(userContext.data.chatrooms)
   }
 
   useEffect(() => {
     try {
-      setLoading(false)
       handleApi()
+      setLoading(false)
     } catch (err) {
       console.log(err)
     }
