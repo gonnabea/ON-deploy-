@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import api from "../api"
 import Loader from "../Components/Loader"
+import UserContextProvider, { UserContext } from "../context"
 
 const Container = styled.section`
   width: 100%;
@@ -58,7 +59,8 @@ const MenuTitle = styled.h2`
 const Navigation = () => {
   const [user, setUser] = useState(null)
   const [isLoading, setLoading] = useState(true)
-
+  const userContext = useContext(UserContext)
+  console.log(userContext)
   const getLoggedUser = async () => {
     const userData = await api.getLoggedUser()
 
@@ -72,6 +74,7 @@ const Navigation = () => {
   }, [])
 
   return user ? (
+    <UserContextProvider>
     <Container>
       <Header>
         <SLink to="/">홈으로</SLink>
@@ -103,6 +106,7 @@ const Navigation = () => {
         <Submit type="submit" value="Join" />
       </Form>
     </Container>
+    </UserContextProvider>
   )
 }
 
