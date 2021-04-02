@@ -380,9 +380,9 @@ const Chatroom = () => {
     setLoggedUser(userContext)
     const allUsers = await api.getAllUsers() // 모든 유저정보 불러오기
 
-    console.log(loggedUser)
+    console.log(userContext)
     setUserList(allUsers.data)
-    setChatroomList(loggedUser.chatrooms)
+    setChatroomList(userContext.chatrooms)
   }
 
   useEffect(() => {
