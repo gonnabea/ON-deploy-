@@ -8,13 +8,10 @@ const UserContextProvider = ({ children }) => {
   const getLoggedUser = async () => {
     const { data } = await api.getLoggedUser()
     setLoggedUser(data)
+    return loggedUser
   }
 
-  useEffect(() => {
-    getLoggedUser()
-  }, [])
-
-  return <UserContext.Provider value={loggedUser}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={getLoggedUser()}>{children}</UserContext.Provider>
 }
 
 export default UserContextProvider
