@@ -59,13 +59,10 @@ const MenuTitle = styled.h2`
 const Navigation = () => {
   const [user, setUser] = useState(null)
   const [isLoading, setLoading] = useState(true)
-  const userContext = useContext(UserContext)
-  console.log(userContext)
-  const getLoggedUser = async () => {
-    const userData = await api.getLoggedUser()
-
-    const User = userData.data
-    setUser(User)
+  const loggedUser = useContext(UserContext)
+  console.log(loggedUser)
+  const getLoggedUser = () => {
+    setUser(loggedUser)
   }
 
   useEffect(() => {
