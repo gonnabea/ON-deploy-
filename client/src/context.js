@@ -3,8 +3,8 @@ import api from "./api"
 
 export const UserContext = React.createContext()
 
-const UserContextProvider = async ({ children }) => (
-  <UserContext.Provider value={{ name: "Jiwon" }}>{children}</UserContext.Provider>
+const UserContextProvider = ({ children }) => (
+  <UserContext.Provider value={{ username: "Jiwon" }}>{children}</UserContext.Provider>
 )
 
 export default UserContextProvider
