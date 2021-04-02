@@ -61,6 +61,7 @@ const Navigation = () => {
   const [isLoading, setLoading] = useState(true)
   const loggedUser = useContext(UserContext)
   const getLoggedUser = () => {
+    console.log(loggedUser)
     setUser(loggedUser)
   }
 
@@ -69,7 +70,7 @@ const Navigation = () => {
     setLoading(false)
   }, [])
 
-  return user ? (
+  return loggedUser ? (
     <Container>
       <Header>
         <SLink to="/">홈으로</SLink>
