@@ -56,8 +56,6 @@ const Chatroom = () => {
   const location = useLocation()
   const peerList = useRef({})
   const userContext = useContext(UserContext)
-  const loggedUser = userContext.data
-  console.log(loggedUser)
 
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     // 상대의 영상 처리 효과 상태 받기
@@ -377,11 +375,13 @@ const Chatroom = () => {
   } // 메세지 보냈을 때 처리
 
   const handleApi = async () => {
+    console.log(userContext)
+    const loggedUser = userContext.data
     const allUsers = await api.getAllUsers() // 모든 유저정보 불러오기
 
+    console.log(loggedUser)
     setUserList(allUsers.data)
     setChatroomList(loggedUser.chatrooms)
-    console.log(loggedUser.chatrooms)
   }
 
   useEffect(() => {
