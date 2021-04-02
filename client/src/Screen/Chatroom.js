@@ -376,13 +376,13 @@ const Chatroom = () => {
   } // 메세지 보냈을 때 처리
 
   const handleApi = async () => {
-    console.log(userContext)
-    setLoggedUser(userContext)
     const allUsers = await api.getAllUsers() // 모든 유저정보 불러오기
 
-    console.log(userContext)
-    setUserList(allUsers.data)
-    setChatroomList(userContext.chatrooms)
+    if (userContext) {
+      setLoggedUser(userContext)
+      setUserList(allUsers.data)
+      setChatroomList(userContext.chatrooms)
+    }
   }
 
   useEffect(() => {

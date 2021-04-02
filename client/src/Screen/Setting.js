@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef, useContext } from "react"
 import styled from "styled-components"
 import Navigation from "../Hooks/useNavigation"
 import Book from "../Components/3DBook"
@@ -11,6 +11,7 @@ import {
   treatBookSpine,
   treatBookWidth,
 } from "./ChatroomStyle"
+import { UserContext } from "../userContext"
 
 const Container = styled.section`
   width: 100vw;
@@ -63,6 +64,7 @@ const StatusMsgInput = styled.input`
 `
 
 const Chatroom = (props) => {
+  const userContext = useContext(UserContext)
   const [loggedUser, setLoggedUser] = useState()
 
   const statusMsg = useRef()
@@ -73,17 +75,9 @@ const Chatroom = (props) => {
     statusMsg.current.value = ""
   }
 
-  const getUser = async () => {
-    const user = await api.getLoggedUser()
-    console.log(user.data)
-    return user.data
-  }
-
   useEffect(() => {
     try {
-      setLoggedUser(getUser())
-
-      getUser()
+      setLoggedUser(userContext)
     } catch (err) {
       console.log(err)
     }
