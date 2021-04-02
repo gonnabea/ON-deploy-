@@ -43,7 +43,6 @@ import { UserContext } from "../userContext"
 const Chatroom = () => {
   const [isLoading, setLoading] = useState(true)
   const [messages, setMessages] = useState([]) // DB에서 가져오는 메세지들
-  const [loggedUser, setLoggedUser] = useState(null) // 로그인 된 유저 정보
   const [userList, setUserList] = useState() // 모든 유저리스트
   const currentRoom = useRef() // 지정된 유저 정보
   const [submit, setSubmit] = useState(0) // submit시 리렌더링 위해 작동시키는 useState
@@ -57,7 +56,8 @@ const Chatroom = () => {
   const location = useLocation()
   const peerList = useRef({})
   const userContext = useContext(UserContext)
-  console.log(userContext)
+  const loggedUser = userContext.data
+  console.log(loggedUser)
 
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     // 상대의 영상 처리 효과 상태 받기
@@ -379,10 +379,9 @@ const Chatroom = () => {
   const handleApi = async () => {
     const allUsers = await api.getAllUsers() // 모든 유저정보 불러오기
 
-    setLoggedUser(userContext.data)
     setUserList(allUsers.data)
-    setChatroomList(loggedUser.data.chatrooms)
-    console.log(loggedUser.data.chatrooms)
+    setChatroomList(loggedUser.chatrooms)
+    console.log(loggedUser.chatrooms)
   }
 
   useEffect(() => {
