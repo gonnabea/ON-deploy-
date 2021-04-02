@@ -103,7 +103,7 @@ export const ChatSubmit = styled.input`
 export const BookFront = styled.div`
   width: 100%;
   height: 100%;
-  background-image: background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
+  background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
   overflow: auto;
   /* background-image: url("/cover.jpg"); */
   background-size: 100% 100%;
