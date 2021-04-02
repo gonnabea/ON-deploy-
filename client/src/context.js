@@ -12,7 +12,7 @@ const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     getLoggedUser()
-  })
+  }, [])
 
   return <UserContext.Provider value={loggedUser}>{children}</UserContext.Provider>
 }
