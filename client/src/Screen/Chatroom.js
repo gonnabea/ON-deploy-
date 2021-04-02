@@ -377,7 +377,7 @@ const Chatroom = () => {
 
   const handleApi = async () => {
     console.log(userContext)
-    setLoggedUser(userContext.data)
+    setLoggedUser(userContext)
     const allUsers = await api.getAllUsers() // 모든 유저정보 불러오기
 
     console.log(loggedUser)
