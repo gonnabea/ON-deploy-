@@ -480,8 +480,8 @@ const Chatroom = () => {
                 <VideoGrid id="videoGrid"></VideoGrid>
                 {videoCall
                   ? () => {
-                      setVideoCall(false)
                       activateVideoCall(loggedUser)
+                      setVideoCall(false)
                     }
                   : null}
               </ChatScreen>
