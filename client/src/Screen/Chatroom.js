@@ -57,7 +57,8 @@ const Chatroom = () => {
   const peerList = useRef({})
   const userContext = useContext(UserContext)
   const [loggedUser, setLoggedUser] = useState(null)
-  const [socket, setSocket] = useState("https://our-now.herokuapp.com/") // 클라이언트 소켓 통신
+  const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
+
   // 유저가 특정 채팅방에 들어왔을 때
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     // 상대의 영상 처리 효과 상태 받기
