@@ -409,6 +409,9 @@ const Chatroom = () => {
     }
   }
 
+  const videoGrid = document.getElementById("videoGrid")
+  const chatroomList = document.getElementById("chatroomList")
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -475,14 +478,7 @@ const Chatroom = () => {
                     )
                   : null}
                 <VideoGrid id="videoGrid"></VideoGrid>
-                {videoCall
-                  ? () => {
-                      const videoGrid = document.getElementById("videoGrid")
-                      const chatroomList = document.getElementById("chatroomList")
-
-                      activateVideoCall(loggedUser, videoGrid, chatroomList)
-                    }
-                  : null}
+                {videoCall ? activateVideoCall(loggedUser, videoGrid, chatroomList) : null}
               </ChatScreen>
               <ChatForm onSubmit={handleSubmit} action="chat" method="post">
                 <ChatText id="text" type="text" name="content" required={true} />
