@@ -197,7 +197,7 @@ const Chatroom = () => {
   // 영상처리 소켓 리스너 활성화
   function imageCatcher(socketChannel, target) {
     flaskSocket.on(socketChannel, (base64Img) => {
-      chatroomList = document.getElementById("chatroomList")
+      const chatroomList = document.getElementById("chatroomList")
 
       // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
       function toBase64(arr) {
