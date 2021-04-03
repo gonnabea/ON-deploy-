@@ -1,7 +1,5 @@
 import Peer from "peerjs"
-import { useContext } from "react"
 import io from "socket.io-client"
-import { UserContext } from "../userContext"
 
 const peerList = {}
 const socket = io.connect("https://our-now.herokuapp.com/") // 클라이언트 소켓 통신
@@ -103,7 +101,6 @@ const activateVideoCall = (loggedUser, videoGrid, chatroomList) => {
     })
     // 컨넥팅 시도한 피어에게 반응 (회원)
     peer.on("connection", (conn) => {
-      myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
       myVideo.muted = true
 
       conn.on("error", (err) => {
