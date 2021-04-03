@@ -54,7 +54,7 @@ const activateVideoCall = (loggedUser) => {
     }
 
     peer = new Peer(loggedUser.id)
-    peerList.current.myPeer = peer.id
+    peerList.myPeer = peer.id
     console.log(peer)
 
     peer.on("error", (err) => {
@@ -64,7 +64,7 @@ const activateVideoCall = (loggedUser) => {
     socket.emit("sendPeerId", peer.id)
     socket.on("getPeerId", (id) => {
       console.log(id)
-      peerList.current.targetPeer = id
+      peerList.targetPeer = id
 
       // 컨넥팅
       const conn = peer.connect(id)
