@@ -348,7 +348,9 @@ const Chatroom = () => {
                     )
                   : null}
                 <VideoGrid id="videoGrid"></VideoGrid>
-                {videoCall ? activateVideoCall(loggedUser, videoGrid, chatroomList) : null}
+                {videoCall
+                  ? activateVideoCall(loggedUser, videoGrid, chatroomList, socket, flaskSocket)
+                  : null}
               </ChatScreen>
               <ChatForm onSubmit={handleSubmit} action="chat" method="post">
                 <ChatText id="text" type="text" name="content" required={true} />

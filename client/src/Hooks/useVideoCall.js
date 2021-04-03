@@ -2,16 +2,9 @@ import Peer from "peerjs"
 import io from "socket.io-client"
 
 const peerList = {}
-const socket = io.connect("https://our-now.herokuapp.com/") // 클라이언트 소켓 통신
-
-// opencv flask 서버 소켓 통신
-const flaskSocket = io.connect("http://localhost:5000/", {
-  upgrade: false,
-  transports: ["websocket"],
-})
 
 // 내 카메라 비디오
-const activateVideoCall = (loggedUser, videoGrid, chatroomList) => {
+const activateVideoCall = (loggedUser, videoGrid, chatroomList, socket, flaskSocket) => {
   console.log(loggedUser)
   flaskSocket.on("connect-flask", (msg) => {
     console.log(msg)
@@ -87,7 +80,6 @@ const activateVideoCall = (loggedUser, videoGrid, chatroomList) => {
       video.id = "partnerVideo"
       callConn.on("stream", (userVideoStream) => {
         myVideo.muted = true
-        myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
 
         video.srcObject = userVideoStream
         video.addEventListener("loadedmetadata", () => {
