@@ -33,7 +33,6 @@ const activateVideoCall = (loggedUser, videoGrid, chatroomList) => {
     myVideo.muted = true
     myVideo.srcObject = videoStream
     myVideo.controls = true
-    myVideo.requestPictureInPicture()
     myVideo.addEventListener("loadedmetadata", () => {
       myVideo.play()
       videoGrid.append(myVideo)
