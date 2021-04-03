@@ -1,47 +1,55 @@
-import React, { useEffect, useRef, useState } from "react"
-import { VideoGrid } from "../Screen/ChatroomStyle"
 import Peer from "peerjs"
+import { useContext } from "react"
 import io from "socket.io-client"
-import api from "../api"
+import { UserContext } from "../userContext"
+import { videoGrid, chatroomList } from "../Screen/Chatroom"
 
-let peer
-const useVideoCall = () => {
-  const [loggedUser, setLoggedUser] = useState(null)
-  const [streamingVideo, setVideo] = useState()
-  const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/"))
-  const myPeerId = useRef(null)
-  const peerList = useRef({})
+const peerList = {}
+const socket = io.connect("https://our-now.herokuapp.com/") // 클라이언트 소켓 통신
 
-  const getLoggedUser = async () => {
-    const user = await api.getLoggedUser()
-    console.log(user.data.id)
-    setLoggedUser(user.data.id)
-    return user.data.id
-  }
+// opencv flask 서버 소켓 통신
+const flaskSocket = io.connect("http://localhost:5000/", {
+  upgrade: false,
+  transports: ["websocket"],
+})
 
+// 내 카메라 비디오
+const activateVideoCall = (loggedUser) => {
+  flaskSocket.on("connect-flask", (msg) => {
+    console.log(msg)
+  })
+
+  let peer
   const createVideoStream = async () => {
-    const video = document.createElement("video")
-    const videoGrid = document.getElementById("videoGrid")
+    const myVideo = document.createElement("video")
+    myVideo.id = "myVideo"
     const videoStream = await navigator.mediaDevices.getUserMedia({
       video: { width: { max: 240 }, height: { min: 240 }, facingMode: "user" },
       audio: true,
-      echoCancellation: true,
+      controls: true,
     })
-
-    video.controls = true
-
-    video.srcObject = videoStream
-    video.addEventListener("loadedmetadata", () => {
-      video.play()
-      videoGrid.append(video)
+    myVideo.muted = true
+    myVideo.srcObject = videoStream
+    myVideo.controls = true
+    myVideo.requestPictureInPicture()
+    myVideo.addEventListener("loadedmetadata", () => {
+      myVideo.play()
+      videoGrid.append(myVideo)
     })
-
-    peersConnection(videoStream, video)
+    peersConnection(videoStream, myVideo)
   }
 
   const peersConnection = async (videoStream, myVideo) => {
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
-    peer = new Peer(await getLoggedUser())
+    const peerOptions = {
+      host: "our-now/herokuapp.com",
+      debug: true,
+      port: 9000,
+      proxied: true,
+      path: "/peerjs",
+    }
+
+    peer = new Peer(loggedUser.id)
     peerList.current.myPeer = peer.id
     console.log(peer)
 
@@ -57,7 +65,7 @@ const useVideoCall = () => {
       // 컨넥팅
       const conn = peer.connect(id)
 
-      // 컨넥팅 받은 피어에게 반응 (방장)
+      // 컨넥팅 신청 받은 피어에게 반응 (방장)
       conn.on("open", () => {
         console.log("컨넥션 오픈")
         console.log(conn)
@@ -76,14 +84,16 @@ const useVideoCall = () => {
       const callConn = peer.call(id, videoStream)
       console.log(callConn)
       const video = document.createElement("video")
+      video.id = "partnerVideo"
       callConn.on("stream", (userVideoStream) => {
         myVideo.muted = true
-        const videoGrid = document.getElementById("videoGrid")
+        myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
+
         video.srcObject = userVideoStream
         video.addEventListener("loadedmetadata", () => {
           video.play()
         })
-        videoGrid.append(video)
+        chatroomList.append(video)
       })
       callConn.on("close", () => {
         video.remove()
@@ -91,7 +101,9 @@ const useVideoCall = () => {
     })
     // 컨넥팅 시도한 피어에게 반응 (회원)
     peer.on("connection", (conn) => {
+      myVideo.requestPictureInPicture() // 통화 연결 시 PIP 모드로 전환, 모바일에선 지원 x.
       myVideo.muted = true
+
       conn.on("error", (err) => {
         console.log(err)
       })
@@ -109,15 +121,14 @@ const useVideoCall = () => {
       call.answer(videoStream)
 
       const video = document.createElement("video")
-
+      video.id = "partnerVideo"
       call.on("stream", (userVideoStream) => {
         console.log(userVideoStream)
         video.srcObject = userVideoStream
         video.addEventListener("loadedmetadata", () => {
           video.play()
         })
-        const videoGrid = document.getElementById("videoGrid")
-        videoGrid.append(video)
+        chatroomList.append(video)
       })
 
       call.on("close", () => {
@@ -126,11 +137,7 @@ const useVideoCall = () => {
     })
   }
 
-  useEffect(() => {
-    createVideoStream()
-  }, [])
-
-  return <VideoGrid id="videoGrid"></VideoGrid>
+  createVideoStream()
 }
 
-export default useVideoCall
+export default activateVideoCall

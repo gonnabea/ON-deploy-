@@ -42,7 +42,7 @@ export default ({ user, loading }) => (
         <BookFront>
           <Head>
             <Navigation />
-            {user ? `안녕하세요 ${user ? user.username : ""}님!` : "로그인 후 이용해주세요"}
+            {user ? `안녕하세요 ${user ? user.username : ""}님!` : ""}
           </Head>
           <Intro></Intro>
         </BookFront>
