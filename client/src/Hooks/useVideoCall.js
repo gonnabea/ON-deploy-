@@ -15,12 +15,13 @@ const flaskSocket = io.connect("http://localhost:5000/", {
 
 // 내 카메라 비디오
 const activateVideoCall = (loggedUser) => {
+  console.log(loggedUser)
   flaskSocket.on("connect-flask", (msg) => {
     console.log(msg)
   })
 
   let peer
-  const createVideoStream = async () => {
+  const createVideoStream = async (loggedUser) => {
     const myVideo = document.createElement("video")
     myVideo.id = "myVideo"
     const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -36,10 +37,11 @@ const activateVideoCall = (loggedUser) => {
       myVideo.play()
       videoGrid.append(myVideo)
     })
-    peersConnection(videoStream, myVideo)
+    peersConnection(videoStream, myVideo, loggedUser)
   }
 
-  const peersConnection = async (videoStream, myVideo) => {
+  const peersConnection = async (videoStream, myVideo, loggedUser) => {
+    console.log(loggedUser)
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
     const peerOptions = {
       host: "our-now/herokuapp.com",
