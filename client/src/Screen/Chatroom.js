@@ -41,9 +41,6 @@ import Loader from "../Components/Loader"
 import { UserContext } from "../userContext"
 import activateVideoCall from "../Hooks/useVideoCall"
 
-export let videoGrid
-export let chatroomList
-
 const Chatroom = () => {
   const [isLoading, setLoading] = useState(true)
   const [messages, setMessages] = useState([]) // DB에서 가져오는 메세지들
@@ -478,7 +475,14 @@ const Chatroom = () => {
                     )
                   : null}
                 <VideoGrid id="videoGrid"></VideoGrid>
-                {videoCall ? activateVideoCall(loggedUser) : null}
+                {videoCall
+                  ? () => {
+                      const videoGrid = document.getElementById("videoGrid")
+                      const chatroomList = document.getElementById("chatroomList")
+
+                      activateVideoCall(loggedUser, videoGrid, chatroomList)
+                    }
+                  : null}
               </ChatScreen>
               <ChatForm onSubmit={handleSubmit} action="chat" method="post">
                 <ChatText id="text" type="text" name="content" required={true} />

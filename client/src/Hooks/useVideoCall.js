@@ -2,7 +2,6 @@ import Peer from "peerjs"
 import { useContext } from "react"
 import io from "socket.io-client"
 import { UserContext } from "../userContext"
-import { videoGrid, chatroomList } from "../Screen/Chatroom"
 
 const peerList = {}
 const socket = io.connect("https://our-now.herokuapp.com/") // 클라이언트 소켓 통신
@@ -14,7 +13,7 @@ const flaskSocket = io.connect("http://localhost:5000/", {
 })
 
 // 내 카메라 비디오
-const activateVideoCall = (loggedUser) => {
+const activateVideoCall = (loggedUser, videoGrid, chatroomList) => {
   console.log(loggedUser)
   flaskSocket.on("connect-flask", (msg) => {
     console.log(msg)
