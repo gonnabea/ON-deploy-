@@ -21,7 +21,9 @@ const activateVideoCall = (loggedUser) => {
   })
 
   let peer
-  const createVideoStream = async (loggedUser) => {
+  const createVideoStream = async () => {
+    console.log(loggedUser)
+
     const myVideo = document.createElement("video")
     myVideo.id = "myVideo"
     const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -37,10 +39,10 @@ const activateVideoCall = (loggedUser) => {
       myVideo.play()
       videoGrid.append(myVideo)
     })
-    peersConnection(videoStream, myVideo, loggedUser)
+    peersConnection(videoStream, myVideo)
   }
 
-  const peersConnection = async (videoStream, myVideo, loggedUser) => {
+  const peersConnection = async (videoStream, myVideo) => {
     console.log(loggedUser)
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
     const peerOptions = {
