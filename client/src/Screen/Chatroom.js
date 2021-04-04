@@ -198,7 +198,7 @@ const Chatroom = () => {
   function imageCatcher(socketChannel, target) {
     flaskSocket.on(socketChannel, (base64Img) => {
       const chatroomList = document.getElementById("chatroomList")
-
+      const videoGrid = document.getElementById("videoGrid")
       // https://stackoverflow.com/questions/59430269/how-to-convert-buffer-object-to-image-in-javascript
       function toBase64(arr) {
         arr = new Uint8Array(arr) // if it's an ArrayBuffer
@@ -207,7 +207,7 @@ const Chatroom = () => {
 
       if (target === "me") {
         imageContainer.src = "data:image/webp;base64," + toBase64(base64Img)
-        chatroomList.appendChild(imageContainer)
+        videoGrid.appendChild(imageContainer)
       }
 
       if (target === "partner") {
