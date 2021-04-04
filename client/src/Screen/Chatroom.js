@@ -348,7 +348,7 @@ const Chatroom = () => {
                     )
                   : null}
                 <VideoGrid id="videoGrid"></VideoGrid>
-                {videoCall
+                {videoCall && videoGrid.innerHTML !== "" // 이미 화상 통화 중 페이지 렌더링 시 중복 실행 방지
                   ? activateVideoCall(loggedUser, videoGrid, chatroomList, socket, flaskSocket)
                   : null}
               </ChatScreen>
