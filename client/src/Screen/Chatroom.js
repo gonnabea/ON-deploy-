@@ -156,7 +156,7 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("gray-video", "me")
-    streamToSocket = setInterval(() => videoToBase64("gray-video", myVideo), 1000 / 30)
+    streamToSocket = setInterval(() => videoToBase64("my-gray-video", myVideo), 1000 / 30)
   }
 
   function giveRabbitEffect() {
@@ -167,7 +167,7 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("face-detection", "me")
-    streamToSocket = setInterval(() => videoToBase64("face-detection", myVideo), 1000 / 15)
+    streamToSocket = setInterval(() => videoToBase64("my-face-detection", myVideo), 1000 / 15)
   }
 
   let partnerVidSocket
