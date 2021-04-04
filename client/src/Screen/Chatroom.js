@@ -167,7 +167,7 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("my-face-detection", "me")
-    streamToSocket = setInterval(() => videoToBase64("my-face-detection", myVideo), 1000 / 15)
+    streamToSocket = setInterval(() => videoToBase64("my-face-detection", myVideo), 1000 / 10)
   }
 
   let partnerVidSocket
@@ -189,7 +189,7 @@ const Chatroom = () => {
       clearInterval(partnerVidSocket)
     }
     imageCatcher("face-detection", "partner")
-    partnerVidSocket = setInterval(() => videoToBase64("face-detection", partnerVideo), 1000 / 15)
+    partnerVidSocket = setInterval(() => videoToBase64("face-detection", partnerVideo), 1000 / 10)
   }
 
   const imageContainer = new Image()
