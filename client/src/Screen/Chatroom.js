@@ -155,7 +155,7 @@ const Chatroom = () => {
     if (streamToSocket) {
       clearInterval(streamToSocket)
     }
-    imageCatcher("gray-video", "me")
+    imageCatcher("my-gray-video", "me")
     streamToSocket = setInterval(() => videoToBase64("my-gray-video", myVideo), 1000 / 30)
   }
 
@@ -166,7 +166,7 @@ const Chatroom = () => {
     if (streamToSocket) {
       clearInterval(streamToSocket)
     }
-    imageCatcher("face-detection", "me")
+    imageCatcher("my-face-detection", "me")
     streamToSocket = setInterval(() => videoToBase64("my-face-detection", myVideo), 1000 / 15)
   }
 
