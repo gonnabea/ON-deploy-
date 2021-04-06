@@ -355,7 +355,7 @@ const Chatroom = () => {
                       chatroomList,
                       socket,
                       flaskSocket,
-                      currentRoom.id
+                      currentRoom.current.id
                     )
                   : null}
               </ChatScreen>
