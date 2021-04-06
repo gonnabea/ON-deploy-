@@ -50,9 +50,19 @@ const activateVideoCall = (
     }
 
     peer = new Peer(loggedUser.id)
+
+    // 통화 종료 버튼
+    const endCallBtn = document.createElement("button")
+    endCallBtn.innerHTML = "통화 종료"
+    endCallBtn.addEventListener("click", (e) => {
+      peer.destroy()
+      e.target.remove()
+      myVideo.remove()
+    })
+    videoGrid.appendChild(endCallBtn)
+
     peerList.myPeer = peer.id
     console.log(peer)
-
     peer.on("error", (err) => {
       console.log(err)
     })
@@ -64,14 +74,6 @@ const activateVideoCall = (
 
       // 컨넥팅
       const conn = peer.connect(id)
-
-      // 통화 종료 버튼
-      const endCallBtn = document.createElement("button")
-      endCallBtn.innerHTML = "통화 종료"
-      endCallBtn.addEventListener("click", () => {
-        conn.close()
-      })
-      videoGrid.appendChild(endCallBtn)
 
       // 컨넥팅 신청 받은 피어에게 반응 (방장)
       conn.on("open", () => {
