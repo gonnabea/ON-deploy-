@@ -4,8 +4,15 @@ import io from "socket.io-client"
 const peerList = {}
 
 // 내 카메라 비디오
-const activateVideoCall = (loggedUser, videoGrid, chatroomList, socket, flaskSocket) => {
-  console.log(loggedUser)
+const activateVideoCall = (
+  loggedUser,
+  videoGrid,
+  chatroomList,
+  socket,
+  flaskSocket,
+  currentRoomId
+) => {
+  console.log(currentRoomId)
   flaskSocket.on("connect-flask", (msg) => {
     console.log(msg)
   })
@@ -28,10 +35,10 @@ const activateVideoCall = (loggedUser, videoGrid, chatroomList, socket, flaskSoc
       myVideo.play()
       videoGrid.append(myVideo)
     })
-    peersConnection(videoStream, myVideo)
+    peersConnection(videoStream, myVideo, currentRoomId)
   }
 
-  const peersConnection = async (videoStream, myVideo) => {
+  const peersConnection = async (videoStream, myVideo, currentRoomId) => {
     console.log(loggedUser)
     // host와 port를 설정해주어 개인 peerjs 서버를 가동
     const peerOptions = {
@@ -50,7 +57,7 @@ const activateVideoCall = (loggedUser, videoGrid, chatroomList, socket, flaskSoc
       console.log(err)
     })
 
-    socket.emit("sendPeerId", peer.id)
+    socket.emit("sendPeerId", { peerId: peer.id, roomId: currentRoomId })
     socket.on("getPeerId", (id) => {
       console.log(id)
       peerList.targetPeer = id
