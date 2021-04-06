@@ -280,7 +280,7 @@ const Chatroom = () => {
   }
 
   const videoGrid = document.getElementById("videoGrid")
-  videoGrid.style.width = "100%"
+
   const chatroomList = document.getElementById("chatroomList")
 
   return isLoading ? (

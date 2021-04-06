@@ -189,7 +189,8 @@ export const VideoGrid = styled.div`
   align-items: center;
   flex-direction: column;
   overflow: auto;
-  min-height: 240px;
+  min-height: 500px;
+  width: 100%;
 `
 
 export const ButtonContainer = styled.span`
