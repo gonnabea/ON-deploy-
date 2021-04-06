@@ -392,7 +392,6 @@ const Chatroom = () => {
 
                     videoOptionBox.appendChild(grayBtn)
                     videoOptionBox.appendChild(rabbitBtn)
-                    videoOptionBox.appendChild(endCallBtn)
 
                     chatScreen.appendChild(videoOptionBox)
                   }}
