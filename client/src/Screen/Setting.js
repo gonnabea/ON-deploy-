@@ -36,7 +36,7 @@ const BookFront = styled.div`
 const Back = styled.section`
   width: 100%;
   height: 100%;
-  background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20190313/pngtree-sparkling-stars-night-star-background-image_88891.jpg");
+  background-image: url("https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1609958132000/photosp/18c97ef2-c67d-49b5-88cd-d615f8c45427/stock-photo-star-blue-background-starry-sky-stars-glitter-starry-glitters-starry-background-starry-night-sky-18c97ef2-c67d-49b5-88cd-d615f8c45427.jpg");
   background-size: 100% 100%;
   transform: scaleX(-1);
 `

@@ -28,6 +28,7 @@ const activateVideoCall = (
       audio: true,
       controls: true,
     })
+
     myVideo.muted = true
     myVideo.srcObject = videoStream
     myVideo.controls = true
@@ -58,6 +59,7 @@ const activateVideoCall = (
       peer.destroy()
       e.target.remove()
       myVideo.remove()
+      videoStream.removeTrack()
     })
     videoGrid.appendChild(endCallBtn)
 
