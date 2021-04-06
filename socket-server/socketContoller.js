@@ -26,8 +26,8 @@ export const socketController = (socket) => {
       socket.in(roomId).emit(events.getPeerId, peerId)
     }),
     // 상대에게 내 영상처리 옵션 상태를 보냄
-    socket.on(events.patnerCVOption, ({ CVOption, roomId }) => {
-      socket.in(roomId).emit(events.patnerCVOption, CVOption)
+    socket.on(events.patnerCVOption, (CVOption) => {
+      socket.broadcast.emit(events.patnerCVOption, CVOption)
     })
   )
 }
