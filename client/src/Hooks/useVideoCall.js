@@ -117,9 +117,17 @@ const activateVideoCall = (
 
     peer.on("call", (call) => {
       call.answer(videoStream)
-
       const video = document.createElement("video")
       video.id = "partnerVideo"
+
+      // 통화 종료 버튼
+      const endCallBtn = document.createElement("button")
+      endCallBtn.innerHTML = "통화 종료"
+      endCallBtn.addEventListener("click", () => {
+        call.close()
+      })
+      videoGrid.appendChild(endCallBtn)
+
       call.on("stream", (userVideoStream) => {
         console.log(userVideoStream)
         video.srcObject = userVideoStream

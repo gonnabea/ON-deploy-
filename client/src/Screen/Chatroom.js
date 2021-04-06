@@ -389,8 +389,10 @@ const Chatroom = () => {
                       socket.emit("patnerCVOption", "rabbit")
                       giveRabbitEffect()
                     })
+
                     videoOptionBox.appendChild(grayBtn)
                     videoOptionBox.appendChild(rabbitBtn)
+                    videoOptionBox.appendChild(endCallBtn)
 
                     chatScreen.appendChild(videoOptionBox)
                   }}
