@@ -36,7 +36,7 @@ const BookFront = styled.div`
 const Back = styled.section`
   width: 100%;
   height: 100%;
-  background-image: url("https://wallpaperaccess.com/full/804975.jpg");
+  background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20190313/pngtree-sparkling-stars-night-star-background-image_88891.jpg");
   background-size: 100% 100%;
   transform: scaleX(-1);
 `
