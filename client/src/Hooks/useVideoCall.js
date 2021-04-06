@@ -59,7 +59,11 @@ const activateVideoCall = (
       peer.destroy()
       e.target.remove()
       myVideo.remove()
-      videoStream.removeTrack()
+      const tracks = videoStream.getTracks()
+      console.log(tracks)
+      tracks.forEach(function (track) {
+        track.stop()
+      })
     })
     videoGrid.appendChild(endCallBtn)
 
