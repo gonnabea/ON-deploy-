@@ -54,7 +54,6 @@ const activateVideoCall = (
 
     // 통화 종료 버튼
     const endCallBtn = document.createElement("button")
-    endCallBtn.style.position = "absolute"
     endCallBtn.innerHTML = "통화 종료"
     endCallBtn.addEventListener("click", (e) => {
       peer.destroy()
