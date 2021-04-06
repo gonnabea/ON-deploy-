@@ -54,16 +54,21 @@ const activateVideoCall = (
 
     // 통화 종료 버튼
     const endCallBtn = document.createElement("button")
+    endCallBtn.style.position = "absolute"
     endCallBtn.innerHTML = "통화 종료"
     endCallBtn.addEventListener("click", (e) => {
       peer.destroy()
       e.target.remove()
       myVideo.remove()
+
       const tracks = videoStream.getTracks()
-      console.log(tracks)
       tracks.forEach(function (track) {
         track.stop()
       })
+
+      // 영상채팅 옵션 버튼 박스 제거
+      const videoOptionBox = document.getElementById("videoOptionBox")
+      videoOptionBox.remove()
     })
     videoGrid.appendChild(endCallBtn)
 

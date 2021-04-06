@@ -376,6 +376,7 @@ const Chatroom = () => {
 
                     // 화상채팅 시 영상효과 옵션 선택 버튼
                     const videoOptionBox = document.createElement("div")
+                    videoOptionBox.id = "videoOptionBox"
                     const grayBtn = document.createElement("button")
                     grayBtn.innerHTML = "흑백"
                     grayBtn.addEventListener("click", () => {
