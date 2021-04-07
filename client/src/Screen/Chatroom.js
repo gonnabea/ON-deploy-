@@ -58,12 +58,14 @@ const Chatroom = () => {
   const userContext = useContext(UserContext)
   const [loggedUser, setLoggedUser] = useState(null)
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
+
+  // opencv flask 서버 소켓 통신
   const [flaskSocket, setFlaskSocket] = useState(
     io.connect("http://localhost:5000/", {
       upgrade: false,
       transports: ["websocket"],
     })
-  ) // opencv flask 서버 소켓 통신
+  )
 
   const imageContainer = useRef(new Image())
   const partnerImgContainer = useRef(new Image())

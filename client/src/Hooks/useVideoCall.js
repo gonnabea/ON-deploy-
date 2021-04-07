@@ -51,6 +51,15 @@ const activateVideoCall = (
 
     peer = new Peer(loggedUser.id)
 
+    // 통화 종료 버튼
+    const endCallBtn = document.createElement("button")
+    endCallBtn.innerHTML = "통화 종료"
+    endCallBtn.addEventListener("click", (e) => {
+      window.location.replace("https://our-now.herokuapp.com/#/")
+      window.location.reload()
+    })
+    videoGrid.appendChild(endCallBtn)
+
     peerList.myPeer = peer.id
     console.log(peer)
     peer.on("error", (err) => {
@@ -82,26 +91,6 @@ const activateVideoCall = (
       })
 
       const callConn = peer.call(id, videoStream)
-      // 통화 종료 버튼
-      const endCallBtn = document.createElement("button")
-      endCallBtn.innerHTML = "통화 종료"
-      endCallBtn.addEventListener("click", (e) => {
-        // 통화 종료 버튼
-        const endCallBtn = document.createElement("button")
-        endCallBtn.innerHTML = "통화 종료"
-        endCallBtn.addEventListener("click", () => {
-          window.location.replace("https://our-now.herokuapp.com/#/")
-        })
-        videoGrid.appendChild(endCallBtn)
-
-        const videoCallBtn = document.getElementById("videoCallBtn")
-        videoCallBtn.style.display = "block"
-        // 영상채팅 옵션 버튼 박스 제거
-        const videoOptionBox = document.getElementById("videoOptionBox")
-        videoOptionBox.remove()
-      })
-      videoGrid.appendChild(endCallBtn)
-
       const video = document.createElement("video")
       video.id = "partnerVideo"
       callConn.on("stream", (userVideoStream) => {
@@ -144,6 +133,7 @@ const activateVideoCall = (
       endCallBtn.innerHTML = "통화 종료"
       endCallBtn.addEventListener("click", () => {
         window.location.replace("https://our-now.herokuapp.com/#/")
+        window.location.reload()
       })
       videoGrid.appendChild(endCallBtn)
 
