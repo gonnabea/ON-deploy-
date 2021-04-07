@@ -86,16 +86,14 @@ const activateVideoCall = (
       const endCallBtn = document.createElement("button")
       endCallBtn.innerHTML = "통화 종료"
       endCallBtn.addEventListener("click", (e) => {
-        callConn.close()
-        e.target.remove()
-        myVideo.remove()
-        setVideoCall(false)
-        videoGrid.innerHTML = ""
-        videoGrid.style.display = "none"
-        const tracks = videoStream.getTracks()
-        tracks.forEach(function (track) {
-          track.stop()
+        // 통화 종료 버튼
+        const endCallBtn = document.createElement("button")
+        endCallBtn.innerHTML = "통화 종료"
+        endCallBtn.addEventListener("click", () => {
+          window.location.replace("https://our-now.herokuapp.com/#/")
         })
+        videoGrid.appendChild(endCallBtn)
+
         const videoCallBtn = document.getElementById("videoCallBtn")
         videoCallBtn.style.display = "block"
         // 영상채팅 옵션 버튼 박스 제거
@@ -145,7 +143,7 @@ const activateVideoCall = (
       const endCallBtn = document.createElement("button")
       endCallBtn.innerHTML = "통화 종료"
       endCallBtn.addEventListener("click", () => {
-        call.close()
+        window.location.replace("https://our-now.herokuapp.com/#/")
       })
       videoGrid.appendChild(endCallBtn)
 
