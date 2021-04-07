@@ -58,6 +58,10 @@ const activateVideoCall = (
     const endCallBtn = document.createElement("button")
     endCallBtn.innerHTML = "통화 종료"
     endCallBtn.addEventListener("click", (e) => {
+      if (streamToSocket) {
+        console.log(streamToSocket)
+        clearInterval(streamToSocket)
+      }
       peer.destroy()
       e.target.remove()
       myVideo.remove()
@@ -72,7 +76,6 @@ const activateVideoCall = (
       // 영상채팅 옵션 버튼 박스 제거
       const videoOptionBox = document.getElementById("videoOptionBox")
       videoOptionBox.remove()
-      clearInterval(streamToSocket)
     })
     videoGrid.appendChild(endCallBtn)
 
