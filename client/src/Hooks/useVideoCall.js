@@ -12,8 +12,7 @@ const activateVideoCall = (
   flaskSocket,
   currentRoomId,
   setVideoCall,
-  streamToSocket,
-  partnerVidSocket
+  stopCVSockets
 ) => {
   console.log(currentRoomId)
   flaskSocket.on("connect-flask", (msg) => {
@@ -60,12 +59,9 @@ const activateVideoCall = (
     endCallBtn.innerHTML = "통화 종료"
     endCallBtn.addEventListener("click", (e) => {
       console.log(streamToSocket)
-      if (streamToSocket) {
-        clearInterval(streamToSocket)
-      }
-      if (partnerVidSocket) {
-        clearInterval(partnerVidSocket)
-      }
+      console.log(partnerVidSocket)
+
+      stopCVSockets()
       peer.destroy()
       e.target.remove()
       myVideo.remove()

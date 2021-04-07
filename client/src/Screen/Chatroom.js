@@ -59,6 +59,13 @@ const Chatroom = () => {
   const [loggedUser, setLoggedUser] = useState(null)
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
   let streamToSocket // 영상처리를 위해 flask 소켓으로 보내고 있는 영상
+  let partnerVidSocket
+
+  function stopCVSockets() {
+    clearInterval(streamToSocket)
+    clearInterval(partnerVidSocket)
+  }
+
   // 유저가 특정 채팅방에 들어왔을 때
   const createUserRoom = async ({ chatroom, previousRoom }) => {
     // 상대의 영상 처리 효과 상태 받기
@@ -167,8 +174,6 @@ const Chatroom = () => {
     imageCatcher("my-face-detection", "me")
     streamToSocket = setInterval(() => videoToBase64("my-face-detection", myVideo), 1000 / 15)
   }
-
-  let partnerVidSocket
   function grayForPartner() {
     console.log("파트너 흑백 효과")
     const partnerVideo = document.getElementById("partnerVideo")
@@ -356,8 +361,7 @@ const Chatroom = () => {
                       flaskSocket,
                       currentRoom.current.id,
                       setVideoCall,
-                      streamToSocket,
-                      partnerVidSocket
+                      stopCVSockets
                     )
                   : null}
               </ChatScreen>
