@@ -58,9 +58,6 @@ const activateVideoCall = (
     const endCallBtn = document.createElement("button")
     endCallBtn.innerHTML = "통화 종료"
     endCallBtn.addEventListener("click", (e) => {
-      console.log(streamToSocket)
-      console.log(partnerVidSocket)
-
       stopCVSockets()
       peer.destroy()
       e.target.remove()
