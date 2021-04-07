@@ -139,13 +139,6 @@ const Chatroom = () => {
   })
 
   function videoToBase64(socketChannel, myVideo) {
-    const videoGrid = document.getElementById("videoGrid")
-    // 영상통화 종료 시 자동으로 영상효과 소켓 제거 위함
-    if (videoGrid.style.display === "none") {
-      clearInterval(streamToSocket)
-      clearInterval(partnerVidSocket)
-    }
-
     const canvas = document.createElement("canvas")
 
     canvas.width = 240
@@ -154,6 +147,13 @@ const Chatroom = () => {
 
     console.log(`동영상 base64 ${socketChannel} 이미지 전송 중...`)
     flaskSocket.emit(socketChannel, canvas.toDataURL("image/webp"))
+
+    const videoGrid = document.getElementById("videoGrid")
+    // 영상통화 종료 시 자동으로 영상효과 소켓 제거 위함
+    if (videoGrid.style.display === "none") {
+      clearInterval(streamToSocket)
+      clearInterval(partnerVidSocket)
+    }
   }
 
   function giveGrayEffect() {
