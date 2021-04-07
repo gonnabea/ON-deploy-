@@ -355,17 +355,6 @@ const Chatroom = () => {
                     )
                   : null}
                 <VideoGrid id="videoGrid"></VideoGrid>
-                {videoCall && videoGrid.innerHTML === "" // 이미 화상 통화 중 페이지 렌더링 시 중복 실행 방지
-                  ? activateVideoCall(
-                      loggedUser,
-                      videoGrid,
-                      chatroomList,
-                      socket,
-                      flaskSocket,
-                      currentRoom.current.id,
-                      setVideoCall
-                    )
-                  : null}
               </ChatScreen>
               <ChatForm onSubmit={handleSubmit} action="chat" method="post">
                 <ChatText id="text" type="text" name="content" required={true} />
@@ -404,6 +393,15 @@ const Chatroom = () => {
                     videoOptionBox.appendChild(rabbitBtn)
 
                     chatScreen.appendChild(videoOptionBox)
+                    activateVideoCall(
+                      loggedUser,
+                      videoGrid,
+                      chatroomList,
+                      socket,
+                      flaskSocket,
+                      currentRoom.current.id,
+                      setVideoCall
+                    )
                   }}
                 >
                   🎥
