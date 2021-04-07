@@ -16,13 +16,10 @@ const activateVideoCall = (
   console.log(currentRoomId)
   flaskSocket.on("connect-flask", (msg) => {
     console.log(msg)
-    createVideoStream()
   })
-
   let peer
   const createVideoStream = async () => {
     console.log(loggedUser)
-
     const myVideo = document.createElement("video")
     myVideo.id = "myVideo"
     const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -62,6 +59,7 @@ const activateVideoCall = (
       e.target.remove()
       myVideo.remove()
       setVideoCall(false)
+      videoGrid.innerHTML = ""
       videoGrid.style.display = "none"
       const tracks = videoStream.getTracks()
       tracks.forEach(function (track) {
@@ -165,6 +163,7 @@ const activateVideoCall = (
       })
     })
   }
+  createVideoStream()
 }
 
 export default activateVideoCall
