@@ -16,6 +16,7 @@ const activateVideoCall = (
   console.log(currentRoomId)
   flaskSocket.on("connect-flask", (msg) => {
     console.log(msg)
+    createVideoStream()
   })
 
   let peer
@@ -164,8 +165,6 @@ const activateVideoCall = (
       })
     })
   }
-
-  createVideoStream()
 }
 
 export default activateVideoCall
