@@ -368,6 +368,7 @@ const Chatroom = () => {
               {/* 채팅방 내의 유저가 2명일 경우만 보임, 버튼 클릭 시 사라짐 */}
               {currentRoom && showVideoCall(currentRoom.current) ? (
                 <VideoCallBtn
+                  id="videoCallBtn"
                   onClick={(e) => {
                     const videoGrid = document.getElementById("videoGrid")
                     const chatScreen = document.getElementById("chatScreen")
