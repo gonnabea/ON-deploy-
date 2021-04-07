@@ -11,7 +11,8 @@ const activateVideoCall = (
   socket,
   flaskSocket,
   currentRoomId,
-  setVideoCall
+  setVideoCall,
+  streamToSocket
 ) => {
   console.log(currentRoomId)
   flaskSocket.on("connect-flask", (msg) => {
@@ -71,6 +72,7 @@ const activateVideoCall = (
       // 영상채팅 옵션 버튼 박스 제거
       const videoOptionBox = document.getElementById("videoOptionBox")
       videoOptionBox.remove()
+      clearInterval(streamToSocket)
     })
     videoGrid.appendChild(endCallBtn)
 

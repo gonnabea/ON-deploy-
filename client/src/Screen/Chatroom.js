@@ -357,7 +357,8 @@ const Chatroom = () => {
                       socket,
                       flaskSocket,
                       currentRoom.current.id,
-                      setVideoCall
+                      setVideoCall,
+                      streamToSocket
                     )
                   : null}
               </ChatScreen>
