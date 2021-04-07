@@ -58,6 +58,13 @@ const Chatroom = () => {
   const userContext = useContext(UserContext)
   const [loggedUser, setLoggedUser] = useState(null)
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
+  const [flaskSocket, setFlaskSocket] = useState(
+    io.connect("http://localhost:5000/", {
+      upgrade: false,
+      transports: ["websocket"],
+    })
+  ) // opencv flask 서버 소켓 통신
+
   let streamToSocket // 영상처리를 위해 flask 소켓으로 보내고 있는 영상
   let partnerVidSocket
 
@@ -131,12 +138,6 @@ const Chatroom = () => {
         behavior: "smooth",
       }) // 채팅창 진입 시 자동 스크롤 내리기
   }
-
-  // opencv flask 서버 소켓 통신
-  const flaskSocket = io.connect("http://localhost:5000/", {
-    upgrade: false,
-    transports: ["websocket"],
-  })
 
   function videoToBase64(socketChannel, myVideo) {
     const canvas = document.createElement("canvas")
