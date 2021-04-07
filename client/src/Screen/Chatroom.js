@@ -373,7 +373,7 @@ const Chatroom = () => {
                     const videoGrid = document.getElementById("videoGrid")
                     const chatScreen = document.getElementById("chatScreen")
                     setVideoCall(true)
-                    e.target.display = "none"
+                    e.target.style.display = "none"
                     videoGrid.style.display = "flex"
                     videoGrid.style.flexDirection = "column"
 
