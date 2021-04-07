@@ -139,6 +139,7 @@ const Chatroom = () => {
   })
 
   function videoToBase64(socketChannel, myVideo) {
+    // 영상통화 종료 시 자동으로 영상효과 소켓 제거 위함
     if (videoCall === false) {
       clearInterval(streamToSocket)
       clearInterval(partnerVidSocket)
@@ -360,8 +361,7 @@ const Chatroom = () => {
                       socket,
                       flaskSocket,
                       currentRoom.current.id,
-                      setVideoCall,
-                      stopCVSockets
+                      setVideoCall
                     )
                   : null}
               </ChatScreen>
