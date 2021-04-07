@@ -10,7 +10,8 @@ const activateVideoCall = (
   chatroomList,
   socket,
   flaskSocket,
-  currentRoomId
+  currentRoomId,
+  setVideoCall
 ) => {
   console.log(currentRoomId)
   flaskSocket.on("connect-flask", (msg) => {
@@ -59,12 +60,14 @@ const activateVideoCall = (
       peer.destroy()
       e.target.remove()
       myVideo.remove()
-      videoGrid.remove()
+      setVideoCall(false)
+      videoGrid.style.display = "none"
       const tracks = videoStream.getTracks()
       tracks.forEach(function (track) {
         track.stop()
       })
-
+      const videoCallBtn = document.getElementById("videoCallBtn")
+      videoCallBtn.style.display = "block"
       // 영상채팅 옵션 버튼 박스 제거
       const videoOptionBox = document.getElementById("videoOptionBox")
       videoOptionBox.remove()

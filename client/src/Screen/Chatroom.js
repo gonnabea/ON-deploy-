@@ -356,7 +356,8 @@ const Chatroom = () => {
                       chatroomList,
                       socket,
                       flaskSocket,
-                      currentRoom.current.id
+                      currentRoom.current.id,
+                      setVideoCall
                     )
                   : null}
               </ChatScreen>
@@ -371,7 +372,7 @@ const Chatroom = () => {
                     const videoGrid = document.getElementById("videoGrid")
                     const chatScreen = document.getElementById("chatScreen")
                     setVideoCall(true)
-                    e.target.remove()
+                    e.target.display = "none"
                     videoGrid.style.display = "flex"
                     videoGrid.style.flexDirection = "column"
 
