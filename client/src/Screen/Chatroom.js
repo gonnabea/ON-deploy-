@@ -65,6 +65,9 @@ const Chatroom = () => {
     })
   ) // opencv flask 서버 소켓 통신
 
+  const imageContainer = useRef(new Image())
+  const partnerImgContainer = useRef(new Image())
+
   let streamToSocket // 영상처리를 위해 flask 소켓으로 보내고 있는 영상
   let partnerVidSocket
 
@@ -198,8 +201,6 @@ const Chatroom = () => {
     partnerVidSocket = setInterval(() => videoToBase64("face-detection", partnerVideo), 1000 / 15)
   }
 
-  const imageContainer = new Image()
-  const partnerImgContainer = new Image()
   // 영상처리 소켓 리스너 활성화
   function imageCatcher(socketChannel, target) {
     flaskSocket.on(socketChannel, (base64Img) => {
@@ -212,13 +213,13 @@ const Chatroom = () => {
       }
 
       if (target === "me") {
-        imageContainer.src = "data:image/webp;base64," + toBase64(base64Img)
-        videoGrid.appendChild(imageContainer)
+        imageContainer.current.src = "data:image/webp;base64," + toBase64(base64Img)
+        videoGrid.appendChild(imageContainer.current)
       }
 
       if (target === "partner") {
-        partnerImgContainer.src = "data:image/webp;base64," + toBase64(base64Img)
-        chatroomList.appendChild(partnerImgContainer)
+        partnerImgContainer.current.src = "data:image/webp;base64," + toBase64(base64Img)
+        chatroomList.appendChild(partnerImgContainer.current)
       }
 
       console.log("Creating Image...")
