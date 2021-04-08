@@ -59,6 +59,11 @@ const Chatroom = () => {
   const [loggedUser, setLoggedUser] = useState(null)
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
 
+  // 리사이즈 할 때마다 페이지 리렌더링 위함. (책 사이즈 떄문)
+  const [render, setRender] = useState(0)
+  window.addEventListener("resize", () => {
+    setRender(render + 1)
+  })
   // opencv flask 서버 소켓 통신
   const [flaskSocket, setFlaskSocket] = useState(
     io.connect("http://localhost:5000/", {

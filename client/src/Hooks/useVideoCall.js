@@ -128,15 +128,6 @@ const activateVideoCall = (
       const video = document.createElement("video")
       video.id = "partnerVideo"
 
-      // 통화 종료 버튼
-      const endCallBtn = document.createElement("button")
-      endCallBtn.innerHTML = "통화 종료"
-      endCallBtn.addEventListener("click", () => {
-        window.location.replace("https://our-now.herokuapp.com/#/")
-        window.location.reload()
-      })
-      videoGrid.appendChild(endCallBtn)
-
       call.on("stream", (userVideoStream) => {
         console.log(userVideoStream)
         video.srcObject = userVideoStream

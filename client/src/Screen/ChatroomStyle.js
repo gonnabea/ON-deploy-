@@ -189,7 +189,7 @@ export const VideoGrid = styled.div`
   align-items: center;
   flex-direction: column;
   overflow: auto;
-  min-height: 500px;
+  min-height: 600px;
   width: 100%;
 `
 
