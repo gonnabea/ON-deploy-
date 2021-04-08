@@ -257,11 +257,9 @@ const Chatroom = () => {
   const handleApi = async () => {
     const allUsers = await api.getAllUsers() // 모든 유저정보 불러오기
 
-    if (userContext) {
-      setLoggedUser(userContext)
-      setUserList(allUsers.data)
-      setChatroomList(userContext.chatrooms)
-    }
+    setLoggedUser(userContext)
+    setUserList(allUsers.data)
+    setChatroomList(userContext.chatrooms)
   }
 
   useEffect(() => {
@@ -381,7 +379,10 @@ const Chatroom = () => {
                     const videoGrid = document.getElementById("videoGrid")
                     const chatScreen = document.getElementById("chatScreen")
                     setVideoCall(true)
-                    e.target.style.display = "none"
+                    // 화상채팅 진행 중 3명 이상 채팅방으로 이동 시 오류 방지
+                    if (e.target.style.display !== "none") {
+                      e.target.style.display = "none"
+                    }
                     videoGrid.style.display = "flex"
                     videoGrid.style.flexDirection = "column"
 
