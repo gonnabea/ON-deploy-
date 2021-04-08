@@ -8,11 +8,9 @@ import NeonLineButton from "../Components/NeonLineButton"
 import GroupChatModal from "../Components/GroupChatModal"
 import api from "../api"
 import { useLocation } from "react-use"
-import Peer from "peerjs"
 
 import {
   Container,
-  FrontContainer,
   ChatBox,
   ChatScreen,
   GreetingNotice,
@@ -22,19 +20,16 @@ import {
   BookFront,
   FrontBgImg,
   Inside,
-  UserList,
   ChatRoomLink,
   UserInfo,
   Username,
-  StatusMsg,
   ChatroomList,
   VideoCallBtn,
   showVideoCall,
   VideoGrid,
-  treatBookWidth,
-  treatBookHeight,
   ButtonContainer,
-  VideoOptionBox,
+  bookWidth,
+  bookHeight,
 } from "./ChatroomStyle"
 
 import Loader from "../Components/Loader"
@@ -58,12 +53,6 @@ const Chatroom = () => {
   const userContext = useContext(UserContext)
   const [loggedUser, setLoggedUser] = useState(null)
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
-
-  // 리사이즈 할 때마다 페이지 리렌더링 위함. (책 사이즈 떄문)
-  const [render, setRender] = useState(0)
-  window.addEventListener("resize", () => {
-    setRender(render + 1)
-  })
 
   // opencv flask 서버 소켓 통신
   const [flaskSocket, setFlaskSocket] = useState(
@@ -303,8 +292,8 @@ const Chatroom = () => {
   ) : (
     <Container>
       <Book
-        width={treatBookWidth()}
-        height={treatBookHeight()}
+        width={bookWidth}
+        height={bookHeight}
         spineWidth="50px"
         state={true}
         front={

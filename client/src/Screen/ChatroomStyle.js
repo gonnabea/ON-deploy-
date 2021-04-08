@@ -215,36 +215,34 @@ export const showVideoCall = (chatroom) => {
   }
 }
 
+export let bookWidth = "500px"
+
 // 책 사이즈 반응형 구현
 export const treatBookWidth = () => {
-  let width = "500px"
   if (window.matchMedia("(max-width: 700px)").matches) {
-    width = "50vw"
-    return width
+    bookWidth = "50vw"
   }
   if (window.matchMedia("(max-width: 950px)").matches) {
-    width = "350px"
-    return width
+    bookWidth = "350px"
   }
   if (window.matchMedia("(max-width: 1150px)").matches) {
-    width = "400px"
-    return width
+    bookWidth = "400px"
   }
-  return width
 }
 
+export let bookHeight = "650px"
+
 export const treatBookHeight = () => {
-  let height = "650px"
   if (window.matchMedia("(max-width: 700px)").matches) {
-    height = "70vh"
-    return height
+    bookHeight = "70vh"
   }
   if (window.matchMedia("(max-width: 950px)").matches) {
-    height = "600px"
-    return height
+    bookHeight = "600px"
   }
-  return height
 }
+
+window.addEventListener("resize", treatBookWidth)
+window.addEventListener("resize", treatBookHeight)
 
 export const closedBookWidth = () => {
   let width = "500px"
