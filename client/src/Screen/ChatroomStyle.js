@@ -9,6 +9,7 @@ export const Container = styled.section`
   align-items: center;
   flex-direction: column;
   animation: moveBook 0.7s forwards;
+  overflow: hidden;
   // 책 열었을 떄 오른쪽으로 움직이는 애니메이션 (반응형)
   @keyframes moveBook {
     to {
@@ -236,7 +237,7 @@ export const treatBookWidth = () => {
 export const treatBookHeight = () => {
   let height = "650px"
   if (window.matchMedia("(max-width: 500px)").matches) {
-    height = "100vh"
+    height = "95vh"
     return height
   }
   if (window.matchMedia("(max-width: 700px)").matches) {
