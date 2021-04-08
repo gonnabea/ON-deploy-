@@ -64,6 +64,7 @@ const Chatroom = () => {
   window.addEventListener("resize", () => {
     setRender(render + 1)
   })
+
   // opencv flask 서버 소켓 통신
   const [flaskSocket, setFlaskSocket] = useState(
     io.connect("http://localhost:5000/", {
