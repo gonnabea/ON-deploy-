@@ -240,7 +240,7 @@ export const treatBookWidth = () => {
 export const treatBookHeight = () => {
   let height = "650px"
   if (window.matchMedia("(max-width: 500px)").matches) {
-    height = "95vh"
+    height = "90vh"
     return height
   }
   if (window.matchMedia("(max-width: 700px)").matches) {
