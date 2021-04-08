@@ -25,6 +25,9 @@ export const Container = styled.section`
   }
 
   @media screen and (max-width: 500px) {
+    position: absolute;
+    left: 0;
+    width: calc(100vw + 300px);
   }
 `
 
