@@ -20,9 +20,6 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  @media screen and (max-width: 500px) {
-    align-items: flex-end;
-  }
 `
 
 const BookFront = styled.div`
