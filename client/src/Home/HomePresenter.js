@@ -33,6 +33,8 @@ const Intro = styled.main``
 
 // 반응형을 위한 이벤트리스너
 window.addEventListener("resize", () => {
+  if (window.matchMedia("(max-width: 500px)").matches) {
+  }
   if (window.matchMedia("(max-width: 700px)").matches) {
     window.location.reload()
   }

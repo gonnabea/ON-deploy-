@@ -23,6 +23,10 @@ export const Container = styled.section`
       }
     }
   }
+
+  @media screen and (max-width: 500px) {
+    width: calc(100vw + 300px);
+  }
 `
 
 export const FrontContainer = styled.section`
