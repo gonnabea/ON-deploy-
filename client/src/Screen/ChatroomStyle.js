@@ -287,7 +287,7 @@ export const closedBookHeight = () => {
 export const treatBookSpine = () => {
   let spine = "50px"
   if (window.matchMedia("(max-width: 700px)").matches) {
-    spine = "25px"
+    spine = "50px"
     return spine
   }
 }
