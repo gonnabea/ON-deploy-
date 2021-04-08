@@ -287,14 +287,17 @@ const Chatroom = () => {
 
   const chatroomList = document.getElementById("chatroomList")
 
-  let bookWidth, bookHeight
-
+  // 반응형을 위한 이벤트리스너
   window.addEventListener("resize", () => {
-    bookWidth = treatBookWidth()
-  })
-
-  window.addEventListener("resize", () => {
-    bookHeight = treatBookHeight()
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      window.location.reload()
+    }
+    if (window.matchMedia("(max-width: 950px)").matches) {
+      window.location.reload()
+    }
+    if (window.matchMedia("(max-width: 1150px)").matches) {
+      window.location.reload()
+    }
   })
 
   return isLoading ? (
@@ -302,8 +305,8 @@ const Chatroom = () => {
   ) : (
     <Container>
       <Book
-        width={bookWidth}
-        height={bookHeight}
+        width={treatBookWidth()}
+        height={treatBookHeight()}
         spineWidth="50px"
         state={true}
         front={
