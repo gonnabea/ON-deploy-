@@ -36,6 +36,9 @@ const Container = styled.section`
       transform: rotateY(180deg);
     }
   }
+  @media screen and (max-width: 500px) {
+    position: absolute;
+  }
 `
 
 const Front = styled.div`
