@@ -54,12 +54,6 @@ const Chatroom = () => {
   const [loggedUser, setLoggedUser] = useState(null)
   const [socket, setSocket] = useState(io.connect("https://our-now.herokuapp.com/")) // 클라이언트 소켓 통신
 
-  // 반응형을 위한 페이지 리렌더링
-  const [render, setRender] = useState(0)
-  window.addEventListener("mouseup", () => {
-    setRender(render + 1)
-  })
-
   // opencv flask 서버 소켓 통신
   const [flaskSocket, setFlaskSocket] = useState(
     io.connect("http://localhost:5000/", {
@@ -293,13 +287,23 @@ const Chatroom = () => {
 
   const chatroomList = document.getElementById("chatroomList")
 
+  let bookWidth, bookHeight
+
+  window.addEventListener("resize", () => {
+    bookWidth = treatBookWidth()
+  })
+
+  window.addEventListener("resize", () => {
+    bookHeight = treatBookHeight()
+  })
+
   return isLoading ? (
     <Loader />
   ) : (
     <Container>
       <Book
-        width={treatBookWidth()}
-        height={treatBookHeight()}
+        width={bookWidth}
+        height={bookHeight}
         spineWidth="50px"
         state={true}
         front={

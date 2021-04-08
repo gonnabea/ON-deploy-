@@ -139,18 +139,6 @@ const Inside6 = styled.div`
   border-radius: 0 3px 3px 0;
 `
 
-// const MobileFilter = (width) => {
-//   let filtered = width
-//   if (window.matchMedia("(min-width: 500px)").matches) {
-//     /* 뷰포트 너비가 500 픽셀 이상 */
-//   } else {
-//     /* 뷰포트 너비가 500 픽셀 미만 */
-//     console.log(`${width} -> 350px`)
-//     filtered = "350px"
-//   }
-//   return filtered
-// }
-
 const Book = ({
   width = "100px",
   height = "150px",
