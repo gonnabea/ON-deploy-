@@ -16,11 +16,7 @@ const UserContextProvider = ({ children }) => {
     setLoading(false)
   }, [])
 
-  return isLoading ? (
-    <UserContext.Provider value={null}>{children}</UserContext.Provider>
-  ) : (
-    <UserContext.Provider value={loggedUser}>{children}</UserContext.Provider>
-  )
+  return <UserContext.Provider value={loggedUser}>{children}</UserContext.Provider>
 }
 
 export default UserContextProvider
