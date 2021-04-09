@@ -61,8 +61,8 @@ const Navigation = () => {
   const [isLoading, setLoading] = useState(true)
   const loggedUser = useContext(UserContext)
   const getLoggedUser = () => {
-    console.log(loggedUser)
     setUser(loggedUser)
+    console.log(loggedUser)
   }
 
   useEffect(() => {

@@ -5,7 +5,6 @@ export const UserContext = React.createContext()
 
 const UserContextProvider = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState(null)
-  const [isLoading, setLoading] = useState(true)
   const getLoggedUser = async () => {
     const { data } = await api.getLoggedUser()
     setLoggedUser(data)
@@ -13,7 +12,6 @@ const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     getLoggedUser()
-    setLoading(false)
   }, [])
 
   return <UserContext.Provider value={loggedUser}>{children}</UserContext.Provider>
