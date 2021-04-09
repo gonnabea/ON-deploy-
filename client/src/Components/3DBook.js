@@ -38,7 +38,7 @@ const Container = styled.section`
   }
   @media screen and (max-width: 500px) {
     position: absolute;
-    margin-left: ${(props) => (props.state ? "150px" : "0px")};
+    margin-left: ${(props) => (props.state ? "170px" : "0px")};
   }
 `
 
