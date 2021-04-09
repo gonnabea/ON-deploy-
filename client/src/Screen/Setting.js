@@ -64,8 +64,8 @@ const StatusMsgInput = styled.input`
 `
 
 // 반응형을 위한 이벤트리스너
-if (window.innerWidth > 600) {
-  window.addEventListener("resize", () => {
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 600) {
     if (window.matchMedia("(max-width: 700px)").matches) {
       window.location.reload()
     }
@@ -75,8 +75,8 @@ if (window.innerWidth > 600) {
     if (window.matchMedia("(max-width: 1150px)").matches) {
       window.location.reload()
     }
-  })
-}
+  }
+})
 
 const Chatroom = (props) => {
   const userContext = useContext(UserContext)

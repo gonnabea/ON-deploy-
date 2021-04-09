@@ -261,6 +261,7 @@ const Chatroom = () => {
       setUserList(allUsers.data)
       setChatroomList(userContext.chatrooms)
     } else {
+      // context API로 유저를 불러올 수 없을 시 대안
       const { data: user } = await api.getLoggedUser()
       setLoggedUser(user)
       const allUsers = await api.getAllUsers() // 모든 유저정보 불러오기
@@ -293,8 +294,8 @@ const Chatroom = () => {
   const chatroomList = document.getElementById("chatroomList")
 
   // 반응형을 위한 이벤트리스너
-  if (window.innerWidth > 600) {
-    window.addEventListener("resize", () => {
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 600) {
       if (window.matchMedia("(max-width: 700px)").matches) {
         window.location.reload()
       }
@@ -304,8 +305,8 @@ const Chatroom = () => {
       if (window.matchMedia("(max-width: 1150px)").matches) {
         window.location.reload()
       }
-    })
-  }
+    }
+  })
 
   return isLoading ? (
     <Loader />
