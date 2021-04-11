@@ -54,7 +54,7 @@ const Spine = styled.section`
 `
 
 const StatusMsgForm = styled.form`
-  margin-left: 20px;
+  margin-left: 10px;
 `
 
 const StatusMsgInput = styled.input`
