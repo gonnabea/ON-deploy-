@@ -53,6 +53,10 @@ const Spine = styled.section`
   background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
 `
 
+const StatusMsgForm = styled.form`
+  margin-left: 20px;
+`
+
 const StatusMsgInput = styled.input`
   background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
   box-shadow: 0 0 10px white;
@@ -121,7 +125,7 @@ const Chatroom = (props) => {
           <Back>
             <Navigation />
 
-            <form action="setStatusMsg" method="post" onSubmit={(e) => setStatusMsg(e)}>
+            <StatusMsgForm action="setStatusMsg" method="post" onSubmit={(e) => setStatusMsg(e)}>
               <StatusMsgInput
                 ref={statusMsg}
                 type="text"
@@ -129,7 +133,7 @@ const Chatroom = (props) => {
                 name="text"
               />
               <StatusMsgInput type="submit" value="적용" />
-            </form>
+            </StatusMsgForm>
           </Back>
         }
         spine={<Spine></Spine>}
