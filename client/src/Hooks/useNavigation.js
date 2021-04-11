@@ -54,7 +54,7 @@ const SLink = styled(Link)`
 `
 
 const MenuTitle = styled.h2`
-  padding: 20px 0;
+  padding: 10px;
   font-weight: 700;
 `
 
