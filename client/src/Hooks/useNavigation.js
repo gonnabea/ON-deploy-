@@ -16,7 +16,7 @@ const Input = styled.input`
   background-image: linear-gradient(to right top, #080809, #101214, #15191b, #192021, #1f2725);
   color: white;
   border-radius: 10px;
-  padding: 5px;
+  padding: 20px;
   font-weight: 700;
   @media (max-width: 700px) {
     width: 100%;
@@ -52,7 +52,7 @@ const SLink = styled(Link)`
 `
 
 const MenuTitle = styled.h2`
-  padding-bottom: 20px 0;
+  padding: 20px 0;
   font-weight: 700;
 `
 
