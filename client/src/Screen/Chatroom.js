@@ -175,7 +175,7 @@ const Chatroom = () => {
       clearInterval(streamToSocket)
     }
     imageCatcher("my-face-detection", "me")
-    streamToSocket = setInterval(() => videoToBase64("my-face-detection", myVideo), 1000 / 30)
+    streamToSocket = setInterval(() => videoToBase64("my-face-detection", myVideo), 1000 / 20)
   }
   function grayForPartner() {
     console.log("파트너 흑백 효과")
