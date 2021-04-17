@@ -18,8 +18,6 @@ import flash from "connect-flash"
 import localsMiddlewares from "./middleware"
 import path from "path"
 import MySQLStore from "express-mysql-session"
-import http from "http"
-import { ExpressPeerServer } from "peer"
 
 const PORT = process.env.PORT || 5000 // dotenv 쓰면 프록시가 망가짐
 const app = express()
@@ -157,6 +155,7 @@ if (process.env.NODE_ENV === "production") {
 } // 헤로쿠에 리액트 프론트를 배포하기 위함
 
 app.use(helmet())
+app.disable("x-powered-by") // helmet으로 x-powered-by가 disable되지 않아 수동설정
 app.use(express.static("public"))
 app.use(cookieParser())
 app.use(bodyParser.json({ extended: true }))
